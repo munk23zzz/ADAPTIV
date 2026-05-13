@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — ADAPTIV AI Learning</title>
+  <meta name="description" content="Dashboard ADAPTIV — kelola dokumen, mulai sesi belajar, dan pantau progresmu.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+
+  <meta name="theme-color" content="#00F5FF">
+  <meta name="application-name" content="ADAPTIV">
+  <link rel="manifest" href="../manifest.json">
+
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="app-body theme-dark" data-page="dashboard" data-user-role="student">
+
+  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+  <div class="app-shell" id="app-shell">
+
+    <header class="app-header" id="app-header" role="banner">
+      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
+
+        <div class="topnav__left">
+          <!-- Global Menu (Hamburger) -->
+          <button
+            class="btn btn--icon topnav__sidebar-toggle"
+            id="sidebar-toggle-btn"
+            type="button"
+            aria-label="Toggle sidebar navigation"
+            aria-expanded="true"
+            aria-controls="app-sidebar">
+            <span class="material-icons-round">menu</span>
+          </button>
+
+          <a class="logo-wrap" href="dashboard.html">
+            <div class="logo-icon">📓</div>
+            <span class="logo-text">ADAPTIV</span>
+          </a>
+        </div>
+
+        <div class="topnav__center">
+          <div class="search-bar" role="search">
+            <label for="global-search" class="sr-only">Cari dokumen atau sesi belajar</label>
+            <span class="search-bar__icon" aria-hidden="true"></span>
+            <input
+              type="search"
+              id="global-search"
+              name="global-search"
+              class="search-bar__input"
+              placeholder="Cari dokumen, sesi, atau topik..."
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              maxlength="100"
+              aria-describedby="search-hint">
+            <span id="search-hint" class="sr-only">Tekan Enter untuk mencari, Escape untuk menutup</span>
+            <kbd class="search-bar__shortcut" aria-hidden="true">⌘K</kbd>
+          </div>
+        </div>
+
+        <div class="topnav__right">
+          <button
+            class="btn btn--primary btn--sm topnav__upload-btn"
+            id="topnav-upload-btn"
+            type="button"
+            aria-label="Upload dokumen baru"
+            data-modal-target="upload-modal">
+            <span class="icon icon--upload" aria-hidden="true"></span>
+            <span class="btn__label">Upload</span>
+          </button>
+
+          <div class="topnav__notifications">
+            <button
+              class="btn btn--icon"
+              id="notifications-btn"
+              type="button"
+              aria-label="Notifikasi (3 belum dibaca)"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="notifications-panel">
+              <span class="icon icon--bell" aria-hidden="true"></span>
+              <span class="badge badge--notification badge--cyan" id="notif-count" aria-label="3 notifikasi belum dibaca">3</span>
+            </button>
+
+            <div class="notifications-panel" id="notifications-panel" role="region" aria-label="Panel notifikasi" aria-hidden="true" hidden>
+              <div class="notifications-panel__header">
+                <h2 class="notifications-panel__title">Notifikasi</h2>
+                <button
+                  class="btn btn--text btn--sm"
+                  type="button"
+                  id="mark-all-read-btn"
+                  aria-label="Tandai semua notifikasi sudah dibaca">
+                  Tandai semua dibaca
+                </button>
+              </div>
+
+              <ul class="notifications-list" role="list" aria-live="polite">
+                <li class="notifications-list__item notifications-list__item--unread" role="listitem">
+                  <span class="notif-icon notif-icon--success" aria-hidden="true"></span>
+                  <div class="notif-content">
+                    <p class="notif-content__message">
+                      Flashcard dari <strong>"Modul_SisOp.pdf"</strong> selesai dibuat. 47 kartu siap.
+                    </p>
+                    <time class="notif-content__time" datetime="2025-01-15T10:30:00">2 menit lalu</time>
+                  </div>
+                </li>
+
+                <li class="notifications-list__item notifications-list__item--unread" role="listitem">
+                  <span class="notif-icon notif-icon--info" aria-hidden="true"></span>
+                  <div class="notif-content">
+                    <p class="notif-content__message">
+                      Kuis dari <strong>"Bab 3 Kimia Organik"</strong> siap dimulai. 20 soal menunggu.
+                    </p>
+                    <time class="notif-content__time" datetime="2025-01-15T09:45:00">47 menit lalu</time>
+                  </div>
+                </li>
+
+                <li class="notifications-list__item" role="listitem">
+                  <span class="notif-icon notif-icon--warning" aria-hidden="true"></span>
+                  <div class="notif-content">
+                    <p class="notif-content__message">
+                      Skor kuis terakhirmu <strong>62/100</strong>. Review flashcard direkomendasikan.
+                    </p>
+                    <time class="notif-content__time" datetime="2025-01-15T08:00:00">2 jam lalu</time>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="notifications-panel__footer">
+                <a href="notifications.html" class="btn btn--text btn--full">Lihat semua notifikasi</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="topnav__profile">
+            <button
+              class="btn btn--icon profile-trigger"
+              id="profile-menu-btn"
+              type="button"
+              aria-label="Menu profil pengguna: Muhammad Nabil"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="profile-menu">
+              <div class="avatar avatar--sm" aria-hidden="true" data-initials="MN"></div>
+            </button>
+
+            <nav class="profile-menu" id="profile-menu" role="menu" aria-label="Menu profil" aria-hidden="true" hidden>
+              <div class="profile-menu__header" role="none">
+                <div class="avatar avatar--md" data-initials="MN"></div>
+                <div class="profile-menu__user-info">
+                  <span class="profile-menu__name">Muhammad Nabil Kurniawan</span>
+                  <span class="profile-menu__email">nabil@example.com</span>
+                  <span class="badge badge--plan badge--cyan">Free Plan</span>
+                </div>
+              </div>
+
+              <hr class="profile-menu__divider" role="separator">
+
+              <ul role="none">
+                <li role="none">
+                  <a href="profile.html" class="profile-menu__item" role="menuitem">
+                    <span class="icon icon--user" aria-hidden="true"></span>
+                    Profil Saya
+                  </a>
+                </li>
+                <li role="none">
+                  <a href="settings.html" class="profile-menu__item" role="menuitem">
+                    <span class="icon icon--settings" aria-hidden="true"></span>
+                    Pengaturan
+                  </a>
+                </li>
+                <li role="none">
+                  <a href="billing.html" class="profile-menu__item" role="menuitem">
+                    <span class="icon icon--crown" aria-hidden="true"></span>
+                    Upgrade ke Pro
+                    <span class="badge badge--sm badge--violet" aria-label="Rekomendasi">PRO</span>
+                  </a>
+                </li>
+              </ul>
+
+              <hr class="profile-menu__divider" role="separator">
+
+              <ul role="none">
+                <li role="none">
+                  <button
+                    class="profile-menu__item profile-menu__item--danger"
+                    role="menuitem"
+                    type="button"
+                    id="logout-btn"
+                    data-action="logout">
+                    <span class="icon icon--logout" aria-hidden="true"></span>
+                    Keluar
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <div class="app-layout" id="app-layout">
+
+      <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
+      <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
+      <div class="global-drawer" id="global-drawer">
+        <div class="drawer-header">
+          <span class="logo-text" style="font-size: 1.2rem; font-weight: bold; letter-spacing: 1px;">ADAPTIV</span>
+          <button class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+        </div>
+        <nav class="drawer-nav">
+          <a href="dashboard.html" class="active"><span class="material-icons-round">dashboard</span> Dashboard</a>
+          <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
+          <a href="chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
+          <a href="flashcard.html"><span class="material-icons-round">style</span> Flashcard</a>
+          <a href="quiz.html"><span class="material-icons-round">quiz</span> Kuis Interaktif</a>
+          <a href="podcast.html"><span class="material-icons-round">podcasts</span> Podcast Belajar</a>
+        </nav>
+      </div>
+
+
+
+      <main class="dashboard-main" id="main-content" role="main" aria-label="Konten dashboard utama" tabindex="-1">
+
+        <header class="page-header" role="banner">
+          <div class="page-header__greeting">
+            <h1 class="page-header__title">
+              Selamat datang, <span class="text--accent-cyan">Nabil</span> 👋
+            </h1>
+            <p class="page-header__subtitle">
+              Kamu punya <strong>3 sesi tertunda</strong> dan <strong>2 dokumen baru</strong> menunggu diproses.
+            </p>
+          </div>
+
+          <div class="page-header__actions">
+            <button
+              class="btn btn--primary"
+              type="button"
+              id="hero-upload-btn"
+              aria-label="Upload dokumen baru"
+              data-modal-target="upload-modal">
+              <span class="icon icon--upload" aria-hidden="true"></span>
+              Upload Dokumen
+            </button>
+            <button
+              class="btn btn--ghost"
+              type="button"
+              aria-label="Mulai sesi belajar baru">
+              <span class="icon icon--play" aria-hidden="true"></span>
+              Mulai Sesi
+            </button>
+          </div>
+        </header>
+
+        <section class="stats-section" aria-labelledby="stats-heading">
+          <h2 id="stats-heading" class="sr-only">Ringkasan statistik belajar</h2>
+          
+          <ul class="stats-grid" role="list" aria-label="Statistik belajar kamu">
+            <li class="stat-card stat-card--cyan" role="listitem">
+              <div class="stat-card__icon" aria-hidden="true">
+                <span class="icon icon--documents"></span>
+              </div>
+              <div class="stat-card__content">
+                <span class="stat-card__value" data-count="12" aria-label="12 dokumen">12</span>
+                <span class="stat-card__label">Total Dokumen</span>
+              </div>
+              <div class="stat-card__trend stat-card__trend--up" aria-label="Naik 3 dari minggu lalu">
+                <span class="icon icon--trend-up" aria-hidden="true"></span>
+                +3 minggu ini
+              </div>
+            </li>
+
+            <li class="stat-card stat-card--violet" role="listitem">
+              <div class="stat-card__icon" aria-hidden="true">
+                <span class="icon icon--flashcard"></span>
+              </div>
+              <div class="stat-card__content">
+                <span class="stat-card__value" data-count="248" aria-label="248 flashcard">248</span>
+                <span class="stat-card__label">Total Flashcard</span>
+              </div>
+              <div class="stat-card__trend stat-card__trend--up" aria-label="Naik 47 dari minggu lalu">
+                <span class="icon icon--trend-up" aria-hidden="true"></span>
+                +47 minggu ini
+              </div>
+            </li>
+
+            <li class="stat-card stat-card--lime" role="listitem">
+              <div class="stat-card__icon" aria-hidden="true">
+                <span class="icon icon--quiz"></span>
+              </div>
+              <div class="stat-card__content">
+                <span class="stat-card__value" data-count="78" aria-label="Rata-rata skor 78 persen">78%</span>
+                <span class="stat-card__label">Rata-rata Skor Kuis</span>
+              </div>
+              <div class="stat-card__trend stat-card__trend--up" aria-label="Naik 5 persen dari minggu lalu">
+                <span class="icon icon--trend-up" aria-hidden="true"></span>
+                +5% minggu ini
+              </div>
+            </li>
+
+            <li class="stat-card stat-card--default" role="listitem">
+              <div class="stat-card__icon" aria-hidden="true">
+                <span class="icon icon--clock"></span>
+              </div>
+              <div class="stat-card__content">
+                <span class="stat-card__value" data-count="14" aria-label="14 jam belajar">14j</span>
+                <span class="stat-card__label">Total Jam Belajar</span>
+              </div>
+              <div class="stat-card__trend stat-card__trend--up" aria-label="Naik 2 jam dari minggu lalu">
+                <span class="icon icon--trend-up" aria-hidden="true"></span>
+                +2j minggu ini
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="quick-actions-section" aria-labelledby="quick-actions-heading">
+          <h2 id="quick-actions-heading" class="section-title">Aksi Cepat</h2>
+          <ul class="quick-actions-grid" role="list">
+            
+            <li class="quick-action-card" role="listitem">
+              <button
+                class="btn btn--ghost quick-action-card__btn"
+                type="button"
+                data-modal-target="upload-modal"
+                aria-label="Upload dokumen baru">
+                <span class="quick-action-card__icon quick-action-card__icon--cyan" aria-hidden="true">
+                  <span class="icon icon--upload"></span>
+                </span>
+                <span class="quick-action-card__label">Upload Dokumen</span>
+                <span class="quick-action-card__desc">PDF, PPT, DOCX</span>
+              </button>
+            </li>
+
+            <li class="quick-action-card" role="listitem">
+              <a href="chat.html" class="quick-action-card__btn" aria-label="Mulai sesi chat dengan Tutor AI">
+                <span class="quick-action-card__icon quick-action-card__icon--violet" aria-hidden="true">
+                  <span class="icon icon--chat"></span>
+                </span>
+                <span class="quick-action-card__label">Tanya Tutor AI</span>
+                <span class="quick-action-card__desc">Chat langsung</span>
+              </a>
+            </li>
+
+            <li class="quick-action-card" role="listitem">
+              <a href="flashcard.html" class="quick-action-card__btn" aria-label="Buka sesi flashcard">
+                <span class="quick-action-card__icon quick-action-card__icon--violet" aria-hidden="true">
+                  <span class="icon icon--flashcard"></span>
+                </span>
+                <span class="quick-action-card__label">Review Flashcard</span>
+                <span class="quick-action-card__desc">248 kartu tersedia</span>
+              </a>
+            </li>
+
+            <li class="quick-action-card" role="listitem">
+              <a href="quiz.html" class="quick-action-card__btn" aria-label="Mulai kuis interaktif">
+                <span class="quick-action-card__icon quick-action-card__icon--lime" aria-hidden="true">
+                  <span class="icon icon--quiz"></span>
+                </span>
+                <span class="quick-action-card__label">Mulai Kuis</span>
+                <span class="quick-action-card__desc">3 kuis menunggu</span>
+              </a>
+            </li>
+
+          </ul>
+        </section>
+
+        <div class="dashboard-grid">
+
+          <section class="recent-documents-section" aria-labelledby="recent-docs-heading">
+            <div class="section-header">
+              <h2 id="recent-docs-heading" class="section-title">Dokumen Terbaru</h2>
+              <a href="documents.html" class="btn btn--text btn--sm" aria-label="Lihat semua dokumen">
+                Lihat Semua →
+              </a>
+            </div>
+
+            <ul class="document-list" role="list" aria-label="Daftar dokumen terbaru">
+              <li class="document-item" role="listitem" data-doc-id="doc-001" data-doc-type="pdf">
+                <div class="document-item__icon document-item__icon--pdf" aria-hidden="true">
+                  <span class="filetype-badge">PDF</span>
+                </div>
+                <div class="document-item__info">
+                  <h3 class="document-item__name">
+                    <a href="chat.html?doc=doc-001" class="document-item__link" aria-label="Buka Modul_Sistem_Operasi.pdf">
+                      Modul_Sistem_Operasi.pdf
+                    </a>
+                  </h3>
+                  <div class="document-item__meta">
+                    <span class="document-item__size">2.4 MB</span>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <time class="document-item__date" datetime="2025-01-14">14 Jan 2025</time>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <span class="badge badge--sm badge--success" aria-label="Status: Diproses">✓ Diproses</span>
+                  </div>
+                </div>
+                <div class="document-item__formats" aria-label="Format tersedia">
+                  <span class="format-pill format-pill--cyan" title="Flashcard tersedia" aria-label="47 flashcard tersedia">🃏 47</span>
+                  <span class="format-pill format-pill--lime" title="Kuis tersedia" aria-label="20 kuis tersedia">❓ 20</span>
+                  <span class="format-pill format-pill--violet" title="Podcast tersedia" aria-label="Podcast tersedia">🎵 1</span>
+                </div>
+                <div class="document-item__actions">
+                  <button
+                    class="btn btn--icon btn--sm"
+                    type="button"
+                    aria-label="Opsi lebih lanjut untuk Modul_Sistem_Operasi.pdf"
+                    aria-haspopup="true"
+                    data-doc-id="doc-001">
+                    <span class="icon icon--more-vertical" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </li>
+
+              <li class="document-item" role="listitem" data-doc-id="doc-002" data-doc-type="pdf">
+                <div class="document-item__icon document-item__icon--pdf" aria-hidden="true">
+                  <span class="filetype-badge">PDF</span>
+                </div>
+                <div class="document-item__info">
+                  <h3 class="document-item__name">
+                    <a href="chat.html?doc=doc-002" class="document-item__link" aria-label="Buka Bab3_Kimia_Organik.pdf">
+                      Bab3_Kimia_Organik.pdf
+                    </a>
+                  </h3>
+                  <div class="document-item__meta">
+                    <span class="document-item__size">1.1 MB</span>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <time class="document-item__date" datetime="2025-01-13">13 Jan 2025</time>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <span class="badge badge--sm badge--warning" aria-label="Status: Sedang diproses">⏳ Diproses...</span>
+                  </div>
+                </div>
+                <div class="document-item__formats" aria-label="Format sedang disiapkan">
+                  <span class="format-pill format-pill--disabled" aria-label="Flashcard sedang disiapkan">🃏 —</span>
+                </div>
+                <div class="document-item__actions">
+                  <button
+                    class="btn btn--icon btn--sm"
+                    type="button"
+                    aria-label="Opsi lebih lanjut untuk Bab3_Kimia_Organik.pdf"
+                    aria-haspopup="true"
+                    data-doc-id="doc-002">
+                    <span class="icon icon--more-vertical" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </li>
+
+              <li class="document-item" role="listitem" data-doc-id="doc-003" data-doc-type="pptx">
+                <div class="document-item__icon document-item__icon--pptx" aria-hidden="true">
+                  <span class="filetype-badge">PPT</span>
+                </div>
+                <div class="document-item__info">
+                  <h3 class="document-item__name">
+                    <a href="chat.html?doc=doc-003" class="document-item__link" aria-label="Buka Slide_Algoritma_Sorting.pptx">
+                      Slide_Algoritma_Sorting.pptx
+                    </a>
+                  </h3>
+                  <div class="document-item__meta">
+                    <span class="document-item__size">3.8 MB</span>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <time class="document-item__date" datetime="2025-01-10">10 Jan 2025</time>
+                    <span class="document-item__separator" aria-hidden="true">·</span>
+                    <span class="badge badge--sm badge--success" aria-label="Status: Diproses">✓ Diproses</span>
+                  </div>
+                </div>
+                <div class="document-item__formats" aria-label="Format tersedia">
+                  <span class="format-pill format-pill--cyan" aria-label="31 flashcard tersedia">🃏 31</span>
+                  <span class="format-pill format-pill--lime" aria-label="15 kuis tersedia">❓ 15</span>
+                </div>
+                <div class="document-item__actions">
+                  <button
+                    class="btn btn--icon btn--sm"
+                    type="button"
+                    aria-label="Opsi lebih lanjut untuk Slide_Algoritma_Sorting.pptx"
+                    aria-haspopup="true"
+                    data-doc-id="doc-003">
+                    <span class="icon icon--more-vertical" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <aside class="learning-progress-section" aria-labelledby="progress-heading">
+            <h2 id="progress-heading" class="section-title">Progres Belajar</h2>
+
+            <div class="goal-card" role="region" aria-labelledby="weekly-goal-heading">
+              <h3 id="weekly-goal-heading" class="goal-card__title">Target Minggu Ini</h3>
+              <div class="goal-card__progress" role="meter" aria-label="Progres target mingguan" aria-valuenow="5" aria-valuemin="0" aria-valuemax="7" aria-valuetext="5 dari 7 hari selesai">
+                <ol class="day-tracker" aria-label="Tracker hari belajar minggu ini">
+                  <li class="day-tracker__day day-tracker__day--complete" aria-label="Senin: selesai">Sen</li>
+                  <li class="day-tracker__day day-tracker__day--complete" aria-label="Selasa: selesai">Sel</li>
+                  <li class="day-tracker__day day-tracker__day--complete" aria-label="Rabu: selesai">Rab</li>
+                  <li class="day-tracker__day day-tracker__day--complete" aria-label="Kamis: selesai">Kam</li>
+                  <li class="day-tracker__day day-tracker__day--complete" aria-label="Jumat: selesai">Jum</li>
+                  <li class="day-tracker__day day-tracker__day--today" aria-label="Sabtu: hari ini">Sab</li>
+                  <li class="day-tracker__day day-tracker__day--pending" aria-label="Minggu: belum">Min</li>
+                </ol>
+                <p class="goal-card__summary">
+                  <strong>5 dari 7 hari</strong> target terpenuhi 🔥
+                </p>
+              </div>
+            </div>
+
+            <div class="subject-progress" role="region" aria-labelledby="subject-progress-heading">
+              <h3 id="subject-progress-heading" class="subject-progress__title">Progres per Mata Pelajaran</h3>
+              <ul class="subject-list" role="list">
+                
+                <li class="subject-item" role="listitem">
+                  <div class="subject-item__header">
+                    <span class="subject-item__name">Sistem Operasi</span>
+                    <span class="subject-item__percent" aria-label="72 persen selesai">72%</span>
+                  </div>
+                  <div class="progress-bar" role="meter" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-valuetext="72 persen selesai">
+                    <div class="progress-bar__fill progress-bar__fill--cyan" data-width="72"></div>
+                  </div>
+                </li>
+
+                <li class="subject-item" role="listitem">
+                  <div class="subject-item__header">
+                    <span class="subject-item__name">Kimia Organik</span>
+                    <span class="subject-item__percent" aria-label="35 persen selesai">35%</span>
+                  </div>
+                  <div class="progress-bar" role="meter" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" aria-valuetext="35 persen selesai">
+                    <div class="progress-bar__fill progress-bar__fill--violet" data-width="35"></div>
+                  </div>
+                </li>
+
+                <li class="subject-item" role="listitem">
+                  <div class="subject-item__header">
+                    <span class="subject-item__name">Algoritma & Sorting</span>
+                    <span class="subject-item__percent" aria-label="89 persen selesai">89%</span>
+                  </div>
+                  <div class="progress-bar" role="meter" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" aria-valuetext="89 persen selesai">
+                    <div class="progress-bar__fill progress-bar__fill--lime" data-width="89"></div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="last-session-card" role="region" aria-labelledby="last-session-heading">
+              <h3 id="last-session-heading" class="last-session-card__title">Lanjutkan Sesi</h3>
+              <div class="session-resume-card">
+                <div class="session-resume-card__info">
+                  <span class="session-resume-card__icon" aria-hidden="true">🃏</span>
+                  <div>
+                    <p class="session-resume-card__name">Flashcard — Sistem Operasi</p>
+                    <p class="session-resume-card__progress">Kartu 23 dari 47</p>
+                  </div>
+                </div>
+                <a href="flashcard.html?doc=doc-001&resume=true" class="btn btn--primary btn--sm" aria-label="Lanjutkan sesi flashcard Sistem Operasi dari kartu 23">
+                  Lanjutkan
+                </a>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+
+        <section class="recommendations-section" aria-labelledby="recommendations-heading">
+          <h2 id="recommendations-heading" class="section-title">Rekomendasi ADAPTIV</h2>
+          <p class="section-subtitle">Berdasarkan pola belajar dan dokumenmu</p>
+
+          <ul class="recommendations-grid" role="list">
+            
+            <li class="recommendation-card" role="listitem">
+              <div class="recommendation-card__badge recommendation-card__badge--warning" aria-hidden="true">⚠</div>
+              <div class="recommendation-card__content">
+                <h3 class="recommendation-card__title">Review Kimia Organik</h3>
+                <p class="recommendation-card__desc">
+                  Kamu belum belajar Kimia Organik selama 3 hari. Spaced repetition menyarankan review sekarang.
+                </p>
+              </div>
+              <a href="flashcard.html?doc=doc-002" class="btn btn--ghost btn--sm" aria-label="Review flashcard Kimia Organik">
+                Review Sekarang →
+              </a>
+            </li>
+
+            <li class="recommendation-card" role="listitem">
+              <div class="recommendation-card__badge recommendation-card__badge--info" aria-hidden="true">💡</div>
+              <div class="recommendation-card__content">
+                <h3 class="recommendation-card__title">Coba Mode Podcast</h3>
+                <p class="recommendation-card__desc">
+                  Deteksi AI: gaya belajarmu cenderung Auditori. Coba konversi Modul SisOp ke format podcast.
+                </p>
+              </div>
+              <a href="podcast.html?doc=doc-001" class="btn btn--ghost btn--sm" aria-label="Buat podcast dari Modul Sistem Operasi">
+                Buat Podcast →
+              </a>
+            </li>
+
+            <li class="recommendation-card" role="listitem">
+              <div class="recommendation-card__badge recommendation-card__badge--success" aria-hidden="true">🏆</div>
+              <div class="recommendation-card__content">
+                <h3 class="recommendation-card__title">Kamu hampir master Algoritma!</h3>
+                <p class="recommendation-card__desc">
+                  89% progres tercapai. Selesaikan 5 kartu tersisa untuk unlock badge "Algorithm Master".
+                </p>
+              </div>
+              <a href="flashcard.html?doc=doc-003" class="btn btn--ghost btn--sm" aria-label="Selesaikan flashcard Algoritma Sorting">
+                Selesaikan →
+              </a>
+            </li>
+
+          </ul>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="upload-modal-title" aria-describedby="upload-modal-desc" hidden data-modal="upload-modal">
+    <div class="modal modal--upload" id="upload-modal">
+      
+      <header class="modal__header">
+        <h2 id="upload-modal-title" class="modal__title">Upload Dokumen Baru</h2>
+        <button
+          class="btn btn--icon modal__close-btn"
+          type="button"
+          aria-label="Tutup dialog upload"
+          data-modal-close="upload-modal">
+          <span class="icon icon--close" aria-hidden="true"></span>
+        </button>
+      </header>
+
+      <div class="modal__body">
+        <p id="upload-modal-desc" class="modal__desc">
+          Upload dokumen PDF, PPT, DOCX, atau TXT. AI akan otomatis memproses dan mengunci jawabannya pada dokumenmu.
+        </p>
+
+        <div
+          class="dropzone"
+          id="upload-dropzone"
+          role="button"
+          tabindex="0"
+          aria-label="Area upload — seret file ke sini atau klik untuk memilih file"
+          data-state="idle">
+          
+          <div class="dropzone__icon" aria-hidden="true">
+            <span class="icon icon--upload-cloud"></span>
+          </div>
+          <p class="dropzone__primary-text">Seret & lepas file di sini</p>
+          <p class="dropzone__secondary-text">atau</p>
+          <label for="file-input" class="btn btn--ghost btn--sm">Pilih File dari Komputer</label>
+          <input
+            type="file"
+            id="file-input"
+            name="document"
+            class="sr-only"
+            accept=".pdf,.ppt,.pptx,.doc,.docx,.txt"
+            multiple
+            aria-label="Pilih dokumen untuk diupload"
+            aria-describedby="file-type-hint">
+          <p id="file-type-hint" class="dropzone__hint">
+            Format didukung: PDF, PPT, DOCX, TXT · Maks 50MB per file
+          </p>
+        </div>
+
+        <ul class="upload-progress-list" id="upload-progress-list" role="list" aria-label="Daftar file yang diupload" aria-live="polite" hidden></ul>
+
+        <fieldset class="format-selection">
+          <legend class="format-selection__legend">Otomatis buat format:</legend>
+          <div class="format-selection__options">
+            <label class="checkbox-option">
+              <input type="checkbox" name="format" value="flashcard" checked class="checkbox-option__input">
+              <span class="checkbox-option__label">🃏 Flashcard</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="format" value="quiz" checked class="checkbox-option__input">
+              <span class="checkbox-option__label">❓ Kuis</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="format" value="podcast" class="checkbox-option__input">
+              <span class="checkbox-option__label">🎵 Podcast</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <footer class="modal__footer">
+        <button
+          class="btn btn--ghost"
+          type="button"
+          data-modal-close="upload-modal"
+          aria-label="Batal dan tutup dialog">
+          Batal
+        </button>
+        <button
+          class="btn btn--primary"
+          type="button"
+          id="start-upload-btn"
+          disabled
+          aria-label="Mulai upload dokumen yang dipilih"
+          aria-describedby="upload-btn-hint">
+          Upload & Proses
+        </button>
+        <span id="upload-btn-hint" class="sr-only">Pilih file terlebih dahulu untuk mengaktifkan tombol upload</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="delete-modal-overlay" role="alertdialog" aria-modal="true" aria-labelledby="delete-modal-title" aria-describedby="delete-modal-desc" hidden data-modal="delete-modal">
+    <div class="modal modal--confirm modal--danger" id="delete-modal">
+      
+      <div class="modal__body modal__body--centered">
+        <span class="modal__danger-icon" aria-hidden="true">⚠</span>
+        <h2 id="delete-modal-title" class="modal__title">Hapus Dokumen?</h2>
+        <p id="delete-modal-desc" class="modal__desc">
+          Dokumen <strong id="delete-doc-name" class="modal__target-name">[nama dokumen]</strong> dan semua flashcard, kuis, serta podcast yang terkait akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+
+      <footer class="modal__footer">
+        <button
+          class="btn btn--ghost"
+          type="button"
+          data-modal-close="delete-modal"
+          aria-label="Batal, jangan hapus dokumen">
+          Batal
+        </button>
+        <button
+          class="btn btn--danger"
+          type="button"
+          id="confirm-delete-btn"
+          data-action="delete-document"
+          aria-label="Konfirmasi hapus dokumen secara permanen">
+          Ya, Hapus Permanen
+        </button>
+      </footer>
+
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container" role="region" aria-label="Notifikasi sistem" aria-live="polite" aria-atomic="false">
+    </div>
+
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>
