@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simulate API Call
         setTimeout(() => {
             alert('Account created successfully!');
-            // window.location.href = 'dashboard.html'; // Redirect
+            window.location.href = '../app/dashboard.html'; // Redirect to app dashboard
 
             submitBtn.textContent = 'Sign Up';
             submitBtn.disabled = false;
