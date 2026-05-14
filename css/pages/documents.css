@@ -1,0 +1,504 @@
+.documents-main {
+    flex: 1;
+    padding: 32px 40px;
+    overflow-y: auto;
+    background: radial-gradient(circle at top right, rgba(0, 232, 200, 0.03), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(124, 92, 252, 0.03), transparent 50%);
+    background-color: var(--bg-base);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.page-header__info h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.page-header__info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Toolbar Styling */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-panel);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-primary);
+    background: var(--bg-hover);
+    box-shadow: 0 0 0 2px var(--accent-subtle);
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    width: 100%;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 14px;
+}
+
+.search-icon {
+    color: var(--text-muted);
+    font-size: 20px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.filter-select {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    outline: none;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-select:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-hover);
+}
+
+.view-toggle {
+    display: flex;
+    background: var(--bg-surface-2);
+    padding: 4px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+}
+
+.btn-view {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    display: grid;
+    place-items: center;
+    transition: var(--transition);
+}
+
+.btn-view .material-icons-round {
+    font-size: 18px;
+}
+
+.btn-view:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+}
+
+.btn-view.active {
+    background: var(--accent-primary);
+    color: var(--text-on-accent);
+}
+
+/* Document Grid Area */
+.document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.doc-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.doc-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.doc-card__preview {
+    height: 120px;
+    background: linear-gradient(135deg, var(--bg-panel), var(--bg-base));
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid var(--divider);
+    position: relative;
+}
+
+.doc-card__preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--accent-subtle), transparent 70%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.doc-card:hover .doc-card__preview-overlay {
+    opacity: 1;
+}
+
+.file-icon {
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.file-icon.pdf {
+    background: var(--color-error-subtle);
+    color: var(--color-error);
+    border: 1px solid rgba(248, 81, 73, 0.2);
+}
+
+.file-icon.pptx {
+    background: var(--color-warning-subtle);
+    color: var(--color-warning);
+    border: 1px solid rgba(245, 166, 35, 0.2);
+}
+
+.doc-card__body {
+    padding: 20px;
+    flex: 1;
+}
+
+.doc-card__title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doc-card__meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.badge--success {
+    background: var(--color-success-subtle);
+    color: var(--color-success);
+    border: 1px solid rgba(45, 212, 168, 0.2);
+}
+
+.doc-card__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 8px 12px;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--divider);
+}
+
+.btn-action {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    color: var(--text-muted);
+    display: grid;
+    place-items: center;
+    transition: var(--transition-fast);
+}
+
+.btn-action:hover {
+    background: var(--bg-hover);
+    color: var(--accent-primary);
+}
+
+.btn-action--danger:hover {
+    background: var(--color-error-subtle);
+    color: var(--color-error);
+}
+
+/* List View Styling */
+.document-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.document-grid.list-view .doc-card {
+    flex-direction: row;
+    height: auto;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+}
+
+.document-grid.list-view .doc-card__preview {
+    display: none;
+}
+
+.document-grid.list-view .doc-card__body {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    padding: 0;
+    gap: 16px;
+}
+
+.document-grid.list-view .doc-card__title {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.document-grid.list-view .doc-card__meta {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.document-grid.list-view .doc-card__actions {
+    background: transparent;
+    border-top: none;
+    padding: 0;
+}
+
+/* ═══════════════ BREADCRUMB ═══════════════ */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.breadcrumb__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+a.breadcrumb__item:hover {
+    color: var(--accent-primary);
+}
+
+.breadcrumb__item .material-icons-round {
+    font-size: 18px;
+}
+
+.breadcrumb__separator {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+}
+
+.breadcrumb__separator .material-icons-round {
+    font-size: 18px;
+}
+
+.breadcrumb__current {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ═══════════════ FOLDER GRID ═══════════════ */
+.folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.folder-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.folder-card__icon-area {
+    height: 100px;
+    display: grid;
+    place-items: center;
+    font-size: 2.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.folder-card__icon-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    transition: opacity 0.25s ease;
+}
+
+.folder-card:hover .folder-card__icon-area::before {
+    opacity: 0.15;
+}
+
+.folder-card__body {
+    padding: 16px 20px 20px;
+    flex: 1;
+}
+
+.folder-card__name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.folder-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.folder-card__file-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.folder-card__file-count .material-icons-round {
+    font-size: 14px;
+}
+
+/* ═══════════════ DOCX FILE ICON ═══════════════ */
+.file-icon.docx {
+    background: rgba(66, 133, 244, 0.12);
+    color: #4285F4;
+    border: 1px solid rgba(66, 133, 244, 0.2);
+}
+
+/* ═══════════════ EMPTY STATE ═══════════════ */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.empty-state__icon {
+    font-size: 4rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state__title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.empty-state__desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 300px;
+}
+
+/* ═══════════════ FOLDER LIST VIEW ═══════════════ */
+.folder-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.folder-grid.list-view .folder-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+}
+
+.folder-grid.list-view .folder-card__icon-area {
+    height: auto;
+    width: 48px;
+    font-size: 1.6rem;
+}
+
+.folder-grid.list-view .folder-card__icon-area::before {
+    display: none;
+}
+
+.folder-grid.list-view .folder-card__body {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 0;
+    flex: 1;
+}
+
+.folder-grid.list-view .folder-card__name {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.folder-grid.list-view .folder-card__meta {
+    gap: 24px;
+}

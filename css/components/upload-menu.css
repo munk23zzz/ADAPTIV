@@ -1,0 +1,93 @@
+/* Posisi Relative untuk menahan menu absolut di dalamnya */
+.upload-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tombol Trigger */
+.btn-upload-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-surface-2, #1E2734);
+    color: var(--text-primary, #F8FAFC);
+    border: 1px solid var(--border, #232E3D);
+    padding: 10px 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-upload-trigger:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.05));
+    border-color: var(--accent-primary, #00E8C8);
+}
+
+/* Kotak Pop-up Menu */
+.upload-menu {
+    position: absolute;
+    top: 100%;
+    /* Muncul tepat di bawah tombol */
+    left: 0;
+    margin-top: 8px;
+    width: 220px;
+    background-color: var(--bg-surface, #141A23);
+    border: 1px solid var(--border, #232E3D);
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+
+    /* Animasi Transisi */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    /* Cegah klik saat hidden */
+}
+
+/* Class untuk memunculkan menu */
+.upload-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.upload-menu__list {
+    list-style: none;
+    padding: 8px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Item List Menu */
+.upload-menu__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary, #F8FAFC);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+.upload-menu__item:hover {
+    background-color: var(--bg-hover, rgba(255, 255, 255, 0.08));
+}
+
+.menu-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary, #94A3B8);
+}

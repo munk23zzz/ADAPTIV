@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumen Saya - ADAPTIV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/typography.css">
+    <link rel="stylesheet" href="../../css/components/navbar.css">
+    <link rel="stylesheet" href="../../css/components/sidebar.css">
+    <link rel="stylesheet" href="../../css/components/buttons.css">
+    <link rel="stylesheet" href="../../css/pages/documents.css">
+    <script src="../../js/core/theme.js"></script>
+</head>
+
+<body class="app-body">
+
+    <div class="app-shell">
+        <header class="app-header" id="app-header" role="banner">
+            <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
+
+                <div class="topnav__left">
+                    <!-- Global Menu (Hamburger) -->
+                    <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
+                        aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
+                        <span class="material-icons-round">menu</span>
+                    </button>
+
+                    <a class="logo-wrap" href="dashboard.html">
+                        <div class="logo-icon">📓</div>
+                        <span class="logo-text">ADAPTIV</span>
+                    </a>
+                </div>
+
+                <div class="topnav__center">
+                    <div class="search-bar" role="search">
+            
+                        <span class="search-bar__icon" aria-hidden="true"></span>
+                        <input type="search" id="global-search" name="global-search" class="search-bar__input"
+                            placeholder="Cari dokumen, sesi, atau topik..." autocomplete="off" autocorrect="off"
+                            spellcheck="false" maxlength="100">
+            
+                        <kbd class="search-bar__shortcut" aria-hidden="true">⌘K</kbd>
+                    </div>
+                </div>
+
+                <div class="topnav__right">
+                  <!-- Temporary Chat -->
+                  <button class="btn btn--icon topnav__icon-btn" id="btn-temp-chat" type="button"
+                    aria-label="Mulai temporary chat" title="Temporary Chat">
+                    <span class="material-icons-round">bolt</span>
+                  </button>
+                  <!-- Theme Toggle -->
+                  <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
+                    aria-label="Toggle dark/light mode" title="Ganti tema">
+                    <span class="material-icons-round" id="theme-icon">light_mode</span>
+                  </button>
+                </div>
+            </nav>
+        </header>
+
+        <div class="app-layout">
+            <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
+            <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
+            <div class="global-drawer" id="global-drawer">
+
+              <!-- Header -->
+              <div class="drawer-header">
+                <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
+                <button class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+              </div>
+
+              <!-- Zone 1: Menu Utama -->
+              <nav class="drawer-main-nav">
+                <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
+                <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
+                <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Leaderboard</a>
+                <a href="chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
+              </nav>
+
+              <!-- Zone 2: Terkini (Recents) -->
+              <div class="drawer-recents">
+                <div class="recents-label">Terkini</div>
+                <a class="recent-item" href="#">Perbandingan ChatGPT dan Gemini...</a>
+                <a class="recent-item" href="#">Soal Matematika Langkah demi...</a>
+                <a class="recent-item" href="#">Hormati Keberagaman Budaya</a>
+                <a class="recent-item" href="#">Interface Status: Show Commands</a>
+                <a class="recent-item" href="#">Show IP Interface Brief</a>
+                <a class="recent-item" href="#">Alamat IP terakhir.</a>
+                <a class="recent-item" href="#">Kecepatan Aktual 0,875 MByte/s</a>
+                <a class="recent-item" href="#">Kemandirian Menurut Sentosa</a>
+                <a class="recent-item" href="#">Hari Anti-Korupsi Sedunia</a>
+                <a class="recent-item" href="#">Bola Basket: Chest Pass</a>
+              </div>
+
+              <!-- Zone 3: Account Bar -->
+              <div class="drawer-account">
+
+                <!-- Sub-popup Level 2 -->
+                <div class="account-sub-popup hidden" id="account-sub-popup">
+                  <div class="sub-popup-email">
+                    <span class="material-icons-round">account_circle</span>
+                    nabil@student.binus.ac.id
+                  </div>
+                  <div class="sub-popup-account-row">
+                    <div class="account-avatar">NK</div>
+                    <span class="sub-popup-account-name">Nabil Kurniawan</span>
+                    <span class="material-icons-round sub-popup-check">check</span>
+                  </div>
+                  <div class="sub-popup-add">
+                    <span class="material-icons-round">add</span>
+                    Tambah Akun
+                  </div>
+                </div>
+
+                <!-- Main Popup Level 1 -->
+                <div class="account-popup hidden" id="account-popup">
+                  <div class="popup-user-row" id="popup-user-row">
+                    <div class="account-avatar">NK</div>
+                    <div>
+                      <div class="popup-user-name">Nabil Kurniawan</div>
+                      <div class="popup-user-plan">Free</div>
+                    </div>
+                    <span class="material-icons-round popup-user-chevron">chevron_right</span>
+                  </div>
+                  <div class="popup-menu">
+                    <button class="popup-item"><span class="material-icons-round">auto_awesome</span>Upgrade plan</button>
+                    <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
+                    <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
+                    <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
+                    <div class="popup-divider"></div>
+                    <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
+                    <button class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
+                  </div>
+                </div>
+
+                <!-- Account Bar -->
+                <button class="account-bar" id="account-bar-btn">
+                  <div class="account-avatar">NK</div>
+                  <div class="account-info">
+                    <div class="account-name">Nabil Kurniawan</div>
+                    <div class="account-plan">Free</div>
+                  </div>
+                  <span class="upgrade-btn">Upgrade</span>
+                </button>
+              </div>
+
+            </div>
+
+
+            <main class="documents-main" id="main-content">
+                <!-- Breadcrumb Navigation -->
+                <nav class="breadcrumb" id="breadcrumb" aria-label="Navigasi folder">
+                    <a href="#" class="breadcrumb__item breadcrumb__root" id="breadcrumb-root">
+                        <span class="material-icons-round">folder</span> Dokumen Saya
+                    </a>
+                    <span class="breadcrumb__separator" id="breadcrumb-sep" style="display:none;">
+                        <span class="material-icons-round">chevron_right</span>
+                    </span>
+                    <span class="breadcrumb__item breadcrumb__current" id="breadcrumb-current"></span>
+                </nav>
+
+                <header class="page-header">
+                    <div class="page-header__info">
+                        <h1 id="page-title">Dokumen Saya</h1>
+                        <p id="page-subtitle">Kelola mata kuliah dan materi belajarmu.</p>
+                    </div>
+                    <button class="btn btn--primary" id="action-btn">
+                        <span class="material-icons-round" id="action-btn-icon">create_new_folder</span>
+                        <span id="action-btn-label">Buat Folder Baru</span>
+                    </button>
+                </header>
+
+                <section class="toolbar">
+                    <div class="search-box">
+                        <span class="material-icons-round search-icon">search</span>
+                        <input type="text" id="doc-search" placeholder="Cari folder...">
+                    </div>
+                    <div class="filter-group">
+                        <select class="filter-select" id="filter-type" style="display:none;">
+                            <option value="all">Semua Format</option>
+                            <option value="pdf">PDF</option>
+                            <option value="pptx">PowerPoint</option>
+                            <option value="docx">Word</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="btn-view active" id="view-grid" title="Grid View"><span
+                                    class="material-icons-round">grid_view</span></button>
+                            <button class="btn-view" id="view-list" title="List View"><span
+                                    class="material-icons-round">view_list</span></button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Folder Grid (Root Level) -->
+                <section class="folder-grid" id="folder-container"></section>
+
+                <!-- Document Grid (Inside Folder) -->
+                <section class="document-grid" id="document-container" style="display:none;"></section>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state" style="display:none;">
+                    <span class="material-icons-round empty-state__icon">folder_open</span>
+                    <h3 class="empty-state__title">Belum ada file</h3>
+                    <p class="empty-state__desc">Unggah dokumen pertamamu ke folder ini.</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../../js/core/navigation.js"></script>
+    <script src="../../js/pages/documents.js"></script>
+</body>
+
+</html>

@@ -8,19 +8,7 @@ class DashboardController {
     constructor() {
         // 1. Inisialisasi DOM Elements
         this.body = document.body;
-
-        // Sidebar Elements
-        this.sidebar = document.getElementById('global-drawer');
-        this.sidebarToggle = document.getElementById('sidebar-toggle-btn');
-        this.sidebarBackdrop = document.getElementById('global-drawer-overlay');
-        this.drawerCloseBtn = document.getElementById('btn-close-drawer');
-
-        // Dropdown Elements
-        this.profileBtn = document.getElementById('profile-menu-btn');
-        this.profileMenu = document.getElementById('profile-menu');
-        this.notifBtn = document.getElementById('notifications-btn');
-        this.notifPanel = document.getElementById('notifications-panel');
-
+        
         // Upload Elements
         this.dropzone = document.getElementById('upload-dropzone');
         this.fileInput = document.getElementById('file-input');
@@ -34,106 +22,72 @@ class DashboardController {
 
         // State
         this.uploadedFiles = [];
-        this.activeDropdown = null;
 
         // Jalankan semua setup
         this.init();
     }
 
     init() {
-        this.setupSidebar();
-        this.setupDropdowns();
         this.setupModals();
         this.setupUploadZone();
         this.animateCounters();
-
-        // Global click listener untuk nutup dropdown kalau klik di luar
-        document.addEventListener('click', (e) => this.handleGlobalClick(e));
+        this.updateUserGreeting();
+        this.checkWelcomeAnimation();
     }
 
-    // ═══════════════════════════════════════════════
-    // 1. SIDEBAR LOGIC
-    // ═══════════════════════════════════════════════
-    setupSidebar() {
-        if (!this.sidebarToggle || !this.sidebar) return;
-
-        const toggleSidebar = () => {
-            const isExpanded = this.sidebar.classList.contains('show');
-
-            if (isExpanded) {
-                this.sidebar.classList.remove('show');
-                this.sidebarBackdrop.classList.remove('show');
-                this.sidebarToggle.setAttribute('aria-expanded', 'false');
-                this.body.style.overflow = '';
-            } else {
-                this.sidebar.classList.add('show');
-                this.sidebarBackdrop.classList.add('show');
-                this.sidebarToggle.setAttribute('aria-expanded', 'true');
-                this.body.style.overflow = 'hidden';
-            }
-        };
-
-        this.sidebarToggle.addEventListener('click', toggleSidebar);
-        if (this.drawerCloseBtn) {
-            this.drawerCloseBtn.addEventListener('click', toggleSidebar);
-        }
-        if (this.sidebarBackdrop) {
-            this.sidebarBackdrop.addEventListener('click', toggleSidebar);
+    /**
+     * Update Greeting dengan nama dari localStorage
+     */
+    updateUserGreeting() {
+        const dashboardUserName = document.getElementById('dashboard-user-name');
+        if (dashboardUserName) {
+            const storedName = localStorage.getItem('adaptiv_user_name') || 'Nabil';
+            dashboardUserName.textContent = storedName.split(' ')[0]; // Ambil nama depan saja
         }
     }
 
-    // ═══════════════════════════════════════════════
-    // 2. DROPDOWNS (Profile & Notifications)
-    // ═══════════════════════════════════════════════
-    setupDropdowns() {
-        const toggleDropdown = (btn, menu) => {
-            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    /**
+     * Apple-style Welcome Animation
+     * Dipicu jika ada parameter ?newuser=true di URL
+     */
+    checkWelcomeAnimation() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isNewUser = urlParams.get('newuser') === 'true';
+        const welcomeOverlay = document.getElementById('welcome-overlay');
+        const userDisplayName = document.getElementById('user-display-name');
 
-            // Tutup dropdown lain yang lagi kebuka
-            this.closeAllDropdowns();
+        if (isNewUser && welcomeOverlay) {
+            // Ambil nama dari localStorage
+            const storedName = localStorage.getItem('adaptiv_user_name') || 'User';
+            if (userDisplayName) userDisplayName.textContent = storedName;
 
-            if (!isExpanded) {
-                btn.setAttribute('aria-expanded', 'true');
-                menu.removeAttribute('hidden');
-                this.activeDropdown = { btn, menu };
-            }
-        };
+            // Tampilkan Overlay & Blur Dashboard
+            welcomeOverlay.style.display = 'flex';
+            document.body.classList.add('welcome-active');
 
-        if (this.profileBtn && this.profileMenu) {
-            this.profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleDropdown(this.profileBtn, this.profileMenu);
+            // Trigger Fade In & Scale
+            requestAnimationFrame(() => {
+                welcomeOverlay.classList.add('active');
             });
-        }
 
-        if (this.notifBtn && this.notifPanel) {
-            this.notifBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleDropdown(this.notifBtn, this.notifPanel);
-            });
-        }
-    }
-
-    closeAllDropdowns() {
-        if (this.activeDropdown) {
-            this.activeDropdown.btn.setAttribute('aria-expanded', 'false');
-            this.activeDropdown.menu.setAttribute('hidden', 'true');
-            this.activeDropdown = null;
-        }
-    }
-
-    handleGlobalClick(e) {
-        if (this.activeDropdown) {
-            const isClickInside = this.activeDropdown.menu.contains(e.target) ||
-                this.activeDropdown.btn.contains(e.target);
-            if (!isClickInside) {
-                this.closeAllDropdowns();
-            }
+            // Sembunyikan setelah beberapa detik
+            setTimeout(() => {
+                welcomeOverlay.classList.remove('active');
+                document.body.classList.remove('welcome-active');
+                
+                // Hapus overlay sepenuhnya setelah transisi selesai
+                setTimeout(() => {
+                    welcomeOverlay.style.display = 'none';
+                    // Bersihkan URL agar tidak re-trigger saat refresh
+                    const newUrl = window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                }, 1200);
+            }, 3000);
         }
     }
 
     // ═══════════════════════════════════════════════
-    // 3. MODAL MANAGEMENT
+    // 1. MODAL MANAGEMENT
     // ═══════════════════════════════════════════════
     setupModals() {
         this.modalTriggers.forEach(trigger => {
@@ -157,7 +111,6 @@ class DashboardController {
             if (e.key === 'Escape') {
                 const openOverlay = document.querySelector('.modal-overlay:not([hidden])');
                 if (openOverlay) this.closeModal(openOverlay);
-                this.closeAllDropdowns();
             }
         });
     }
@@ -220,13 +173,6 @@ class DashboardController {
         this.fileInput.addEventListener('change', (e) => {
             this.handleFiles(e.target.files);
         });
-
-        // Handle Upload Button Click (Simulasi)
-        if (this.uploadBtn) {
-            this.uploadBtn.addEventListener('click', () => {
-                this.simulateUploadProcess();
-            });
-        }
     }
 
     handleFiles(files) {
@@ -244,30 +190,29 @@ class DashboardController {
 
         this.uploadedFiles = [file];
 
-        // Update UI Dropzone
-        if (this.primaryText) this.primaryText.innerHTML = `File terpilih: <strong class="text--accent-cyan">${this.sanitizeHTML(file.name)}</strong>`;
-        if (this.secondaryText) this.secondaryText.textContent = `Ukuran: ${(file.size / (1024 * 1024)).toFixed(2)} MB`;
+        // Update UI: Tampilkan nama file di dropzone premium
+        const dropzoneTitle = this.dropzone.querySelector('.dropzone__title--premium');
+        if (dropzoneTitle) {
+            dropzoneTitle.innerHTML = `Memproses: <span class="text--accent-cyan">${file.name}</span>`;
+        }
 
-        this.uploadBtn.disabled = false;
-        this.dropzone.style.borderColor = 'var(--color-accent-cyan)';
+        // Jalankan upload otomatis
+        this.simulateUploadProcess();
     }
 
     simulateUploadProcess() {
-        this.uploadBtn.disabled = true;
-        this.uploadBtn.innerHTML = '<span class="icon icon--spinner fa-spin" aria-hidden="true"></span> Memproses...';
-
         // Simulasi delay jaringan/AI processing
         setTimeout(() => {
             this.showToast('Dokumen berhasil diupload dan diproses!', 'success');
             this.closeModal(document.getElementById('upload-modal-overlay'));
 
-            // Reset Modal state
-            this.uploadBtn.innerHTML = 'Upload & Proses';
-            if (this.primaryText) this.primaryText.textContent = 'Seret & lepas file di sini';
-            if (this.secondaryText) this.secondaryText.textContent = 'atau';
-            this.dropzone.style.borderColor = '';
-            this.uploadedFiles = [];
-        }, 2000);
+            // Reset Dropzone state setelah tertutup
+            setTimeout(() => {
+                const dropzoneTitle = this.dropzone.querySelector('.dropzone__title--premium');
+                if (dropzoneTitle) dropzoneTitle.textContent = 'or drop your files';
+                this.uploadedFiles = [];
+            }, 500);
+        }, 2500);
     }
 
     // ═══════════════════════════════════════════════

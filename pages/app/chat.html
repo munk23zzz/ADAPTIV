@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NotebookLM Clone</title>
+  <link rel="stylesheet" href="../../css/base/variables.css" />
+  <link rel="stylesheet" href="../../css/components/sidebar.css">
+  <link rel="stylesheet" href="../../css/components/upload-modal.css">
+  <link rel="stylesheet" href="../../css/pages/chat.css" />
+  <script src="../../js/core/theme.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <div id="app">
+
+    <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
+    <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
+    <div class="global-drawer" id="global-drawer">
+
+      <!-- Header -->
+      <div class="drawer-header">
+        <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
+        <button class="icon-btn" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+      </div>
+
+      <!-- Zone 1: Menu Utama -->
+      <nav class="drawer-main-nav">
+        <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
+        <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
+        <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Leaderboard</a>
+        <a href="chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
+      </nav>
+
+      <!-- Zone 2: Terkini (Recents) -->
+      <div class="drawer-recents">
+        <div class="recents-label">Terkini</div>
+        <a class="recent-item" href="#">Perbandingan ChatGPT dan Gemini...</a>
+        <a class="recent-item" href="#">Soal Matematika Langkah demi...</a>
+        <a class="recent-item" href="#">Hormati Keberagaman Budaya</a>
+        <a class="recent-item" href="#">Interface Status: Show Commands</a>
+        <a class="recent-item" href="#">Show IP Interface Brief</a>
+        <a class="recent-item" href="#">Alamat IP terakhir.</a>
+        <a class="recent-item" href="#">Kecepatan Aktual 0,875 MByte/s</a>
+        <a class="recent-item" href="#">Kemandirian Menurut Sentosa</a>
+        <a class="recent-item" href="#">Hari Anti-Korupsi Sedunia</a>
+        <a class="recent-item" href="#">Bola Basket: Chest Pass</a>
+      </div>
+
+      <!-- Zone 3: Account Bar -->
+      <div class="drawer-account">
+
+        <!-- Sub-popup Level 2 -->
+        <div class="account-sub-popup hidden" id="account-sub-popup">
+          <div class="sub-popup-email">
+            <span class="material-icons-round">account_circle</span>
+            nabil@student.binus.ac.id
+          </div>
+          <div class="sub-popup-account-row">
+            <div class="account-avatar">NK</div>
+            <span class="sub-popup-account-name">Nabil Kurniawan</span>
+            <span class="material-icons-round sub-popup-check">check</span>
+          </div>
+          <div class="sub-popup-add">
+            <span class="material-icons-round">add</span>
+            Tambah Akun
+          </div>
+        </div>
+
+        <!-- Main Popup Level 1 -->
+        <div class="account-popup hidden" id="account-popup">
+          <div class="popup-user-row" id="popup-user-row">
+            <div class="account-avatar">NK</div>
+            <div>
+              <div class="popup-user-name">Nabil Kurniawan</div>
+              <div class="popup-user-plan">Free</div>
+            </div>
+            <span class="material-icons-round popup-user-chevron">chevron_right</span>
+          </div>
+          <div class="popup-menu">
+            <button class="popup-item"><span class="material-icons-round">auto_awesome</span>Upgrade plan</button>
+            <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
+            <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
+            <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
+            <div class="popup-divider"></div>
+            <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
+            <button class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
+          </div>
+        </div>
+
+        <!-- Account Bar -->
+        <button class="account-bar" id="account-bar-btn">
+          <div class="account-avatar">NK</div>
+          <div class="account-info">
+            <div class="account-name">Nabil Kurniawan</div>
+            <div class="account-plan">Free</div>
+          </div>
+          <span class="upgrade-btn">Upgrade</span>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ═══════════════ TOP BAR ═══════════════ -->
+    <header id="topbar">
+      <div class="topbar-left">
+        <!-- Global Menu (Hamburger) -->
+        <button class="icon-btn" id="btn-global-menu">
+          <span class="material-icons-round">menu</span>
+        </button>
+
+        <a class="logo-wrap" href="dashboard.html">
+          <div class="logo-icon">📓</div>
+          <span class="logo-text">ADAPTIV</span>
+        </a>
+
+        <div class="topbar-divider"></div>
+
+        <span class="notebook-title" id="notebook-title" contenteditable="true" title="Klik untuk ubah nama">
+          Notebook Penelitian Saya
+        </span>
+      </div>
+
+      <div class="topbar-center"></div>
+
+      <div class="topbar-right">
+        <!-- Temporary Chat -->
+        <button class="icon-btn" id="btn-temp-chat" type="button"
+          aria-label="Mulai temporary chat" title="Temporary Chat">
+          <span class="material-icons-round">bolt</span>
+        </button>
+        <!-- Theme Toggle -->
+        <button class="icon-btn" id="btn-theme" type="button"
+          aria-label="Toggle dark/light mode" title="Ganti tema">
+          <span class="material-icons-round" id="theme-icon">light_mode</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ═══════════════ MAIN LAYOUT ═══════════════ -->
+    <div id="layout">
+
+      <!-- ═══ LEFT SIDEBAR — Sources ═══ -->
+      <aside id="sidebar">
+        <div class="panel-header">
+          <span class="panel-title">Sources</span>
+          <button class="icon-btn" id="btn-toggle-sidebar">
+            <span class="material-icons-round">vertical_split</span>
+          </button>
+        </div>
+
+        <button class="add-source-btn" id="btn-add-source" data-modal-target="upload-modal">
+          <span class="material-icons-round">add</span>
+          <span class="add-text">Add sources</span>
+        </button>
+
+        <div class="sources-list" id="sources-list">
+          <!-- Source items populated by JS -->
+        </div>
+      </aside>
+
+      <!-- ═══ CHAT MAIN ═══ -->
+      <main id="main">
+
+        <!-- Chat messages -->
+        <div class="chat-area" id="chat-area">
+          <div class="chat-inner" id="chat-inner">
+
+            <!-- Empty state -->
+            <div class="empty-state" id="empty-state">
+              <div class="empty-icon">✨</div>
+              <h2 class="empty-title">Tanyakan apa saja</h2>
+              <p class="empty-sub">Mulai percakapan tentang sumber Anda. NotebookLM akan menjawab berdasarkan materi
+                yang telah Anda tambahkan.</p>
+              <div class="suggested-prompts" id="suggested-prompts">
+                <!-- chips injected by JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="input-wrap">
+          <div class="input-inner">
+            <div class="input-box" id="input-box">
+              <div class="input-row">
+                <textarea id="chat-input" placeholder="Tanyakan sesuatu tentang sumber Anda…" rows="1"
+                  maxlength="4000"></textarea>
+                <button class="action-btn" id="chat-action-btn" aria-label="Action">
+                  <span class="material-icons-round">mic</span>
+                </button>
+              </div>
+            </div>
+            <p style="text-align:center;font-size:11px;color:var(--text-disabled);margin-top:8px;">
+              NotebookLM dapat membuat kesalahan. Verifikasi jawaban dengan sumber asli Anda.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- ═══ RIGHT PANEL — Studio ═══ -->
+      <aside id="studio">
+        <div class="panel-header">
+          <span class="panel-title">Studio</span>
+          <button class="icon-btn" id="btn-toggle-studio-inner">
+            <span class="material-icons-round">vertical_split</span>
+          </button>
+        </div>
+        <div class="studio-tabs">
+          <button class="studio-tab active" data-tab="studio">
+            <span class="material-icons-round">auto_awesome</span>
+            Studio
+          </button>
+          <button class="studio-tab" data-tab="notes">
+            <span class="material-icons-round">sticky_note_2</span>
+            Catatan
+          </button>
+          <button class="studio-tab" data-tab="mindmap">
+            <span class="material-icons-round">account_tree</span>
+            Peta
+          </button>
+        </div>
+
+        <!-- Studio tab -->
+        <div class="studio-content" id="tab-studio">
+
+          <div class="studio-grid-single-col">
+            <button class="studio-chip-btn" id="btn-gen-audio">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-audio">graphic_eq</span>
+                <span class="studio-chip-label color-audio">Audio Overview</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Video Overview')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-video">smart_display</span>
+                <span class="studio-chip-label color-video">Video Overview</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Slide Deck')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-slide">branding_watermark</span>
+                <span class="studio-chip-label color-slide">Slide Deck</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Mind Map')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-mindmap">account_tree</span>
+                <span class="studio-chip-label color-mindmap">Mind Map</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Flashcards')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-flashcards">style</span>
+                <span class="studio-chip-label color-flashcards">Flashcards</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Quiz')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-quiz">quiz</span>
+                <span class="studio-chip-label color-quiz">Quiz</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Infographic')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-infographic">insert_chart_outlined</span>
+                <span class="studio-chip-label color-infographic">Infographic</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+
+            <button class="studio-chip-btn" onclick="generateStudioContent('Data Table')">
+              <div class="studio-chip-left">
+                <span class="material-icons-round studio-chip-icon color-datatable">table_view</span>
+                <span class="studio-chip-label color-datatable">Data Table</span>
+              </div>
+              <div class="studio-chip-chevron">
+                <span class="material-icons-round">chevron_right</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="studio-empty-state">
+            <span class="material-icons-round">auto_fix_high</span>
+            <p>Studio output will be saved here.<br>After adding sources, click to add Audio Overview, Study Guide, Mind
+              Map, and more!</p>
+          </div>
+
+        </div>
+
+        <!-- Notes tab -->
+        <div class="studio-content" id="tab-notes" style="display:none">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div id="notes-list"></div>
+            <button class="add-note-btn" id="btn-add-note">
+              <span class="material-icons-round" style="font-size:16px">add</span>
+              Tambah catatan
+            </button>
+          </div>
+        </div>
+
+        <!-- Mind Map tab -->
+        <div class="studio-content" id="tab-mindmap" style="display:none">
+          <div class="mind-map-wrap">
+            <div class="mind-map-placeholder">
+              <span class="material-icons-round">account_tree</span>
+              <span>Klik untuk buat peta pikiran</span>
+              <span style="font-size:11px;color:var(--text-disabled)">Berdasarkan sumber aktif</span>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="studio-collapsed-toolbar">
+      <button class="studio-collapsed-btn bg-audio" title="Audio Overview"
+        onclick="generateStudioContent('Audio Overview')">
+        <span class="material-icons-round mat-icon">graphic_eq</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-slide" title="Slide Deck" onclick="generateStudioContent('Slide Deck')">
+        <span class="material-icons-round mat-icon">branding_watermark</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-video" title="Video Overview"
+        onclick="generateStudioContent('Video Overview')">
+        <span class="material-icons-round mat-icon">smart_display</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-mindmap" title="Mind Map" onclick="generateStudioContent('Mind Map')">
+        <span class="material-icons-round mat-icon">account_tree</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-flashcards" title="Flashcards"
+        onclick="generateStudioContent('Flashcards')">
+        <span class="material-icons-round mat-icon">style</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-quiz" title="Quiz" onclick="generateStudioContent('Quiz')">
+        <span class="material-icons-round mat-icon">quiz</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-infographic" title="Infographic"
+        onclick="generateStudioContent('Infographic')">
+        <span class="material-icons-round mat-icon">insert_chart_outlined</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-datatable" title="Data Table"
+        onclick="generateStudioContent('Data Table')">
+        <span class="material-icons-round mat-icon">table_view</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+      <button class="studio-collapsed-btn bg-addnote" title="Add Note">
+        <span class="material-icons-round mat-icon">note_add</span>
+        <div class="studio-collapsed-badge">+</div>
+      </button>
+    </div>
+
+    </aside>
+
+  </div><!-- /#layout -->
+  </div><!-- /#app -->
+
+  <!-- ═══════════════ DROP OVERLAY ═══════════════ -->
+  <div class="drop-overlay" id="drop-overlay">
+    <div class="drop-box">
+      <span class="material-icons-round">upload_file</span>
+      <h3>Lepaskan file di sini</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:4px">PDF, TXT, DOCX, atau URL didukung</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CONTEXT MENU ═══════════════ -->
+  <div class="ctx-menu" id="ctx-menu">
+    <div class="ctx-item" onclick="ctxAction('rename')">
+      <span class="material-icons-round">edit</span> Ganti nama
+    </div>
+    <div class="ctx-item" onclick="ctxAction('view')">
+      <span class="material-icons-round">open_in_new</span> Buka sumber
+    </div>
+    <div class="ctx-divider"></div>
+    <div class="ctx-item danger" onclick="ctxAction('delete')">
+      <span class="material-icons-round">delete</span> Hapus
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script src="../../js/core/navigation.js"></script>
+  <!-- ═══════════════ MODALS ═══════════════ -->
+  <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true"
+    aria-labelledby="upload-modal-title" aria-describedby="upload-modal-desc" hidden data-modal="upload-modal">
+    <div class="modal modal--upload" id="upload-modal">
+      <button class="modal__close-btn--top" data-modal-close="upload-modal" aria-label="Close">
+        <span class="material-icons-round">close</span>
+      </button>
+
+      <header class="modal__header--premium">
+        <h2 class="modal__title--premium">Create Audio and Video Overviews from <span class="text-accent--notes">your
+            notes</span></h2>
+      </header>
+
+      <div class="modal__body">
+        <!-- 1. UPLOAD AREA (Up di atas) -->
+        <div class="dropzone--premium" id="upload-dropzone">
+          <div class="dropzone__title--premium">or drop your files</div>
+          <div class="dropzone__hint--premium">pdf, images, docs, audio, <span style="text-decoration: underline;">and
+              more</span></div>
+
+          <div class="action-pills">
+            <button class="pill-btn" onclick="document.getElementById('file-input').click()">
+              <span class="material-icons-round icon">upload</span> Upload files
+            </button>
+            <button class="pill-btn"><span class="material-icons-round icon">link</span> Websites</button>
+            <button class="pill-btn"><span class="material-icons-round icon">add_to_drive</span> Drive</button>
+            <button class="pill-btn"><span class="material-icons-round icon">content_paste</span> Copied text</button>
+          </div>
+          <input type="file" id="file-input" style="display: none;" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
+        </div>
+
+        <!-- 2. SEARCH AREA (Chat di bawah) -->
+        <div class="search-box-container">
+          <input type="text" class="search-input" placeholder="Search the web for new sources">
+          <div class="search-footer">
+            <div class="search-options">
+              <button class="option-btn">
+                <span class="material-icons-round" style="font-size: 16px;">public</span> Web
+                <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
+              </button>
+              <button class="option-btn">
+                <span class="material-icons-round" style="font-size: 16px;">auto_awesome</span> Fast Research
+                <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
+              </button>
+            </div>
+            <button class="search-icon-btn">
+              <span class="material-icons-round" style="font-size: 18px;">search</span>
+            </button>
+          </div>
+        </div>
+
+        <ul class="upload-progress-list" id="upload-progress-list" role="list" aria-live="polite" hidden></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../../js/pages/chat.js"></script>
+</body>
+
+</html>

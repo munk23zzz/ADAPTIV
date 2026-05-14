@@ -1,0 +1,166 @@
+/* ═══════════════════════════════════════════════
+   2. APP SHELL & LAYOUT (dashboard.css layout)
+   ═══════════════════════════════════════════════ */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  margin-top: var(--header-height);
+}
+
+
+
+
+/* ═══════════════════════════════════════════════
+   3. NAVBAR (navbar.css)
+   ═══════════════════════════════════════════════ */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--bg-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--divider);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.app-topnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.topnav__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topnav__sidebar-toggle {
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.topnav__sidebar-toggle:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.topnav__sidebar-toggle .material-icons-round {
+  font-size: 24px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.logo-wrap:hover {
+  background: var(--accent-subtle);
+}
+
+.logo-icon {
+  font-size: 20px;
+  filter: drop-shadow(0 0 5px var(--accent-glow));
+  border-radius: var(--radius-md);
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.topnav__center {
+  flex: 1;
+  max-width: 500px;
+  margin: 0 40px;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar__input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 10px 40px 10px 20px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: var(--transition-smooth);
+}
+
+.search-bar__input:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-hover);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.topnav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topnav__notifications {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.topnav__profile {
+  position: relative;
+}
+
+/* Icon buttons in topnav right area */
+.topnav__icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, color 0.18s;
+}
+
+.topnav__icon-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.topnav__icon-btn .material-icons-round {
+  font-size: 20px;
+}
+
+/* Theme toggle active state */
+#btn-theme { position: relative; }

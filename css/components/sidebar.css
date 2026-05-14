@@ -1,0 +1,268 @@
+/* ═══════════════════════════════════════════════
+   GLOBAL DRAWER — 3-Zona Layout
+   ═══════════════════════════════════════════════ */
+
+.global-drawer-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); z-index: 999;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.global-drawer-overlay.show { opacity: 1; pointer-events: auto; }
+
+.global-drawer {
+  position: fixed; top: 0; left: -300px; width: 280px; bottom: 0;
+  background: var(--bg-panel); z-index: 1000;
+  box-shadow: 5px 0 30px rgba(0,0,0,0.5);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.global-drawer.show { left: 0; }
+
+/* ── HEADER ────────────────────────────────── */
+.drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--divider);
+  flex-shrink: 0;
+}
+
+/* ── ZONE 1: MAIN NAV (top) ─────────────────── */
+.drawer-main-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 2px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.drawer-main-nav a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: var(--font-ui);
+  transition: background 0.18s, color 0.18s;
+}
+.drawer-main-nav a:hover { background: var(--bg-hover); color: var(--text-primary); }
+.drawer-main-nav a.active { background: var(--accent-subtle); color: var(--accent-primary); }
+.drawer-main-nav .material-icons-round { font-size: 20px; }
+
+/* ── ZONE 2: RECENTS (middle, scrollable) ───── */
+.drawer-recents {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 8px 8px;
+  min-height: 0;
+}
+
+.drawer-recents::-webkit-scrollbar { width: 4px; }
+.drawer-recents::-webkit-scrollbar-track { background: transparent; }
+.drawer-recents::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.recents-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 8px 8px;
+}
+
+.recent-item {
+  display: block;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.recent-item:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+/* ── ZONE 3: ACCOUNT BAR (bottom) ──────────── */
+.drawer-account {
+  flex-shrink: 0;
+  padding: 8px;
+  border-top: 1px solid var(--divider);
+  position: relative;
+}
+
+.account-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.18s;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+.account-bar:hover { background: var(--bg-hover); }
+
+.account-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.8rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.account-info {
+  flex: 1;
+  min-width: 0;
+}
+.account-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-ui);
+}
+.account-plan {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+}
+
+.upgrade-btn {
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--text-primary);
+  color: var(--bg-base);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.upgrade-btn:hover { opacity: 0.85; }
+
+/* ── ACCOUNT POPUP (Level 1) ─────────────────── */
+.account-popup {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 8px;
+  right: 8px;
+  background: #2a2d35;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1100;
+  overflow: hidden;
+  transform-origin: bottom center;
+  animation: popupSlideUp 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popupSlideUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.account-popup.hidden { display: none; }
+
+/* Popup Header — user row with chevron (triggers sub-popup) */
+.popup-user-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.popup-user-row:hover { background: rgba(255,255,255,0.05); }
+.popup-user-row .account-avatar { width: 30px; height: 30px; font-size: 0.75rem; }
+.popup-user-name { flex: 1; font-size: 0.875rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-ui); }
+.popup-user-plan { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-ui); }
+.popup-user-chevron { color: var(--text-muted); font-size: 18px; }
+
+/* Popup Menu Items */
+.popup-menu {
+  padding: 6px;
+}
+.popup-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  border: none; background: none; width: 100%; text-align: left;
+}
+.popup-item:hover { background: rgba(255,255,255,0.06); color: var(--text-primary); }
+.popup-item .material-icons-round { font-size: 18px; }
+.popup-item.popup-item--danger { color: var(--color-error); }
+.popup-item.popup-item--danger:hover { background: var(--color-error-subtle); }
+.popup-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 6px; }
+.popup-item-chevron { margin-left: auto; color: var(--text-muted); font-size: 16px; }
+
+/* ── ACCOUNT SUB-POPUP (Level 2) ─────────────── */
+.account-sub-popup {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: calc(100% - 8px + 8px);  /* right side of drawer, overlapping */
+  width: 240px;
+  background: #2a2d35;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
+  z-index: 1200;
+  overflow: hidden;
+  animation: popupSlideUp 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.account-sub-popup.hidden { display: none; }
+
+.sub-popup-email {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-family: var(--font-ui);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sub-popup-email .material-icons-round { font-size: 18px; color: var(--text-muted); }
+
+.sub-popup-account-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sub-popup-account-row:hover { background: rgba(255,255,255,0.05); }
+.sub-popup-account-row .account-avatar { width: 28px; height: 28px; font-size: 0.7rem; }
+.sub-popup-account-name { flex: 1; font-size: 0.875rem; font-weight: 600; color: var(--text-primary); font-family: var(--font-ui); }
+.sub-popup-check { color: var(--accent-primary); font-size: 18px; }
+
+.sub-popup-add {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sub-popup-add:hover { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+.sub-popup-add .material-icons-round { font-size: 18px; }

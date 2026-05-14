@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalisasi Akun - ADAPTIV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/pages/onboarding.css">
+    <script src="../../js/core/theme.js" defer></script>
+</head>
+
+<body>
+    <div class="onboarding-container">
+
+        <header class="onboarding-header">
+            <div class="logo">ADAPTIV</div>
+            <div class="progress-container">
+                <span class="progress-text">Langkah <span id="current-step">1</span> dari 7</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 14.28%;"></div>
+                </div>
+            </div>
+            <button class="btn-skip" id="btn-skip">Lewati</button>
+        </header>
+
+        <main class="onboarding-main">
+            <form id="onboarding-form">
+
+                <div class="step-card active" data-step="1">
+                    <h2>Bagaimana cara kamu paling cepat memahami materi baru?</h2>
+                    <p class="subtitle">Ini membantu kami menyesuaikan format utama untukmu.</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="visual" required>
+                            <span class="icon">📊</span>
+                            <span class="title">Visual</span>
+                            <span class="desc">Lewat grafik, diagram, dan video.</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="auditory">
+                            <span class="icon">🎧</span>
+                            <span class="title">Auditori</span>
+                            <span class="desc">Mendengarkan penjelasan atau diskusi.</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="reading">
+                            <span class="icon">📖</span>
+                            <span class="title">Membaca/Menulis</span>
+                            <span class="desc">Lewat teks, rangkuman, dan artikel.</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="kinesthetic">
+                            <span class="icon">🧩</span>
+                            <span class="title">Kinestetik</span>
+                            <span class="desc">Praktik langsung dan simulasi (Kuis).</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <h2>Apa tujuan utamamu menggunakan ADAPTIV?</h2>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="exam" required>
+                            <span class="icon">🎯</span>
+                            <span class="title">Persiapan Ujian</span>
+                            <span class="desc">Fokus ke hafalan dan latihan soal.</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="research">
+                            <span class="icon">🔬</span>
+                            <span class="title">Riset & Jurnal</span>
+                            <span class="desc">Membedah dokumen kompleks & tabel data.</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="presentation">
+                            <span class="icon">📽️</span>
+                            <span class="title">Bahan Presentasi</span>
+                            <span class="desc">Membuat slide deck & mind map.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <h2>Berapa lama rata-rata waktu belajarmu dalam sekali sesi?</h2>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="short" required>
+                            <span class="icon">⚡</span>
+                            <span class="title">Singkat (< 30 Menit)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="medium">
+                            <span class="icon">⏱️</span>
+                            <span class="title">Sedang (30 - 60 Menit)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="long">
+                            <span class="icon">🔋</span>
+                            <span class="title">Lama (> 1 Jam)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <h2>Jika menemui jalan buntu, apa yang biasa kamu lakukan?</h2>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="summary" required>
+                            <span class="title">Membaca Rangkuman Eksekutif</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="audio">
+                            <span class="title">Mendengar penjelasan ulang (Audio)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="map">
+                            <span class="title">Melihat peta konsep (Mind Map)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="5">
+                    <h2>Bagaimana caramu menghafal istilah teknis?</h2>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="flashcards" required>
+                            <span class="title">Menggunakan Flashcards (Spaced Repetition)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="quiz">
+                            <span class="title">Mengerjakan kuis berulang-ulang</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="notes">
+                            <span class="title">Menulis ulang poin-poin penting</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="6">
+                    <h2>Jenis dokumen apa yang paling sering kamu hadapi?</h2>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q6" value="text" required>
+                            <span class="icon">📄</span>
+                            <span class="title">Teks Padat (Jurnal/Buku)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q6" value="data">
+                            <span class="icon">📊</span>
+                            <span class="title">Data & Angka (Tabel/Laporan)</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q6" value="slides">
+                            <span class="icon">🖥️</span>
+                            <span class="title">Materi Presentasi (PPT)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="7">
+                    <h2>Pilih 3 fitur yang paling ingin kamu gunakan</h2>
+                    <p class="subtitle">Pilihan ini akan muncul di menu utama Dashboard-mu.</p>
+                    <div class="options-grid tools-grid">
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="audio_overview">
+                            <span class="tool-icon">🎶</span> Audio Overview
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="slide_deck">
+                            <span class="tool-icon">🪟</span> Slide Deck
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="video_overview">
+                            <span class="tool-icon">▶️</span> Video Overview
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="mind_map">
+                            <span class="tool-icon">🔀</span> Mind Map
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="reports">
+                            <span class="tool-icon">📋</span> Reports
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="flashcards">
+                            <span class="tool-icon">🃏</span> Flashcards
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="quiz">
+                            <span class="tool-icon">❓</span> Quiz
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="infographic">
+                            <span class="tool-icon">📊</span> Infographic
+                        </label>
+                        <label class="tool-card">
+                            <input type="checkbox" name="tools" value="data_table">
+                            <span class="tool-icon">🧮</span> Data Table
+                        </label>
+                    </div>
+                    <span class="error-msg" id="tools-error">Pilih maksimal 3 fitur.</span>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-back" id="btn-back" style="display: none;">Kembali</button>
+                    <button type="button" class="btn-next" id="btn-next" disabled>Lanjut</button>
+                    <button type="submit" class="btn-submit" id="btn-submit" style="display: none;">Selesai &
+                        Analisis</button>
+                </div>
+            </form>
+
+            <div class="loading-state" id="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <h3>Menganalisis Profil Belajarmu...</h3>
+                <p>Menyiapkan AI Tutor dan algoritma penyortiran fitur.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/pages/onboarding.js"></script>
+</body>
+
+</html>
