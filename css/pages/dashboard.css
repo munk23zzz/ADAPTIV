@@ -508,31 +508,22 @@ button {
   display: flex;
   flex-direction: column;
   position: relative;
-  /* Change overflow to visible so the badge can pop out without being clipped */
-  overflow: visible;
+  /* overflow: hidden; Removed to allow badge to overlap */
 }
 
 .recommendation-card__badge {
   position: absolute;
-  /* Position it so it hangs slightly over the edge but is mostly visible */
   top: -12px;
   right: -12px;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 1.2rem;
-  /* Add border and shadow for the "timbul" (raised) effect */
-  border: 3px solid var(--bg-base);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 
-              inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
   z-index: 2;
-  transition: transform var(--transition-fast);
-}
-
-.recommendation-card:hover .recommendation-card__badge {
-  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--bg-surface);
 }
 
 .recommendation-card__badge--warning {
