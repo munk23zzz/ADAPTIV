@@ -159,6 +159,14 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ── Modal & Upload Initialization ────────────────────────── */
     setupModals();
     setupUploadZone();
+
+    /* ── Audio Overview Navigation ────────────────────────────── */
+    const btnGenAudio = document.getElementById('btn-gen-audio');
+    if (btnGenAudio) {
+        btnGenAudio.addEventListener('click', () => {
+            window.location.href = 'podcast.html';
+        });
+    }
 });
 
 /* ── Modal Functions ──────────────────────────────────────── */

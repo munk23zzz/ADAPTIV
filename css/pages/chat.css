@@ -861,87 +861,116 @@ textarea {
 .input-box {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border-strong);
-  border-radius: var(--radius-xl);
-  padding: 12px 14px;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 16px 20px 12px;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .input-box:focus-within {
+  background: var(--bg-hover);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(208, 188, 255, 0.15);
-}
-
-.input-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
+  box-shadow: 0 0 0 2px var(--accent-subtle);
 }
 
 #chat-input {
-  flex: 1;
+  width: 100%;
   background: none;
   border: none;
   outline: none;
   resize: none;
   color: var(--text-primary);
-  font-size: 14px;
-  line-height: 1.6;
-  max-height: 200px;
+  font-size: 16px;
+  line-height: 1.5;
+  max-height: 400px;
   min-height: 24px;
   overflow-y: auto;
+  font-family: inherit;
 }
 
 #chat-input::placeholder {
   color: var(--text-muted);
+  font-weight: 400;
 }
 
-.send-btn:disabled {
-  opacity: 0.35;
-  pointer-events: none;
+.input-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
 }
 
-.send-btn:hover:not(:disabled) {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
-
-.input-toolbar {
+.actions-left, .actions-right {
   display: flex;
   align-items: center;
-  gap: 2px;
-  padding-top: 4px;
-  border-top: 1px solid var(--divider);
+  gap: 8px;
 }
 
-.toolbar-btn {
+.action-pill-btn {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition);
+}
+
+.action-pill-btn:hover {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.action-pill-btn span:not(.material-icons-round) {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+}
+
+/* For buttons with text */
+.action-pill-btn:has(span:not(.material-icons-round)) {
+  padding: 8px 16px;
   border-radius: var(--radius-full);
-  font-size: 12px;
-  color: var(--text-muted);
+}
+
+.action-text-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
   font-family: var(--font-ui);
   transition: background var(--transition), color var(--transition);
 }
 
-.toolbar-btn:hover {
-  background: var(--bg-hover);
+.action-text-btn:hover {
+  background: var(--bg-surface);
   color: var(--text-primary);
 }
 
-.toolbar-btn .mat-icon {
-  font-size: 16px;
+.action-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
-.char-count {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--text-disabled);
-  font-family: var(--font-ui);
+.action-icon-btn:hover {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.action-icon-btn.active {
+  color: var(--accent-primary);
+  background: var(--accent-subtle);
 }
 
 /* ── Studio (right panel) ──────────────────────────────────── */
