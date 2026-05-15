@@ -65,6 +65,37 @@
 .drawer-recents::-webkit-scrollbar-track { background: transparent; }
 .drawer-recents::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
+/* Drawer Search Box */
+.drawer-search-wrap {
+  padding: 0 8px 12px;
+  position: relative;
+}
+.drawer-search {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px 8px 34px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.drawer-search:focus {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 232, 200, 0.1);
+}
+.drawer-search-icon {
+  position: absolute;
+  left: 18px;
+  top: 9px;
+  font-size: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
 .recents-label {
   font-size: 0.75rem;
   font-weight: 700;

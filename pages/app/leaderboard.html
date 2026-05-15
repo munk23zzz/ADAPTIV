@@ -44,14 +44,18 @@
 
       <!-- Zone 2: Terkini (Recents) -->
       <div class="drawer-recents">
+        <div class="drawer-search-wrap">
+          <span class="material-icons-round drawer-search-icon">search</span>
+          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
+        </div>
         <div class="recents-label">Terkini</div>
-        <a class="recent-item" href="documents.html">📁 Algoritma &amp; Sorting</a>
-        <a class="recent-item" href="documents.html">📁 Sistem Operasi</a>
-        <a class="recent-item" href="documents.html">📁 Kimia Organik</a>
-        <a class="recent-item" href="documents.html">📁 Kalkulus</a>
-        <a class="recent-item" href="documents.html">📁 Basis Data</a>
-        <a class="recent-item" href="documents.html">📁 Jaringan Komputer</a>
-        <a class="recent-item" href="documents.html">📁 Pemrograman Web</a>
+        <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
+        <a class="recent-item" href="chat.html?session=os">📁 Sistem Operasi</a>
+        <a class="recent-item" href="chat.html?session=kimia">📁 Kimia Organik</a>
+        <a class="recent-item" href="chat.html?session=kalkulus">📁 Kalkulus</a>
+        <a class="recent-item" href="chat.html?session=database">📁 Basis Data</a>
+        <a class="recent-item" href="chat.html?session=jaringan">📁 Jaringan Komputer</a>
+        <a class="recent-item" href="chat.html?session=web">📁 Pemrograman Web</a>
       </div>
 
       <!-- Zone 3: Account Bar -->
@@ -80,12 +84,11 @@
             <div class="account-avatar">NK</div>
             <div>
               <div class="popup-user-name">Nabil Kurniawan</div>
-              <div class="popup-user-plan">Free</div>
+              <div class="popup-user-plan">Pro</div>
             </div>
             <span class="material-icons-round popup-user-chevron">chevron_right</span>
           </div>
           <div class="popup-menu">
-            <button class="popup-item"><span class="material-icons-round">auto_awesome</span>Upgrade plan</button>
             <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
             <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
             <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
@@ -100,9 +103,8 @@
           <div class="account-avatar">NK</div>
           <div class="account-info">
             <div class="account-name">Nabil Kurniawan</div>
-            <div class="account-plan">Free</div>
+            <div class="account-plan">Pro</div>
           </div>
-          <span class="upgrade-btn">Upgrade</span>
         </button>
       </div>
 
@@ -126,16 +128,22 @@
         </div>
 
         <div class="topnav__right">
-          <!-- Temporary Chat -->
-          <button class="btn btn--icon topnav__icon-btn" id="btn-temp-chat" type="button"
-            aria-label="Mulai temporary chat" title="Temporary Chat">
-            <span class="material-icons-round">bolt</span>
-          </button>
           <!-- Theme Toggle -->
           <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
             aria-label="Toggle dark/light mode" title="Ganti tema">
             <span class="material-icons-round" id="theme-icon">light_mode</span>
           </button>
+
+          <div class="topbar-divider"></div>
+
+          <!-- User Profile Section -->
+          <div class="user-profile-top">
+            <span class="badge-pro">PRO</span>
+            <div class="user-logo">
+              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+            </div>
+          </div>
         </div>
       </nav>
     </header>

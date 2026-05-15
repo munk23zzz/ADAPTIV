@@ -40,14 +40,18 @@
 
       <!-- Zone 2: Terkini (Recents) -->
       <div class="drawer-recents">
+        <div class="drawer-search-wrap">
+          <span class="material-icons-round drawer-search-icon">search</span>
+          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
+        </div>
         <div class="recents-label">Terkini</div>
-        <a class="recent-item" href="documents.html">📁 Algoritma &amp; Sorting</a>
-        <a class="recent-item" href="documents.html">📁 Sistem Operasi</a>
-        <a class="recent-item" href="documents.html">📁 Kimia Organik</a>
-        <a class="recent-item" href="documents.html">📁 Kalkulus</a>
-        <a class="recent-item" href="documents.html">📁 Basis Data</a>
-        <a class="recent-item" href="documents.html">📁 Jaringan Komputer</a>
-        <a class="recent-item" href="documents.html">📁 Pemrograman Web</a>
+        <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
+        <a class="recent-item" href="chat.html?session=os">📁 Sistem Operasi</a>
+        <a class="recent-item" href="chat.html?session=kimia">📁 Kimia Organik</a>
+        <a class="recent-item" href="chat.html?session=kalkulus">📁 Kalkulus</a>
+        <a class="recent-item" href="chat.html?session=database">📁 Basis Data</a>
+        <a class="recent-item" href="chat.html?session=jaringan">📁 Jaringan Komputer</a>
+        <a class="recent-item" href="chat.html?session=web">📁 Pemrograman Web</a>
       </div>
 
       <!-- Zone 3: Account Bar -->
@@ -76,18 +80,19 @@
             <div class="account-avatar">NK</div>
             <div>
               <div class="popup-user-name">Nabil Kurniawan</div>
-              <div class="popup-user-plan">Free</div>
+              <div class="popup-user-plan">Pro</div>
             </div>
             <span class="material-icons-round popup-user-chevron">chevron_right</span>
           </div>
           <div class="popup-menu">
-            <button class="popup-item"><span class="material-icons-round">auto_awesome</span>Upgrade plan</button>
             <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
             <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
             <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
             <div class="popup-divider"></div>
-            <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
-            <button class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
+            <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span
+                class="material-icons-round popup-item-chevron">chevron_right</span></button>
+            <button class="popup-item popup-item--danger"><span
+                class="material-icons-round">logout</span>Keluar</button>
           </div>
         </div>
 
@@ -96,9 +101,8 @@
           <div class="account-avatar">NK</div>
           <div class="account-info">
             <div class="account-name">Nabil Kurniawan</div>
-            <div class="account-plan">Free</div>
+            <div class="account-plan">Pro</div>
           </div>
-          <span class="upgrade-btn">Upgrade</span>
         </button>
       </div>
 
@@ -128,15 +132,39 @@
 
       <div class="topbar-right">
         <!-- Temporary Chat -->
-        <button class="icon-btn" id="btn-temp-chat" type="button"
-          aria-label="Mulai temporary chat" title="Temporary Chat">
-          <span class="material-icons-round">bolt</span>
+        <button class="icon-btn" id="btn-temp-chat" type="button" aria-label="Mulai temporary chat"
+          title="Temporary Chat">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" 
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" 
+                  stroke-dasharray="4 3"/>
+          </svg>
         </button>
         <!-- Theme Toggle -->
-        <button class="icon-btn" id="btn-theme" type="button"
-          aria-label="Toggle dark/light mode" title="Ganti tema">
+        <button class="icon-btn" id="btn-theme" type="button" aria-label="Toggle dark/light mode" title="Ganti tema">
           <span class="material-icons-round" id="theme-icon">light_mode</span>
         </button>
+
+        <div class="topbar-divider"></div>
+
+        <!-- Panel Toggles -->
+        <button class="icon-btn" id="btn-toggle-left" title="Toggle Sources">
+          <span class="material-icons-round">dock</span>
+        </button>
+        <button class="icon-btn" id="btn-toggle-right" title="Toggle Studio">
+          <span class="material-icons-round">auto_awesome_motion</span>
+        </button>
+
+        <div class="topbar-divider"></div>
+
+        <!-- User Profile Section -->
+        <div class="user-profile-top">
+          <span class="badge-pro">PRO</span>
+          <div class="user-logo">
+            <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+            <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+          </div>
+        </div>
       </div>
     </header>
 
@@ -171,7 +199,10 @@
 
             <!-- Empty state -->
             <div class="empty-state" id="empty-state">
-              <div class="empty-icon">✨</div>
+              <div class="empty-icon">
+                <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV AI" class="empty-state-img empty-state-img--dark">
+                <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV AI" class="empty-state-img empty-state-img--light">
+              </div>
               <h2 class="empty-title">Tanyakan apa saja</h2>
               <p class="empty-sub">Mulai percakapan tentang sumber Anda. NotebookLM akan menjawab berdasarkan materi
                 yang telah Anda tambahkan.</p>
@@ -218,220 +249,75 @@
 
       <!-- ═══ RIGHT PANEL — Studio ═══ -->
       <aside id="studio">
+        <!-- Studio Header -->
         <div class="panel-header">
           <span class="panel-title">Studio</span>
-          <button class="icon-btn" id="btn-toggle-studio-inner">
-            <span class="material-icons-round">vertical_split</span>
-          </button>
-        </div>
-        <div class="studio-tabs">
-          <button class="studio-tab active" data-tab="studio">
-            <span class="material-icons-round">auto_awesome</span>
-            Studio
-          </button>
-          <button class="studio-tab" data-tab="notes">
-            <span class="material-icons-round">sticky_note_2</span>
-            Catatan
-          </button>
-          <button class="studio-tab" data-tab="mindmap">
-            <span class="material-icons-round">account_tree</span>
-            Peta
+          <button class="icon-btn" id="btn-toggle-studio">
+            <span class="material-icons-round">close</span>
           </button>
         </div>
 
-        <!-- Studio tab -->
-        <div class="studio-content" id="tab-studio">
+        <!-- Studio Collapsed Toolbar only -->
 
-          <div class="studio-grid-single-col">
-            <button class="studio-chip-btn" id="btn-gen-audio">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-audio">graphic_eq</span>
-                <span class="studio-chip-label color-audio">Audio Overview</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+        <div class="studio-collapsed-toolbar">
+          <button class="studio-collapsed-btn bg-audio" title="Ringkasan Audio"
+            onclick="generateStudioContent('Ringkasan Audio')">
+            <span class="material-icons-round mat-icon">graphic_eq</span>
+            <span class="collapsed-label">Ringkasan Audio</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="window.location.href='podcast.html?view=customizer'">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-mindmap">tune</span>
-                <span class="studio-chip-label color-mindmap">Podcast Studio</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-mindmap" title="Studio Podcast"
+            onclick="window.location.href='podcast.html?view=customizer'">
+            <span class="material-icons-round mat-icon">tune</span>
+            <span class="collapsed-label">Studio Podcast</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="window.location.href='podcast.html?view=library'">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-quiz">library_music</span>
-                <span class="studio-chip-label color-quiz">Podcast Library</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-slide" title="Slide Presentasi"
+            onclick="generateStudioContent('Slide Presentasi')">
+            <span class="material-icons-round mat-icon">branding_watermark</span>
+            <span class="collapsed-label">Slide Presentasi</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="window.location.href='podcast.html?view=transcript'">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-infographic">subtitles</span>
-                <span class="studio-chip-label color-infographic">Audio Transcript</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-video" title="Ringkasan Video"
+            onclick="generateStudioContent('Ringkasan Video')">
+            <span class="material-icons-round mat-icon">smart_display</span>
+            <span class="collapsed-label">Ringkasan Video</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="generateStudioContent('Video Overview')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-video">smart_display</span>
-                <span class="studio-chip-label color-video">Video Overview</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-mindmap" title="Peta Pikiran"
+            onclick="generateStudioContent('Peta Pikiran')">
+            <span class="material-icons-round mat-icon">account_tree</span>
+            <span class="collapsed-label">Peta Pikiran</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="generateStudioContent('Slide Deck')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-slide">branding_watermark</span>
-                <span class="studio-chip-label color-slide">Slide Deck</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-flashcards" title="Flashcards"
+            onclick="generateStudioContent('Flashcards')">
+            <span class="material-icons-round mat-icon">style</span>
+            <span class="collapsed-label">Flashcards</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="generateStudioContent('Mind Map')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-mindmap">account_tree</span>
-                <span class="studio-chip-label color-mindmap">Mind Map</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-quiz" title="Kuis" onclick="generateStudioContent('Kuis')">
+            <span class="material-icons-round mat-icon">quiz</span>
+            <span class="collapsed-label">Kuis</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="generateStudioContent('Flashcards')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-flashcards">style</span>
-                <span class="studio-chip-label color-flashcards">Flashcards</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
+          <button class="studio-collapsed-btn bg-infographic" title="Infografis"
+            onclick="generateStudioContent('Infografis')">
+            <span class="material-icons-round mat-icon">insert_chart_outlined</span>
+            <span class="collapsed-label">Infografis</span>
+          </button>
 
-            <button class="studio-chip-btn" onclick="generateStudioContent('Quiz')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-quiz">quiz</span>
-                <span class="studio-chip-label color-quiz">Quiz</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
-
-            <button class="studio-chip-btn" onclick="generateStudioContent('Infographic')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-infographic">insert_chart_outlined</span>
-                <span class="studio-chip-label color-infographic">Infographic</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
-
-            <button class="studio-chip-btn" onclick="generateStudioContent('Data Table')">
-              <div class="studio-chip-left">
-                <span class="material-icons-round studio-chip-icon color-datatable">table_view</span>
-                <span class="studio-chip-label color-datatable">Data Table</span>
-              </div>
-              <div class="studio-chip-chevron">
-                <span class="material-icons-round">chevron_right</span>
-              </div>
-            </button>
-          </div>
-
-          <div class="studio-empty-state">
-            <span class="material-icons-round">auto_fix_high</span>
-            <p>Studio output will be saved here.<br>After adding sources, click to add Audio Overview, Study Guide, Mind
-              Map, and more!</p>
-          </div>
+          <button class="studio-collapsed-btn bg-datatable" title="Tabel Data"
+            onclick="generateStudioContent('Tabel Data')">
+            <span class="material-icons-round mat-icon">table_view</span>
+            <span class="collapsed-label">Tabel Data</span>
+          </button>
 
         </div>
 
-        <!-- Notes tab -->
-        <div class="studio-content" id="tab-notes" style="display:none">
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div id="notes-list"></div>
-            <button class="add-note-btn" id="btn-add-note">
-              <span class="material-icons-round" style="font-size:16px">add</span>
-              Tambah catatan
-            </button>
-          </div>
-        </div>
+      </aside>
 
-        <!-- Mind Map tab -->
-        <div class="studio-content" id="tab-mindmap" style="display:none">
-          <div class="mind-map-wrap">
-            <div class="mind-map-placeholder">
-              <span class="material-icons-round">account_tree</span>
-              <span>Klik untuk buat peta pikiran</span>
-              <span style="font-size:11px;color:var(--text-disabled)">Berdasarkan sumber aktif</span>
-            </div>
-          </div>
-        </div>
-    </div>
-
-    <div class="studio-collapsed-toolbar">
-      <button class="studio-collapsed-btn bg-audio" title="Audio Overview"
-        onclick="generateStudioContent('Audio Overview')">
-        <span class="material-icons-round mat-icon">graphic_eq</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-slide" title="Slide Deck" onclick="generateStudioContent('Slide Deck')">
-        <span class="material-icons-round mat-icon">branding_watermark</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-video" title="Video Overview"
-        onclick="generateStudioContent('Video Overview')">
-        <span class="material-icons-round mat-icon">smart_display</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-mindmap" title="Mind Map" onclick="generateStudioContent('Mind Map')">
-        <span class="material-icons-round mat-icon">account_tree</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-flashcards" title="Flashcards"
-        onclick="generateStudioContent('Flashcards')">
-        <span class="material-icons-round mat-icon">style</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-quiz" title="Quiz" onclick="generateStudioContent('Quiz')">
-        <span class="material-icons-round mat-icon">quiz</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-infographic" title="Infographic"
-        onclick="generateStudioContent('Infographic')">
-        <span class="material-icons-round mat-icon">insert_chart_outlined</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-datatable" title="Data Table"
-        onclick="generateStudioContent('Data Table')">
-        <span class="material-icons-round mat-icon">table_view</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-      <button class="studio-collapsed-btn bg-addnote" title="Add Note">
-        <span class="material-icons-round mat-icon">note_add</span>
-        <div class="studio-collapsed-badge">+</div>
-      </button>
-    </div>
-
-    </aside>
-
-  </div><!-- /#layout -->
+    </div><!-- /#layout -->
   </div><!-- /#app -->
 
   <!-- ═══════════════ DROP OVERLAY ═══════════════ -->
@@ -469,7 +355,7 @@
 
       <header class="modal__header--premium">
         <h2 class="modal__title--premium">Create Audio and Video Overviews from <span class="text-accent--notes">your
-            notes</span></h2>
+            sources</span></h2>
       </header>
 
       <div class="modal__body">

@@ -61,9 +61,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const gridBtn = document.getElementById('view-grid');
     const listBtn = document.getElementById('view-list');
 
+    // Modal References
+    const nfOverlay = document.getElementById('nf-overlay');
+    const nfNameInput = document.getElementById('nf-name');
+    const nfConfirmBtn = document.getElementById('nf-confirm');
+    const nfCancelBtn = document.getElementById('nf-cancel');
+    const nfTabColor = document.getElementById('nf-tab-color');
+    const nfTabIcon = document.getElementById('nf-tab-icon');
+    const nfPanelColor = document.getElementById('nf-panel-color');
+    const nfPanelIcon = document.getElementById('nf-panel-icon');
+    const nfColorGrid = document.getElementById('nf-color-grid');
+    const nfIconGrid = document.getElementById('nf-icon-grid');
+    const nfPreviewIcon = document.getElementById('nf-preview-icon');
+    const nfFolderShape = document.getElementById('nf-folder-shape');
+    const nfOverlayIcon = document.getElementById('nf-overlay-icon');
+
+    // Upload Modal References
+    const upOverlay = document.getElementById('up-overlay');
+    const upClose = document.getElementById('up-close');
+    const upCancel = document.getElementById('up-cancel');
+    const upConfirm = document.getElementById('up-confirm');
+    const upDropzone = document.getElementById('up-dropzone');
+    const upFileInput = document.getElementById('up-file-input');
+    const upFileList = document.getElementById('up-file-list');
+
     // ═══════════════ STATE ═══════════════
-    let currentFolderId = null; // null = root level (folders), number = inside folder
+    let currentFolderId = null; 
     let nextFolderId = folders.length + 1;
+    let filesToUpload = [];
+    
+    // Modal State
+    let selectedColor = '#7C5CFC';
+    let selectedIcon = ''; // Empty string means no overlay icon (just folder)
+
+    const COLORS = [
+        '#7C5CFC', '#F59E0B', '#10B981', '#EF4444', '#06B6D4', 
+        '#EC4899', '#8B5CF6', '#14B8A6', '#F97316', '#6366F1',
+        '#34D399', '#FBBF24', '#F87171', '#60A5FA'
+    ];
+
+    const ICONS = [
+        '', 
+        '💻', '📐', '⚡', '🧪', '📝', '📚', '📖', '🎓', '✏️', '🔬', 
+        '🧮', '🌍', '🎨', '🎵', '⚽', '💡', '🏛️', '🧬', '🪐', '🧩', 
+        '📎', '📅', '🎯', '🏆', '🔥', '✨'
+    ];
 
     // ═══════════════ RENDER FUNCTIONS ═══════════════
 
@@ -80,23 +122,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         emptyState.style.display = 'none';
 
-        folderContainer.innerHTML = filtered.map(folder => `
-            <article class="folder-card" data-folder-id="${folder.id}" tabindex="0" role="button" aria-label="Buka folder ${folder.name}">
-                <div class="folder-card__icon-area" style="background: linear-gradient(135deg, ${folder.color}15, transparent);">
-                    <span style="filter: drop-shadow(0 2px 8px ${folder.color}40);">${folder.icon}</span>
-                </div>
-                <div class="folder-card__body">
-                    <h3 class="folder-card__name">${folder.name}</h3>
-                    <div class="folder-card__meta">
-                        <span class="folder-card__file-count">
-                            <span class="material-icons-round">description</span>
-                            ${folder.fileCount} file
-                        </span>
-                        <span>${folder.updated}</span>
+        folderContainer.innerHTML = filtered.map(folder => {
+            // Check if it's an emoji (or if it's empty)
+            const isEmoji = /^\p{Emoji}/u.test(folder.icon);
+            const iconContent = isEmoji 
+                ? `<span>${folder.icon}</span>`
+                : `<span></span>`; // No icon fallback
+
+            return `
+                <article class="folder-card" data-folder-id="${folder.id}" tabindex="0" role="button" aria-label="Buka folder ${folder.name}">
+                    <div class="folder-card__icon-area" style="background: linear-gradient(135deg, ${folder.color}15, transparent);">
+                        <span class="material-icons-round" style="position: absolute; font-size: 80px; color: ${folder.color}; opacity: 0.8; filter: drop-shadow(0 2px 8px ${folder.color}40);">folder</span>
+                        <div style="position: relative; z-index: 2; margin-top: 6px; font-size: 22px;">${iconContent}</div>
                     </div>
-                </div>
-            </article>
-        `).join('');
+                    <div class="folder-card__body">
+                        <h3 class="folder-card__name">${folder.name}</h3>
+                        <div class="folder-card__meta">
+                            <span class="folder-card__file-count">
+                                <span class="material-icons-round">description</span>
+                                ${folder.fileCount} file
+                            </span>
+                            <span>${folder.updated}</span>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }).join('');
     }
 
     function renderFiles(folderId, filter = '') {
@@ -147,13 +198,240 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // ═══════════════ MODAL LOGIC ═══════════════
+
+    function initModal() {
+        // Populate Colors
+        nfColorGrid.innerHTML = COLORS.map(c => `
+            <div class="nf-color-swatch ${c === selectedColor ? 'selected' : ''}" 
+                 style="background-color: ${c}" data-color="${c}"></div>
+        `).join('');
+
+        // Populate Icons
+        nfIconGrid.innerHTML = ICONS.map(i => {
+            const isEmoji = /^\p{Emoji}/u.test(i);
+            return `
+                <button class="nf-icon-btn ${i === selectedIcon ? 'selected' : ''} ${i === '' ? 'nf-icon-none' : ''}" data-icon="${i}">
+                    <span class="${isEmoji ? '' : 'material-icons-round'}">${i || 'block'}</span>
+                </button>
+            `;
+        }).join('');
+
+        updatePreview();
+    }
+
+    function updatePreview() {
+        nfFolderShape.style.color = selectedColor;
+        
+        const isEmoji = /^\p{Emoji}/u.test(selectedIcon);
+        nfOverlayIcon.className = isEmoji ? 'nf-folder-overlay-icon' : 'nf-folder-overlay-icon material-icons-round';
+        nfOverlayIcon.textContent = selectedIcon;
+        
+        nfPreviewIcon.style.setProperty('--nf-color', selectedColor + '40');
+    }
+
+    function openModal() {
+        nfNameInput.value = '';
+        selectedColor = COLORS[0];
+        selectedIcon = '';
+        initModal();
+        nfOverlay.classList.remove('hidden');
+        setTimeout(() => nfNameInput.focus(), 100);
+    }
+
+    function closeModal() {
+        nfOverlay.classList.add('hidden');
+    }
+
+    // Tab Switching
+    nfTabColor.addEventListener('click', () => {
+        nfTabColor.classList.add('active');
+        nfTabIcon.classList.remove('active');
+        nfPanelColor.style.display = 'block';
+        nfPanelIcon.style.display = 'none';
+    });
+
+    nfTabIcon.addEventListener('click', () => {
+        nfTabIcon.classList.add('active');
+        nfTabColor.classList.remove('active');
+        nfPanelIcon.style.display = 'grid';
+        nfPanelColor.style.display = 'none';
+    });
+
+    // Color Selection
+    nfColorGrid.addEventListener('click', (e) => {
+        const swatch = e.target.closest('.nf-color-swatch');
+        if (!swatch) return;
+        selectedColor = swatch.dataset.color;
+        document.querySelectorAll('.nf-color-swatch').forEach(s => s.classList.remove('selected'));
+        swatch.classList.add('selected');
+        updatePreview();
+    });
+
+    // Icon Selection
+    nfIconGrid.addEventListener('click', (e) => {
+        const btn = e.target.closest('.nf-icon-btn');
+        if (!btn) return;
+        selectedIcon = btn.dataset.icon;
+        document.querySelectorAll('.nf-icon-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        updatePreview();
+    });
+
+    nfCancelBtn.addEventListener('click', closeModal);
+    nfOverlay.addEventListener('click', (e) => { if (e.target === nfOverlay) closeModal(); });
+
+    nfConfirmBtn.addEventListener('click', () => {
+        const name = nfNameInput.value.trim() || 'Tanpa Judul';
+        const newFolder = {
+            id: nextFolderId++,
+            name: name,
+            icon: selectedIcon,
+            color: selectedColor,
+            fileCount: 0,
+            updated: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
+        };
+        folders.push(newFolder);
+        files[newFolder.id] = [];
+        renderFolders();
+        closeModal();
+    });
+
+    // ═══════════════ UPLOAD MODAL LOGIC ═══════════════
+
+    function openUploadModal() {
+        filesToUpload = [];
+        upFileList.innerHTML = '';
+        upFileList.style.display = 'none';
+        upDropzone.style.display = 'block';
+        upConfirm.disabled = true;
+        upOverlay.classList.remove('hidden');
+    }
+
+    function closeUploadModal() {
+        upOverlay.classList.add('hidden');
+    }
+
+    function handleFiles(files) {
+        const newFiles = Array.from(files).filter(f => {
+            const ext = f.name.split('.').pop().toLowerCase();
+            return ['pdf', 'docx', 'pptx'].includes(ext);
+        });
+
+        if (newFiles.length === 0) return;
+
+        filesToUpload = [...filesToUpload, ...newFiles];
+        renderUploadList();
+        upFileList.style.display = 'flex';
+        upConfirm.disabled = false;
+    }
+
+    function renderUploadList() {
+        upFileList.innerHTML = filesToUpload.map((file, idx) => `
+            <div class="up-file-item" data-idx="${idx}">
+                <div class="up-file-icon">
+                    <span class="material-icons-round">insert_drive_file</span>
+                </div>
+                <div class="up-file-info">
+                    <div class="up-file-name">${file.name}</div>
+                    <div class="up-progress-bar">
+                        <div class="up-progress-fill" id="up-progress-${idx}"></div>
+                    </div>
+                </div>
+                <button class="up-file-remove" data-idx="${idx}">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+        `).join('');
+    }
+
+    // Drag & Drop Events
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt => {
+        upDropzone.addEventListener(evt, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+
+    upDropzone.addEventListener('dragenter', () => upDropzone.classList.add('active'));
+    upDropzone.addEventListener('dragover', () => upDropzone.classList.add('active'));
+    upDropzone.addEventListener('dragleave', () => upDropzone.classList.remove('active'));
+    upDropzone.addEventListener('drop', (e) => {
+        upDropzone.classList.remove('active');
+        handleFiles(e.dataTransfer.files);
+    });
+
+    upDropzone.addEventListener('click', () => upFileInput.click());
+    upFileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+    upFileList.addEventListener('click', (e) => {
+        const removeBtn = e.target.closest('.up-file-remove');
+        if (!removeBtn) return;
+        const idx = parseInt(removeBtn.dataset.idx);
+        filesToUpload.splice(idx, 1);
+        renderUploadList();
+        if (filesToUpload.length === 0) {
+            upFileList.style.display = 'none';
+            upConfirm.disabled = true;
+        }
+    });
+
+    upConfirm.addEventListener('click', () => {
+        upConfirm.disabled = true;
+        upCancel.disabled = true;
+
+        // Simulate upload for each file
+        let completed = 0;
+        filesToUpload.forEach((file, idx) => {
+            const fill = document.getElementById(`up-progress-${idx}`);
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 30;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    completed++;
+                    
+                    // Add to data
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    const newFile = {
+                        name: file.name,
+                        size: (file.size / (1024 * 1024)).toFixed(1) + ' MB',
+                        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
+                        type: ext,
+                        status: 'ready'
+                    };
+                    
+                    if (!files[currentFolderId]) files[currentFolderId] = [];
+                    files[currentFolderId].push(newFile);
+
+                    if (completed === filesToUpload.length) {
+                        // Update folder count
+                        const folder = folders.find(f => f.id === currentFolderId);
+                        if (folder) folder.fileCount = files[currentFolderId].length;
+                        
+                        setTimeout(() => {
+                            closeUploadModal();
+                            navigateToFolder(currentFolderId); // Refresh view
+                            upCancel.disabled = false;
+                        }, 500);
+                    }
+                }
+                fill.style.width = progress + '%';
+            }, 200);
+        });
+    });
+
+    upClose.addEventListener('click', closeUploadModal);
+    upCancel.addEventListener('click', closeUploadModal);
+    upOverlay.addEventListener('click', (e) => { if (e.target === upOverlay) closeUploadModal(); });
+
     // ═══════════════ NAVIGATION ═══════════════
 
     function navigateToRoot() {
         currentFolderId = null;
         searchInput.value = '';
 
-        // UI updates
         pageTitle.textContent = 'Dokumen Saya';
         pageSubtitle.textContent = 'Kelola mata kuliah dan materi belajarmu.';
         actionBtnIcon.textContent = 'create_new_folder';
@@ -163,7 +441,6 @@ document.addEventListener('DOMContentLoaded', () => {
         breadcrumbCurrent.textContent = '';
         filterSelect.style.display = 'none';
 
-        // Show folders, hide documents
         folderContainer.style.display = '';
         documentContainer.style.display = 'none';
         emptyState.style.display = 'none';
@@ -177,7 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const folder = folders.find(f => f.id === folderId);
         if (!folder) return;
 
-        // UI updates
         pageTitle.textContent = folder.name;
         pageSubtitle.textContent = `${folder.fileCount} file dalam folder ini`;
         actionBtnIcon.textContent = 'upload_file';
@@ -187,7 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
         breadcrumbCurrent.textContent = folder.name;
         filterSelect.style.display = '';
 
-        // Show documents, hide folders
         folderContainer.style.display = 'none';
         documentContainer.style.display = '';
         emptyState.style.display = 'none';
@@ -197,7 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ═══════════════ EVENT LISTENERS ═══════════════
 
-    // Click on folder card
     folderContainer.addEventListener('click', (e) => {
         const card = e.target.closest('.folder-card');
         if (!card) return;
@@ -205,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navigateToFolder(folderId);
     });
 
-    // Keyboard support for folder cards
     folderContainer.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             const card = e.target.closest('.folder-card');
@@ -216,39 +489,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Breadcrumb root click
     breadcrumbRoot.addEventListener('click', (e) => {
         e.preventDefault();
         navigateToRoot();
     });
 
-    // Action button (create folder or upload)
     actionBtn.addEventListener('click', () => {
         if (currentFolderId === null) {
-            // Create new folder
-            const name = prompt('Masukkan nama folder baru:');
-            if (name && name.trim()) {
-                const icons = ['📁', '📂', '📚', '📖', '🎓', '✏️', '🔬', '🧮', '🌍', '🎨'];
-                const colors = ['#7C5CFC', '#F59E0B', '#10B981', '#EF4444', '#06B6D4', '#EC4899', '#8B5CF6', '#14B8A6'];
-                const newFolder = {
-                    id: nextFolderId++,
-                    name: name.trim(),
-                    icon: icons[Math.floor(Math.random() * icons.length)],
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    fileCount: 0,
-                    updated: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }),
-                };
-                folders.push(newFolder);
-                files[newFolder.id] = [];
-                renderFolders();
-            }
+            openModal();
         } else {
-            // Simulate upload (just an alert for now)
-            alert('Fitur upload dokumen akan segera tersedia.');
+            openUploadModal();
         }
     });
 
-    // Search input
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value;
         if (currentFolderId === null) {
@@ -258,14 +511,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Filter by type (inside folder only)
     filterSelect.addEventListener('change', () => {
         if (currentFolderId !== null) {
             renderFiles(currentFolderId, searchInput.value);
         }
     });
 
-    // Grid/List toggle
     gridBtn.addEventListener('click', () => {
         gridBtn.classList.add('active');
         listBtn.classList.remove('active');
@@ -280,25 +531,21 @@ document.addEventListener('DOMContentLoaded', () => {
         documentContainer.classList.add('list-view');
     });
 
-    // Delete file handler
     documentContainer.addEventListener('click', (e) => {
         const deleteBtn = e.target.closest('.btn-action--danger');
         if (!deleteBtn) return;
         if (confirm('Apakah Anda yakin ingin menghapus dokumen ini?')) {
             const card = deleteBtn.closest('.doc-card');
             const fileName = card.querySelector('.doc-card__title').textContent;
-            // Remove from data
             const folderFiles = files[currentFolderId];
             const idx = folderFiles.findIndex(f => f.name === fileName);
             if (idx !== -1) {
                 folderFiles.splice(idx, 1);
-                // Update folder count
                 const folder = folders.find(f => f.id === currentFolderId);
                 if (folder) folder.fileCount = folderFiles.length;
                 pageSubtitle.textContent = `${folderFiles.length} file dalam folder ini`;
             }
             card.remove();
-            // Check if empty
             if (folderFiles.length === 0) {
                 documentContainer.style.display = 'none';
                 emptyState.style.display = 'flex';

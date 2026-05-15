@@ -43,16 +43,22 @@
 
 
                 <div class="topnav__right">
-                  <!-- Temporary Chat -->
-                  <button class="btn btn--icon topnav__icon-btn" id="btn-temp-chat" type="button"
-                    aria-label="Mulai temporary chat" title="Temporary Chat">
-                    <span class="material-icons-round">bolt</span>
-                  </button>
                   <!-- Theme Toggle -->
                   <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
                     aria-label="Toggle dark/light mode" title="Ganti tema">
                     <span class="material-icons-round" id="theme-icon">light_mode</span>
                   </button>
+
+                  <div class="topbar-divider"></div>
+
+                  <!-- User Profile Section -->
+                  <div class="user-profile-top">
+                    <span class="badge-pro">PRO</span>
+                    <div class="user-logo">
+                      <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+                      <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+                    </div>
+                  </div>
                 </div>
             </nav>
         </header>
@@ -71,21 +77,25 @@
               <!-- Zone 1: Menu Utama -->
               <nav class="drawer-main-nav">
                 <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
-                <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
+                <a href="documents.html" class="active"><span class="material-icons-round">folder</span> Dokumen Saya</a>
                 <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Leaderboard</a>
                 <a href="chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
               </nav>
 
               <!-- Zone 2: Terkini (Recents) -->
               <div class="drawer-recents">
+                <div class="drawer-search-wrap">
+                  <span class="material-icons-round drawer-search-icon">search</span>
+                  <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
+                </div>
                 <div class="recents-label">Terkini</div>
-                <a class="recent-item" href="documents.html">📁 Algoritma &amp; Sorting</a>
-                <a class="recent-item" href="documents.html">📁 Sistem Operasi</a>
-                <a class="recent-item" href="documents.html">📁 Kimia Organik</a>
-                <a class="recent-item" href="documents.html">📁 Kalkulus</a>
-                <a class="recent-item" href="documents.html">📁 Basis Data</a>
-                <a class="recent-item" href="documents.html">📁 Jaringan Komputer</a>
-                <a class="recent-item" href="documents.html">📁 Pemrograman Web</a>
+                <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
+                <a class="recent-item" href="chat.html?session=os">📁 Sistem Operasi</a>
+                <a class="recent-item" href="chat.html?session=kimia">📁 Kimia Organik</a>
+                <a class="recent-item" href="chat.html?session=kalkulus">📁 Kalkulus</a>
+                <a class="recent-item" href="chat.html?session=database">📁 Basis Data</a>
+                <a class="recent-item" href="chat.html?session=jaringan">📁 Jaringan Komputer</a>
+                <a class="recent-item" href="chat.html?session=web">📁 Pemrograman Web</a>
               </div>
 
               <!-- Zone 3: Account Bar -->
@@ -114,12 +124,11 @@
                     <div class="account-avatar">NK</div>
                     <div>
                       <div class="popup-user-name">Nabil Kurniawan</div>
-                      <div class="popup-user-plan">Free</div>
+                      <div class="popup-user-plan">Pro</div>
                     </div>
                     <span class="material-icons-round popup-user-chevron">chevron_right</span>
                   </div>
                   <div class="popup-menu">
-                    <button class="popup-item"><span class="material-icons-round">auto_awesome</span>Upgrade plan</button>
                     <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
                     <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
                     <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
@@ -134,9 +143,8 @@
                   <div class="account-avatar">NK</div>
                   <div class="account-info">
                     <div class="account-name">Nabil Kurniawan</div>
-                    <div class="account-plan">Free</div>
+                    <div class="account-plan">Pro</div>
                   </div>
-                  <span class="upgrade-btn">Upgrade</span>
                 </button>
               </div>
 
@@ -205,6 +213,64 @@
 
     <script src="../../js/core/navigation.js"></script>
     <script src="../../js/pages/documents.js"></script>
+
+    <!-- NEW FOLDER MODAL -->
+    <div class="nf-overlay hidden" id="nf-overlay">
+      <div class="nf-modal" role="dialog" aria-modal="true" aria-labelledby="nf-title">
+        <h2 class="nf-title" id="nf-title">Folder Baru</h2>
+        <div class="nf-preview">
+          <div class="nf-folder-icon" id="nf-preview-icon">
+            <span class="material-icons-round nf-folder-shape" id="nf-folder-shape">folder</span>
+            <span class="nf-folder-overlay-icon material-icons-round" id="nf-overlay-icon"></span>
+          </div>
+        </div>
+        <input type="text" class="nf-name-input" id="nf-name" placeholder="Tanpa Judul" maxlength="50" autocomplete="off">
+        <div class="nf-tabs">
+          <button class="nf-tab" id="nf-tab-color" data-tab="color">Warna</button>
+          <button class="nf-tab active" id="nf-tab-icon" data-tab="icon">Icon</button>
+        </div>
+        <div class="nf-panel" id="nf-panel-color" style="display:none;">
+          <div class="nf-color-grid" id="nf-color-grid"></div>
+        </div>
+        <div class="nf-panel" id="nf-panel-icon">
+          <div class="nf-icon-grid" id="nf-icon-grid"></div>
+        </div>
+        <div class="nf-actions">
+          <button class="nf-btn nf-btn--cancel" id="nf-cancel">Batal</button>
+          <button class="nf-btn nf-btn--confirm" id="nf-confirm">Buat Folder</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD DOCUMENT MODAL -->
+    <div class="up-overlay hidden" id="up-overlay">
+      <div class="up-modal" role="dialog" aria-modal="true" aria-labelledby="up-title">
+        <div class="up-header">
+          <h2 class="up-title" id="up-title">Unggah Dokumen</h2>
+          <button class="up-close" id="up-close"><span class="material-icons-round">close</span></button>
+        </div>
+        
+        <div class="up-dropzone" id="up-dropzone">
+          <input type="file" id="up-file-input" hidden multiple accept=".pdf,.docx,.pptx">
+          <div class="up-dz-content">
+            <div class="up-dz-icon">
+              <span class="material-icons-round">cloud_upload</span>
+            </div>
+            <p class="up-dz-text">Tarik & lepas file di sini atau <span>klik untuk memilih</span></p>
+            <p class="up-dz-sub">Mendukung PDF, DOCX, PPTX (Maks. 25MB)</p>
+          </div>
+        </div>
+
+        <div class="up-file-list" id="up-file-list" style="display:none;">
+          <!-- Files being uploaded will appear here -->
+        </div>
+
+        <div class="up-actions">
+          <button class="nf-btn nf-btn--cancel" id="up-cancel">Batal</button>
+          <button class="nf-btn nf-btn--confirm" id="up-confirm" disabled>Unggah Sekarang</button>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>

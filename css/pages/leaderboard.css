@@ -2,28 +2,10 @@
    LEADERBOARD STYLES (User Version)
    ========================================= */
 
-:root {
-  /* Menggunakan Color System ADAPTIV */
-  --bg-base: #0B0E14;
-  --bg-surface: #141A23;
-  --bg-surface-2: #1E2734;
-  --bg-active: rgba(0, 232, 200, 0.1);
-  
-  --accent-primary: #00E8C8;
-  --color-success: #10B981;
-  --success-subtle: rgba(16, 185, 129, 0.1);
-  --color-error: #EF4444;
-  --error-subtle: rgba(239, 68, 68, 0.1);
-  
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  
-  --border: #232E3D;
-}
+/* Leaderboard specific refinements using global variables */
 
 body {
-  background: radial-gradient(circle at top right, rgba(0, 232, 200, 0.05), transparent 40%),
+  background: radial-gradient(circle at top right, var(--accent-subtle), transparent 40%),
               radial-gradient(circle at bottom left, rgba(124, 92, 252, 0.05), transparent 40%),
               var(--bg-base);
   background-attachment: fixed;
@@ -38,7 +20,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-lg);
 }
 
 /* --------------------------------------
@@ -159,14 +141,12 @@ body {
   font-weight: 700;
   margin-bottom: 4px;
   letter-spacing: -0.02em;
-  background: linear-gradient(180deg, #FFFFFF 0%, #BCC5D0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .countdown {
   font-family: var(--font-body);
-  color: #F59E0B;
+  color: var(--color-warning);
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -177,10 +157,10 @@ body {
 
 .countdown span {
   font-family: var(--font-mono);
-  background: rgba(245, 158, 11, 0.1);
+  background: var(--color-warning-subtle);
   padding: 2px 6px;
   border-radius: 4px;
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid var(--color-warning-subtle);
 }
 
 /* League Tabs */

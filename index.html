@@ -44,6 +44,7 @@
             </a>
             <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
                 <a href="#fitur">Fitur</a>
+                <a href="#pricing">Harga</a>
                 <a href="#carakerja">Cara Kerja</a>
                 <a href="#testimoni">Testimoni</a>
 
@@ -285,6 +286,69 @@
             </div>
         </section>
 
+        <!-- PRICING SECTION -->
+        <section class="pricing container" id="pricing">
+            <div class="section-header reveal" style="text-align: center; margin-bottom: 4rem;">
+                <div class="eyebrow">Pricing Plans</div>
+                <h2 class="orbitron">Pilih Paket Belajarmu</h2>
+                <p class="section-subtitle">Investasi kecil untuk masa depan yang lebih cerdas.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free Plan -->
+                <article class="glass-card pricing-card reveal">
+                    <div class="pricing-header">
+                        <h3>Free</h3>
+                        <div class="price">Rp 0<span>/bln</span></div>
+                        <p>Cocok untuk mencoba fitur dasar ADAPTIV.</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-icons-round">check_circle</span> 50 Dokumen / bulan</li>
+                        <li><span class="material-icons-round">check_circle</span> Basic AI Tutor</li>
+                        <li><span class="material-icons-round">check_circle</span> Flashcard Standar</li>
+                        <li class="disabled"><span class="material-icons-round">cancel</span> Audio Podcast Mode</li>
+                        <li class="disabled"><span class="material-icons-round">cancel</span> Smart Mind Map</li>
+                    </ul>
+                    <a href="pages/auth/registration.html" class="neon-btn pricing-btn">Mulai Gratis</a>
+                </article>
+
+                <!-- Pro Plan (Featured) -->
+                <article class="glass-card pricing-card featured reveal" style="transition-delay: 0.1s;">
+                    <div class="popular-badge">Paling Populer</div>
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <div class="price">Rp 149k<span>/bln</span></div>
+                        <p>Untuk pelajar yang haus akan efisiensi maksimal.</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-icons-round">check_circle</span> Unlimited Documents</li>
+                        <li><span class="material-icons-round">check_circle</span> Advanced Gemini AI (Pro)</li>
+                        <li><span class="material-icons-round">check_circle</span> Audio Overview (Podcast)</li>
+                        <li><span class="material-icons-round">check_circle</span> Smart Mind Map Generation</li>
+                        <li><span class="material-icons-round">check_circle</span> Kuis Adaptif Tanpa Batas</li>
+                    </ul>
+                    <a href="pages/auth/registration.html" class="neon-btn pricing-btn">Pilih Pro Sekarang</a>
+                </article>
+
+                <!-- Master Plan -->
+                <article class="glass-card pricing-card master reveal" style="transition-delay: 0.2s;">
+                    <div class="pricing-header">
+                        <h3>Master</h3>
+                        <div class="price">Rp 299k<span>/bln</span></div>
+                        <p>Level tertinggi untuk performa akademik elite.</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-icons-round">check_circle</span> Semua fitur Pro</li>
+                        <li><span class="material-icons-round">check_circle</span> Priority AI Access (No queue)</li>
+                        <li><span class="material-icons-round">check_circle</span> Custom AI Study Persona</li>
+                        <li><span class="material-icons-round">check_circle</span> Video Content Generation</li>
+                        <li><span class="material-icons-round">check_circle</span> Early Access Fitur Baru</li>
+                    </ul>
+                    <a href="pages/auth/registration.html" class="neon-btn pricing-btn master-btn">Jadi Master</a>
+                </article>
+            </div>
+        </section>
+
         <section class="testimonials container" id="testimoni">
             <h2 class="orbitron reveal">Kata Mereka yang Sudah Lulus</h2>
             <div class="testi-grid" id="testiGrid">
@@ -338,13 +402,35 @@
 
         <section class="final-cta" id="cta">
             <div class="cta-bg"></div>
+            <div class="cta-floating-elements">
+                <div class="cta-float item-1"></div>
+                <div class="cta-float item-2"></div>
+                <div class="cta-float item-3"></div>
+            </div>
             <div class="container reveal">
                 <h2 class="orbitron">Mulai Belajar Lebih Cerdas Hari Ini.</h2>
-                <p>Gratis untuk 50 dokumen pertama. Tidak perlu kartu kredit.</p>
-                <a href="pages/auth/registration.html" class="cta-btn-large"
-                    onclick="window.location.href='pages/auth/registration.html'; return false;">Daftar Gratis — Mulai
-                    Sekarang</a>
-                <p class="trust-line">🔒 Data aman &nbsp;✓ No credit card &nbsp;⚡ Setup &lt; 2 menit</p>
+                <p>Mulai perjalanan belajarmu dengan kekuatan AI. Gratis untuk 50 dokumen pertama.</p>
+                
+                <div class="cta-btn-wrapper">
+                    <a href="pages/auth/registration.html" class="cta-btn-large"
+                        onclick="window.location.href='pages/auth/registration.html'; return false;">Daftar Gratis — Mulai Sekarang</a>
+                    <div class="cta-btn-glow"></div>
+                </div>
+
+                <div class="cta-trust-badges">
+                    <div class="cta-badge">
+                        <span class="material-icons-round">verified_user</span>
+                        <span>Data Aman & Enkripsi</span>
+                    </div>
+                    <div class="cta-badge">
+                        <span class="material-icons-round">credit_card_off</span>
+                        <span>Tanpa Kartu Kredit</span>
+                    </div>
+                    <div class="cta-badge">
+                        <span class="material-icons-round">bolt</span>
+                        <span>Setup < 2 Menit</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -366,7 +452,7 @@
                     <h4>Navigasi</h4>
                     <div class="footer-links">
                         <a href="#fitur">Fitur</a>
-                        <a href="#">Harga</a>
+                        <a href="#pricing">Harga</a>
                         <a href="#">Blog</a>
                         <a href="#">Tentang</a>
                         <a href="#">Kebijakan Privasi</a>

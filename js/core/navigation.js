@@ -134,4 +134,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 5. DRAWER SEARCH FILTERING (Recent Sessions)
+    const drawerSearch = document.getElementById('drawer-search-input');
+    if (drawerSearch) {
+        drawerSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const recentItems = document.querySelectorAll('.recent-item');
+            
+            recentItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
 });

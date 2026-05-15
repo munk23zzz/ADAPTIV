@@ -7,10 +7,6 @@ let sources = [
   { id: 5, name: 'https://example.com/artikel', type: 'Web', icon: '🌐', checked: false },
 ];
 
-let notes = [
-  { id: 1, title: 'Catatan Rapat 12 Mei', date: '12 Mei 2026', icon: '📌' },
-  { id: 2, title: 'Poin Utama Laporan', date: '10 Mei 2026', icon: '📎' },
-];
 
 let messages = [];
 let isTyping = false;
@@ -37,17 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const studio = document.getElementById('studio');
     const btnSidebar = document.getElementById('btn-toggle-sidebar');
     const btnStudio = document.getElementById('btn-toggle-studio');
+    
+    // Topbar toggles
+    const btnToggleLeft = document.getElementById('btn-toggle-left');
+    const btnToggleRight = document.getElementById('btn-toggle-right');
 
-    function toggleSidebar() {
+    const toggleSidebar = () => {
+      if (!sidebar) return;
       sidebar.classList.toggle('collapsed');
-      btnSidebar.classList.toggle('active');
-    }
-    function toggleStudio() {
-      studio.classList.toggle('collapsed');
-      btnStudio.classList.toggle('active');
-    }
-    if (btnSidebar) btnSidebar.addEventListener('click', toggleSidebar);
-    if (btnStudio) btnStudio.addEventListener('click', toggleStudio);
+      
+      // Update icon based on state
+      const icon = btnSidebar?.querySelector('.material-icons-round');
+      const topIcon = btnToggleLeft?.querySelector('.material-icons-round');
+      const isCollapsed = sidebar.classList.contains('collapsed');
+      
+      if (icon) icon.textContent = isCollapsed ? 'menu_open' : 'vertical_split';
+      if (topIcon) topIcon.textContent = isCollapsed ? 'vertical_split' : 'dock';
+    };
+
+    const toggleStudio = () => {
+      if (!studio) return;
+      studio.classList.toggle('hidden');
+      
+      const topIcon = btnToggleRight?.querySelector('.material-icons-round');
+      const isHidden = studio.classList.contains('hidden');
+      if (topIcon) topIcon.textContent = isHidden ? 'auto_awesome_motion' : 'close_fullscreen';
+    };
+
+    if (btnSidebar) btnSidebar.addEventListener('click', (e) => { e.stopPropagation(); toggleSidebar(); });
+    if (btnToggleLeft) btnToggleLeft.addEventListener('click', toggleSidebar);
+    
+    if (btnStudio) btnStudio.addEventListener('click', (e) => { e.stopPropagation(); toggleStudio(); });
+    if (btnToggleRight) btnToggleRight.addEventListener('click', toggleStudio);
 
     /* ── Global Drawer toggle ─────────────────────────────────── */
     const globalDrawer = document.getElementById('global-drawer');
@@ -74,24 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ── Studio tabs ──────────────────────────────────────────── */
-    document.querySelectorAll('.studio-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const key = tab.dataset.tab;
-        ['studio', 'notes', 'mindmap'].forEach(k => {
-          const el = document.getElementById('tab-' + k);
-          if (el) el.style.display = k === key ? 'flex' : 'none';
-        });
-        const studioTab = document.getElementById('tab-studio');
-        if (key === 'studio' && studioTab) studioTab.style.display = '';
-      });
-    });
+
 
     /* ── Render ───────────────────────────────────────────────── */
     renderSources();
-    renderNotes();
     renderPrompts();
 
     /* ── Chat Logic ───────────────────────────────────────────── */
@@ -145,16 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ── Studio Toggle (Inner) ────────────────────────────────── */
-    const btnToggleStudioInner = document.getElementById('btn-toggle-studio-inner');
-    if (btnToggleStudioInner) {
-        btnToggleStudioInner.addEventListener('click', () => {
-          if (studio) {
-              studio.classList.toggle('collapsed');
-              btnToggleStudioInner.classList.toggle('active');
-          }
-        });
-    }
 
     /* ── Modal & Upload Initialization ────────────────────────── */
     setupModals();
@@ -166,8 +159,76 @@ document.addEventListener('DOMContentLoaded', () => {
         btnGenAudio.addEventListener('click', () => {
             window.location.href = 'podcast.html';
         });
-    }
+    /* ── History Restoration ──────────────────────────────────── */
+    checkHistorySession();
 });
+
+const sessionHistory = {
+  'algoritma': {
+    title: 'Algoritma & Sorting',
+    sources: [
+      { id: 101, name: 'Sorting_Basics.pdf', type: 'PDF', icon: '📄', checked: true },
+      { id: 102, name: 'Big_O_CheatSheet.docx', type: 'Word', icon: '📝', checked: true }
+    ],
+    messages: [
+      { role: 'user', text: 'Jelaskan perbedaan mendasar antara Bubble Sort dan QuickSort.' },
+      { role: 'ai', text: 'Berdasarkan sumber **Sorting Basics**, perbedaan utamanya terletak pada efisiensi:\n\n• **Bubble Sort** memiliki kompleksitas O(n²) dan bekerja dengan menukar elemen tetangga secara berulang.\n• **QuickSort** menggunakan pendekatan *divide and conquer* dengan kompleksitas rata-rata O(n log n), yang jauh lebih cepat untuk data besar <span class="citation">1</span>.' }
+    ]
+  },
+  'os': {
+    title: 'Sistem Operasi',
+    sources: [
+      { id: 201, name: 'OS_Kernel_Architecture.pdf', type: 'PDF', icon: '📄', checked: true },
+      { id: 202, name: 'Process_Management.pptx', type: 'Slide', icon: '📋', checked: true }
+    ],
+    messages: [
+      { role: 'user', text: 'Apa itu Deadlock dan bagaimana cara menghindarinya?' },
+      { role: 'ai', text: 'Deadlock adalah kondisi di mana dua atau lebih proses saling menunggu sumber daya yang dipegang oleh proses lain <span class="citation">1</span>. \n\nCara menghindarinya meliputi:\n• **Mutual Exclusion**: Membatasi akses eksklusif.\n• **Banker\'s Algorithm**: Melakukan alokasi aman secara dinamis <span class="citation">2</span>.' }
+    ]
+  },
+  'kimia': {
+    title: 'Kimia Organik',
+    sources: [
+      { id: 301, name: 'Organic_Chemistry_Vol1.pdf', type: 'PDF', icon: '📄', checked: true }
+    ],
+    messages: [
+      { role: 'user', text: 'Gambarkan struktur Benzena.' },
+      { role: 'ai', text: 'Benzena adalah hidrokarbon aromatik dengan rumus C₆H₆. Strukturnya berupa cincin segi enam beraturan dengan ikatan rangkap dua yang beresonansi (delokalisasi elektron) <span class="citation">1</span>.' }
+    ]
+  }
+};
+
+function checkHistorySession() {
+    const params = new URLSearchParams(window.location.search);
+    const sessionKey = params.get('session');
+    
+    if (sessionKey && sessionHistory[sessionKey]) {
+        const history = sessionHistory[sessionKey];
+        
+        // Update Title
+        const titleEl = document.getElementById('notebook-title');
+        if (titleEl) titleEl.textContent = history.title;
+        
+        // Update Sources
+        sources = history.sources;
+        renderSources();
+        
+        // Update Messages
+        const emptyState = document.getElementById('empty-state');
+        if (emptyState) emptyState.style.display = 'none';
+        
+        history.messages.forEach(msg => {
+            if (msg.role === 'user') {
+                appendUserMsg(msg.text);
+            } else {
+                appendAiMsg(msg.text);
+            }
+        });
+        
+        // Scroll to bottom
+        scrollBottom();
+    }
+}
 
 /* ── Modal Functions ──────────────────────────────────────── */
 function setupModals() {
@@ -349,9 +410,6 @@ function appendAiMsg(html) {
       <button class="msg-action-btn">
         <span class="material-icons-round">thumb_down</span>
       </button>
-      <button class="msg-action-btn" onclick="saveToNote(this)">
-        <span class="material-icons-round">bookmark_border</span>
-      </button>
       <button class="msg-action-btn">
         <span class="material-icons-round">refresh</span>
       </button>
@@ -400,6 +458,17 @@ function scrollBottom() {
 function renderSources() {
     const list = document.getElementById('sources-list');
     if (!list) return;
+    
+    if (sources.length === 0) {
+        list.innerHTML = `
+            <div class="sources-empty">
+                <span class="material-icons-round">description</span>
+                <p>Belum ada sumber. Tambahkan PDF atau teks untuk mulai belajar.</p>
+            </div>
+        `;
+        return;
+    }
+
     list.innerHTML = sources.map(s => `
   <div class="source-item ${s.checked ? 'checked' : ''}" data-id="${s.id}" onclick="toggleSource(${s.id})">
     <div class="source-check">
@@ -423,34 +492,6 @@ function toggleSource(id) {
     renderSources();
 }
 
-/* ── Notes Management ─────────────────────────────────────── */
-function renderNotes() {
-    const list = document.getElementById('notes-list');
-    if (!list) return;
-    list.innerHTML = notes.map(n => `
-  <div class="note-item">
-    <div class="note-thumb">${n.icon}</div>
-    <div class="note-meta">
-      <div class="note-title">${n.title}</div>
-      <div class="note-date">${n.date}</div>
-    </div>
-  </div>
-`).join('');
-}
-
-function saveToNote(btn) {
-    const bubble = btn.closest('.msg-group').querySelector('.bubble');
-    const content = bubble ? bubble.innerText.slice(0, 60) + '…' : 'Catatan AI';
-    notes.unshift({
-      id: Date.now(),
-      title: content,
-      date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
-      icon: '⭐',
-    });
-    renderNotes();
-    const icon = btn.querySelector('.material-icons-round');
-    if (icon) icon.textContent = 'bookmark';
-}
 
 /* ── Suggested Prompts ────────────────────────────────────── */
 function renderPrompts() {
