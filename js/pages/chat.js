@@ -30,41 +30,13 @@ const aiReplies = [
 document.addEventListener('DOMContentLoaded', () => {
     /* ── Sidebar / Studio toggle ──────────────────────────────── */
     const sidebar = document.getElementById('sidebar');
-    const studio = document.getElementById('studio');
     const btnSidebar = document.getElementById('btn-toggle-sidebar');
-    const btnStudio = document.getElementById('btn-toggle-studio');
-    
-    // Topbar toggles
-    const btnToggleLeft = document.getElementById('btn-toggle-left');
-    const btnToggleRight = document.getElementById('btn-toggle-right');
 
-    const toggleSidebar = () => {
-      if (!sidebar) return;
+    function toggleSidebar() {
       sidebar.classList.toggle('collapsed');
-      
-      // Update icon based on state
-      const icon = btnSidebar?.querySelector('.material-icons-round');
-      const topIcon = btnToggleLeft?.querySelector('.material-icons-round');
-      const isCollapsed = sidebar.classList.contains('collapsed');
-      
-      if (icon) icon.textContent = isCollapsed ? 'menu_open' : 'vertical_split';
-      if (topIcon) topIcon.textContent = isCollapsed ? 'vertical_split' : 'dock';
-    };
-
-    const toggleStudio = () => {
-      if (!studio) return;
-      studio.classList.toggle('hidden');
-      
-      const topIcon = btnToggleRight?.querySelector('.material-icons-round');
-      const isHidden = studio.classList.contains('hidden');
-      if (topIcon) topIcon.textContent = isHidden ? 'auto_awesome_motion' : 'close_fullscreen';
-    };
-
-    if (btnSidebar) btnSidebar.addEventListener('click', (e) => { e.stopPropagation(); toggleSidebar(); });
-    if (btnToggleLeft) btnToggleLeft.addEventListener('click', toggleSidebar);
-    
-    if (btnStudio) btnStudio.addEventListener('click', (e) => { e.stopPropagation(); toggleStudio(); });
-    if (btnToggleRight) btnToggleRight.addEventListener('click', toggleStudio);
+      btnSidebar.classList.toggle('active');
+    }
+    if (btnSidebar) btnSidebar.addEventListener('click', toggleSidebar);
 
     /* ── Global Drawer toggle ─────────────────────────────────── */
     const globalDrawer = document.getElementById('global-drawer');
@@ -458,17 +430,6 @@ function scrollBottom() {
 function renderSources() {
     const list = document.getElementById('sources-list');
     if (!list) return;
-    
-    if (sources.length === 0) {
-        list.innerHTML = `
-            <div class="sources-empty">
-                <span class="material-icons-round">description</span>
-                <p>Belum ada sumber. Tambahkan PDF atau teks untuk mulai belajar.</p>
-            </div>
-        `;
-        return;
-    }
-
     list.innerHTML = sources.map(s => `
   <div class="source-item ${s.checked ? 'checked' : ''}" data-id="${s.id}" onclick="toggleSource(${s.id})">
     <div class="source-check">
