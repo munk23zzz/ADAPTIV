@@ -110,21 +110,58 @@
                 <div class="hero-visual reveal">
                     <div class="mockup-wrapper">
                         <div class="ui-mockup">
-                            <div class="mockup-dropzone">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path
-                                        d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 18H6V4h7v5h5v11zM11 19v-4.17l-1.59 1.59L8 15l4-4 4 4-1.41 1.41L13 14.83V19h-2z" />
-                                </svg>
-                                <span>Upload Dokumen</span>
+                            <!-- Window Titlebar -->
+                            <div class="mockup-header">
+                                <div class="mockup-dots">
+                                    <span class="dot-red"></span>
+                                    <span class="dot-yellow"></span>
+                                    <span class="dot-green"></span>
+                                </div>
+                                <div class="mockup-title orbitron">ADAPTIV WORKSPACE</div>
+                                <div class="mockup-status">● Live</div>
                             </div>
-                            <div class="mockup-pills">
-                                <span class="mpill active-1">🎵 Ringkasan Audio</span>
-                                <span class="mpill active-2">🃏 Kartu Belajar</span>
-                                <span class="mpill active-3">❓ Kuis</span>
-                            </div>
-                            <div class="mockup-chat">
-                                <div class="chat-b user">Jelaskan konsep buffer overflow dalam C</div>
-                                <div class="chat-b ai">Berdasarkan modul kamu di halaman 12...</div>
+                            
+                            <div class="mockup-body">
+                                <!-- Upload Dropzone -->
+                                <div class="mockup-dropzone">
+                                    <div class="dropzone-icon-wrap">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 18H6V4h7v5h5v11zM11 19v-4.17l-1.59 1.59L8 15l4-4 4 4-1.41 1.41L13 14.83V19h-2z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Seret & Lepas Modul Kuliah</span>
+                                    <p class="dropzone-sub">Format PDF, DOCX, atau PPT (Maks. 50MB)</p>
+                                </div>
+                                
+                                <!-- Tool Selector Pills -->
+                                <div class="mockup-pills">
+                                    <span class="mpill active-1"><span class="mpill-icon">🎧</span> Ringkasan Audio</span>
+                                    <span class="mpill active-2"><span class="mpill-icon">🧠</span> Kartu Belajar</span>
+                                    <span class="mpill active-3"><span class="mpill-icon">✍️</span> Kuis Adaptif</span>
+                                </div>
+                                
+                                <!-- Premium Chat Box -->
+                                <div class="mockup-chat">
+                                    <!-- User Bubble -->
+                                    <div class="chat-b user">
+                                        <div class="chat-avatar">👨‍🎓</div>
+                                        <div class="chat-bubble">
+                                            <p>Jelaskan konsep buffer overflow dalam C</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AI Bubble -->
+                                    <div class="chat-b ai">
+                                        <div class="chat-avatar">🤖</div>
+                                        <div class="chat-bubble">
+                                            <p>Berdasarkan modul <strong>Sistem_Keamanan_C.pdf</strong> halaman 12, buffer overflow terjadi ketika data melebihi alokasi memori buffer, menimpa alamat return pointer.</p>
+                                            <div class="chat-source">
+                                                <span class="material-icons-round">description</span>
+                                                <span>Sumber: Sistem_Keamanan_C.pdf (Hlm. 12)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

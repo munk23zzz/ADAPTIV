@@ -122,31 +122,244 @@ header.scrolled {
     font-weight: 500;
 }
 
-/* MOCKUP */
-.ui-mockup { background: var(--bg-surface-2); border: 1px solid var(--border-strong); border-radius: 20px; padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+/* MOCKUP CONTAINER - macOS Application Window style */
+.mockup-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* 3D background glowing orb for the mockup */
+.mockup-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.12) 0%, rgba(124, 92, 252, 0.08) 50%, transparent 80%);
+    border-radius: 40px;
+    z-index: -1;
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.ui-mockup {
+    background: rgba(18, 18, 24, 0.85);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(0, 245, 255, 0.03);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.ui-mockup:hover {
+    border-color: rgba(0, 245, 255, 0.2);
+    box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.7),
+        0 0 50px rgba(0, 245, 255, 0.06);
+}
+
+/* Mockup Header Titlebar */
+.mockup-header {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mockup-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.mockup-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mockup-dots .dot-red { background: #FF5F56; }
+.mockup-dots .dot-yellow { background: #FFBD2E; }
+.mockup-dots .dot-green { background: #27C93F; }
+
+.mockup-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.mockup-status {
+    font-size: 0.7rem;
+    font-family: var(--font-ui);
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 245, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+/* Mockup Body Content */
+.mockup-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Premium Dashed Dropzone */
 .mockup-dropzone {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-bottom: 16px; /* tambahkan ini */
+    border: 1.5px dashed rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 14px;
+    padding: 24px 20px;
+    transition: var(--transition);
+    cursor: pointer;
+    margin-bottom: 0;
 }
-.mockup-dropzone svg { width: 48px; height: 48px; fill: var(--accent-primary); opacity: 0.8; margin-bottom: 12px; }
-.mockup-dropzone span { font-family: var(--font-ui); color: var(--text-primary); font-weight: 500; }
-.mockup-pills { display: flex; gap: 10px; margin-bottom: 24px; justify-content: center; }
-.mpill { background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: var(--radius-pill); font-size: 0.8rem; color: var(--text-secondary); }
+
+.mockup-dropzone:hover {
+    border-color: var(--accent-primary);
+    background: radial-gradient(circle at center, rgba(0, 245, 255, 0.05) 0%, transparent 80%);
+}
+
+.dropzone-icon-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(0, 245, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    transition: var(--transition);
+}
+
+.mockup-dropzone:hover .dropzone-icon-wrap {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(0, 245, 255, 0.1);
+    border-color: var(--accent-primary);
+}
+
+.mockup-dropzone svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--accent-primary);
+    transition: var(--transition);
+}
+
+.mockup-dropzone span {
+    font-family: var(--font-ui);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.dropzone-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted) !important;
+}
+
+/* Premium Pills Section */
+.mockup-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+}
+
+.mpill {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 500;
+    font-family: var(--font-ui);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+    color: var(--text-secondary);
+}
+
+.mpill-icon {
+    font-size: 0.95rem;
+}
+
+/* Unique Brand highlights for Pills */
+.mpill.active-1 {
+    border-color: rgba(0, 245, 255, 0.3);
+    background: rgba(0, 245, 255, 0.06);
+    color: var(--accent-primary);
+}
+
+.mpill.active-1:hover {
+    border-color: var(--accent-primary);
+    background: rgba(0, 245, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.15);
+}
+
+.mpill.active-2 {
+    border-color: rgba(124, 92, 252, 0.3);
+    background: rgba(124, 92, 252, 0.06);
+    color: var(--accent-tertiary);
+}
+
+.mpill.active-2:hover {
+    border-color: var(--accent-tertiary);
+    background: rgba(124, 92, 252, 0.1);
+    box-shadow: 0 0 15px rgba(124, 92, 252, 0.15);
+}
+
+.mpill.active-3 {
+    border-color: rgba(52, 211, 153, 0.3);
+    background: rgba(52, 211, 153, 0.06);
+    color: var(--color-success);
+}
+
+.mpill.active-3:hover {
+    border-color: var(--color-success);
+    background: rgba(52, 211, 153, 0.1);
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.15);
+}
+
+/* Premium Chat Window */
 .mockup-chat {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 12px;
+    gap: 14px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px;
 }
 
 .chat-b {
     display: flex;
-    align-items: flex-end;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
 }
 
 .chat-b.user {
@@ -154,39 +367,79 @@ header.scrolled {
 }
 
 .chat-avatar {
-    font-size: 18px;
+    font-size: 1.2rem;
     flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chat-b.user .chat-avatar {
+    background: rgba(0, 245, 255, 0.08);
+    border-color: rgba(0, 245, 255, 0.2);
+}
+
+.chat-b.ai .chat-avatar {
+    background: rgba(124, 92, 252, 0.08);
+    border-color: rgba(124, 92, 252, 0.2);
 }
 
 .chat-bubble {
     display: flex;
     flex-direction: column;
-    padding: 10px 14px;
+    padding: 12px 16px;
     border-radius: 16px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     max-width: 80%;
-    line-height: 1.4;
+    line-height: 1.5;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .chat-b.user .chat-bubble {
-    background: var(--cyan, #00F5FF);
-    color: #0a0a0a;
-    border-bottom-right-radius: 4px;
-    font-weight: 500;
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.15) 0%, rgba(0, 180, 255, 0.1) 100%);
+    color: var(--text-primary);
+    border-top-right-radius: 4px;
+    border: 1px solid rgba(0, 245, 255, 0.25);
 }
 
 .chat-b.ai .chat-bubble {
-    background: rgba(255,255,255,0.08);
-    color: var(--text-primary, #fff);
-    border-bottom-left-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    border-top-left-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chat-bubble p {
+    margin: 0;
+}
+
+.chat-bubble strong {
+    color: var(--text-primary);
 }
 
 .chat-source {
-    margin-top: 6px;
-    font-size: 0.68rem;
-    opacity: 0.6;
-    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    color: var(--accent-primary);
+    font-family: var(--font-ui);
+    font-weight: 500;
+    background: rgba(0, 245, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 245, 255, 0.15);
+    width: fit-content;
+}
+
+.chat-source .material-icons-round {
+    font-size: 0.88rem;
 }
 
 /* FEATURES */
