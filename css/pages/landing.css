@@ -372,18 +372,11 @@ header.scrolled {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    overflow: hidden;
     background: var(--bg-surface-2);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border);
-}
-
-.chat-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .chat-b.user .chat-avatar {
@@ -394,6 +387,37 @@ header.scrolled {
 .chat-b.ai .chat-avatar {
     background: rgba(var(--accent-tertiary-rgb), 0.08);
     border-color: rgba(var(--accent-tertiary-rgb), 0.2);
+}
+
+/* AI Image Avatar adjustments */
+.chat-avatar.ai-avatar-img-wrap {
+    padding: 0;
+    overflow: hidden;
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+}
+
+.ai-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.theme-light-avatar {
+    display: none;
+}
+
+.theme-dark-avatar {
+    display: block;
+}
+
+[data-theme="light"] .theme-light-avatar {
+    display: block;
+}
+
+[data-theme="light"] .theme-dark-avatar {
+    display: none;
 }
 
 .chat-bubble {
