@@ -66,13 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
     podiumSection.innerHTML = top3.map((user, index) => {
       const rank = index + 1;
       return `
-        <div class="podium-item">
+        <div class="podium-item rank-${rank}">
           ${rank === 1 ? '<span class="crown-badge">👑</span>' : ''}
           <div class="podium-avatar-wrap">
             <div class="podium-avatar">${getInitials(user.name)}</div>
+            <span class="podium-badge">${rank}</span>
           </div>
           <div class="podium-name">${user.name}</div>
           <div class="podium-time">${formatTime(user.timeInMinutes)}</div>
+          <div class="podium-column">
+            <span class="podium-number">${rank}</span>
+          </div>
         </div>
       `;
     }).join('');
@@ -85,10 +89,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Zona hanya aktif di Minggu Ini
       let zoneClass = '';
+      let zoneIndicator = '';
       if (isWeekly) {
-        if (rank <= PROMOTION_ZONE_LIMIT) zoneClass = 'zone-up';
-        else if (rank >= DEMOTION_ZONE_START) zoneClass = 'zone-down';
-        else zoneClass = 'zone-stay';
+        if (rank <= PROMOTION_ZONE_LIMIT) {
+          zoneClass = 'zone-up';
+          zoneIndicator = '<span class="zone-badge badge-up"><span class="material-icons-round">arrow_upward</span></span>';
+        } else if (rank >= DEMOTION_ZONE_START) {
+          zoneClass = 'zone-down';
+          zoneIndicator = '<span class="zone-badge badge-down"><span class="material-icons-round">arrow_downward</span></span>';
+        } else {
+          zoneClass = 'zone-stay';
+          zoneIndicator = '<span class="zone-badge badge-stay"><span class="material-icons-round">remove</span></span>';
+        }
       }
 
       const userClass = user.isCurrentUser ? 'is-current-user' : '';
@@ -96,11 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return `
         <li class="board-item ${zoneClass} ${userClass}" id="${user.isCurrentUser ? 'current-user-row' : ''}">
-          <div class="rank-number">${rank}</div>
+          <div class="rank-container">
+            <div class="rank-number">${rank}</div>
+            ${zoneIndicator}
+          </div>
           <div class="avatar">${getInitials(user.name)}</div>
           <div class="user-progress-container">
             <div class="user-main-info">
               <div class="user-name ${nameHighlight}">${user.name}</div>
+              ${user.isCurrentUser ? '<span class="user-you-tag">Kamu</span>' : ''}
             </div>
             <div class="progress-track">
               <div class="progress-fill" style="width: ${progress}%"></div>
