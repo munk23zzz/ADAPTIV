@@ -546,6 +546,12 @@ header.scrolled {
     padding: 20px 10px 40px;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Hide scrollbar Firefox */
+    cursor: grab;
+    user-select: none;
+}
+.testi-grid.grabbing {
+    cursor: grabbing;
+    scroll-snap-type: none;
 }
 .testi-grid::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
 

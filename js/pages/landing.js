@@ -152,6 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIndex = 0;
         let autoScrollTimer = null;
 
+        // Drag-to-scroll variables
+        let isDown = false;
+        let startX = 0;
+        let scrollLeftVal = 0;
+
         const getCardWidth = () => {
             const card = testiGrid.querySelector('.testi-card');
             return card ? card.offsetWidth + 32 : 412; // 380px card + 32px gap
@@ -165,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Scroll listener to sync active dot during manual scrolls
         testiGrid.addEventListener('scroll', () => {
+            if (isDown) return; // Ignore snap-calculations during active drag
             const cardWidth = getCardWidth();
-            // Calculate active index based on scroll position
             const index = Math.round(testiGrid.scrollLeft / cardWidth);
             if (index >= 0 && index < dots.length) {
                 currentIndex = index;
@@ -193,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Automatic sliding loop
         const startAutoScroll = () => {
+            if (isDown) return;
             autoScrollTimer = setInterval(() => {
                 currentIndex = (currentIndex + 1) % dots.length;
                 scrollToCard(currentIndex);
@@ -206,12 +212,52 @@ document.addEventListener('DOMContentLoaded', () => {
             startAutoScroll();
         };
 
+        // Mouse Drag to Scroll (Swap Kanan/Kiri via Cursor)
+        testiGrid.addEventListener('mousedown', (e) => {
+            isDown = true;
+            testiGrid.classList.add('grabbing');
+            startX = e.pageX - testiGrid.offsetLeft;
+            scrollLeftVal = testiGrid.scrollLeft;
+            
+            // Clear auto-scroll on active drag
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+        });
+
+        const snapToNearestCard = () => {
+            const cardWidth = getCardWidth();
+            const index = Math.round(testiGrid.scrollLeft / cardWidth);
+            scrollToCard(index);
+        };
+
+        testiGrid.addEventListener('mouseleave', () => {
+            if (isDown) {
+                isDown = false;
+                testiGrid.classList.remove('grabbing');
+                snapToNearestCard();
+            }
+            startAutoScroll();
+        });
+
+        testiGrid.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                testiGrid.classList.remove('grabbing');
+                snapToNearestCard();
+            }
+            startAutoScroll();
+        });
+
+        testiGrid.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - testiGrid.offsetLeft;
+            const walk = (x - startX) * 1.5; // Drag speed multiplier
+            testiGrid.scrollLeft = scrollLeftVal - walk;
+        });
+
         // Pause auto-scroll on hover/touch interactions to protect readability
         testiGrid.addEventListener('mouseenter', () => {
             if (autoScrollTimer) clearInterval(autoScrollTimer);
-        });
-        testiGrid.addEventListener('mouseleave', () => {
-            startAutoScroll();
         });
         testiGrid.addEventListener('touchstart', () => {
             if (autoScrollTimer) clearInterval(autoScrollTimer);
