@@ -5,6 +5,7 @@
 /* Import Themes */
 @import url("../themes/dark.css");
 @import url("../themes/light.css");
+@import url("../themes/temporary.css");
 
 :root {
     /* ── TYPOGRAPHY ── */
