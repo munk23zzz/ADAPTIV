@@ -47,7 +47,7 @@
 
   --sidebar-w: 280px;
   --studio-w: 320px;
-  --topbar-h: 56px;
+  --header-height: 56px;
   --font-base: 'Roboto', sans-serif;
   --font-ui: 'Google Sans', sans-serif;
   --font-mono: 'Google Sans Mono', monospace;
@@ -158,7 +158,7 @@ textarea {
 
 /* ── Top Bar ───────────────────────────────────────────────── */
 #topbar {
-  height: var(--topbar-h);
+  height: var(--header-height);
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -376,6 +376,8 @@ textarea {
   flex: 1;
   overflow: hidden;
   position: relative;
+  margin-top: var(--header-height);
+  height: calc(100vh - var(--header-height));
 }
 
 /* ── Sidebar (Sources) ─────────────────────────────────────── */
@@ -1893,7 +1895,7 @@ textarea {
   #sidebar,
   #studio {
     position: fixed;
-    top: var(--topbar-h);
+    top: var(--header-height);
     bottom: 0;
     z-index: 200;
   }
