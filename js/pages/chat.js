@@ -38,30 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (btnSidebar) btnSidebar.addEventListener('click', toggleSidebar);
 
-    /* ── Global Drawer toggle ─────────────────────────────────── */
-    const globalDrawer = document.getElementById('global-drawer');
-    const globalDrawerOverlay = document.getElementById('global-drawer-overlay');
-    const btnGlobalMenu = document.getElementById('btn-global-menu');
-    const btnCloseDrawer = document.getElementById('btn-close-drawer');
-
-    if (btnGlobalMenu) {
-        btnGlobalMenu.addEventListener('click', () => {
-          globalDrawer.classList.add('show');
-          globalDrawerOverlay.classList.add('show');
-        });
-    }
-    if (btnCloseDrawer) {
-        btnCloseDrawer.addEventListener('click', () => {
-          globalDrawer.classList.remove('show');
-          globalDrawerOverlay.classList.remove('show');
-        });
-    }
-    if (globalDrawerOverlay) {
-        globalDrawerOverlay.addEventListener('click', () => {
-          globalDrawer.classList.remove('show');
-          globalDrawerOverlay.classList.remove('show');
-        });
-    }
+    /* ── Render ───────────────────────────────────────────────── */
+    renderSources();
+    renderPrompts();
 
 
 
