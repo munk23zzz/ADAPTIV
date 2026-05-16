@@ -22,10 +22,8 @@ class FlowManager {
     }
 
     start() {
-        console.log("ADAPTIV Flow: Starting Onboarding");
-        if (window.onboardingManager) {
-            window.onboardingManager.start();
-        }
+        console.log("ADAPTIV Flow: Skipping Onboarding, showing Terms");
+        this.next('terms');
     }
 
     next(target) {
