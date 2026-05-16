@@ -8,11 +8,11 @@
 
 :root {
     /* ── TYPOGRAPHY ── */
-    --font-ui:      'Google Sans', 'Inter', system-ui, sans-serif;
-    --font-body:    'Roboto', 'Inter', system-ui, sans-serif;
-    --font-display: 'Google Sans', 'Inter', system-ui, sans-serif;
-    --font-label:   'Google Sans', 'Inter', system-ui, sans-serif;
-    --font-mono:    'Google Sans Mono', 'JetBrains Mono', monospace;
+    --font-ui:      'Plus Jakarta Sans', 'Google Sans', 'Inter', system-ui, sans-serif;
+    --font-body:    'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    --font-display: 'Outfit', 'Google Sans', 'Inter', system-ui, sans-serif;
+    --font-label:   'Plus Jakarta Sans', 'Google Sans', 'Inter', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', 'Google Sans Mono', monospace;
 
     /* ── SPACING & RADII ── */
     --header-height: 56px;
