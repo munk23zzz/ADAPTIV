@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════════════
+   TEMPORARY CHAT — UI & STATES
+   ═══════════════════════════════════════════════ */
+
+/* ── MODIFIER CLASSES ── */
+.is-temporary-mode .app-header {
+    border-bottom: 1px dashed var(--accent-primary);
+    background: rgba(0, 232, 200, 0.03);
+}
+
+.is-temporary-mode #btn-temp-chat {
+    background: var(--accent-primary) !important;
+    color: var(--bg-base) !important;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* ── INTRO SCREEN ── */
+.temp-intro {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 600px;
+    margin: auto;
+    animation: fadeIn 0.5s ease;
+}
+
+.is-temporary-mode .temp-intro {
+    display: flex;
+}
+
+.is-temporary-mode .empty-state,
+.is-temporary-mode .chat-messages-content {
+    display: none !important;
+}
+
+.temp-intro__icon-wrap {
+    width: 64px;
+    height: 64px;
+    background: var(--bg-surface-2);
+    border: 2px dashed var(--accent-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--accent-primary);
+}
+
+.temp-intro__icon-wrap .material-icons-round {
+    font-size: 32px;
+}
+
+.temp-intro__title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.temp-intro__description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.temp-intro__description span {
+    color: var(--accent-primary);
+    font-weight: 500;
+}
+
+/* ── MESSAGE BOX IN TEMP MODE ── */
+.is-temporary-mode .msg-group {
+    border-left: 2px dashed var(--accent-primary);
+    background: rgba(0, 232, 200, 0.02);
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

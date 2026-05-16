@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../css/components/navbar.css">
   <link rel="stylesheet" href="../../css/components/sidebar.css">
   <link rel="stylesheet" href="../../css/components/upload-modal.css">
-  <link rel="stylesheet" href="../../css/components/temp-chat.css">
+  <link rel="stylesheet" href="../../css/components/temporary-chat.css">
   <link rel="stylesheet" href="../../css/pages/chat.css" />
   <script src="../../js/core/theme.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
@@ -194,6 +194,18 @@
         <!-- Chat messages -->
         <div class="chat-area" id="chat-area">
           <div class="chat-inner" id="chat-inner">
+
+            <!-- Temporary Chat Intro -->
+            <div class="temp-intro" id="temp-intro">
+              <div class="temp-intro__icon-wrap">
+                <span class="material-icons-round">chat_bubble_outline</span>
+              </div>
+              <h2 class="temp-intro__title">Chat Sementara</h2>
+              <p class="temp-intro__description">
+                Chat sementara tidak muncul di Riwayat Chat atau Aktivitas Aplikasi <span>ADAPTIV</span> dan tidak digunakan untuk melatih model atau mempersonalisasi pengalaman Anda. 
+                Untuk membantu menanggapi Anda dan menjaga <span>ADAPTIV</span> tetap aman, chat sementara disimpan selama 72 jam.
+              </p>
+            </div>
 
             <!-- Empty state -->
             <div class="empty-state" id="empty-state">
@@ -428,7 +440,7 @@
   </div>
 
   <script src="../../js/pages/chat.js"></script>
-  <script src="../../js/pages/temp-chat.js"></script>
+  <script src="../../js/pages/temporary-chat.js"></script>
 </body>
 
 </html>
