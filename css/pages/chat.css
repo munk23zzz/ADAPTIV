@@ -1041,7 +1041,7 @@ textarea {
   transform: translateY(-1px);
 }
 
-#chat-input {
+#chat-input, #modal-search-input {
   width: 100%;
   background: none;
   border: none;
@@ -1056,7 +1056,7 @@ textarea {
   font-family: inherit;
 }
 
-#chat-input::placeholder {
+#chat-input::placeholder, #modal-search-input::placeholder {
   color: var(--text-disabled);
   font-weight: 400;
 }
@@ -1160,7 +1160,7 @@ input:checked + .toggle-slider:before {
 }
 
 /* Redesigned Model Selector Trigger Pill */
-.action-text-btn#btn-model-selector {
+.action-text-btn#btn-model-selector, .action-text-btn#btn-modal-search-selector {
   background: rgba(0, 232, 200, 0.08);
   border: 1px solid rgba(0, 232, 200, 0.25);
   color: var(--accent-primary);
@@ -1176,7 +1176,7 @@ input:checked + .toggle-slider:before {
   gap: 4px;
 }
 
-.action-text-btn#btn-model-selector:hover {
+.action-text-btn#btn-model-selector:hover, .action-text-btn#btn-modal-search-selector:hover {
   background: var(--accent-primary);
   color: #fff;
   border-color: var(--accent-primary);
@@ -1184,17 +1184,17 @@ input:checked + .toggle-slider:before {
   box-shadow: 0 4px 15px rgba(0, 232, 200, 0.2);
 }
 
-.action-text-btn#btn-model-selector span.material-icons-round {
+.action-text-btn#btn-model-selector span.material-icons-round, .action-text-btn#btn-modal-search-selector span.material-icons-round {
   font-size: 16px;
   transition: transform 0.25s ease;
 }
 
-.action-text-btn#btn-model-selector:hover span.material-icons-round {
+.action-text-btn#btn-model-selector:hover span.material-icons-round, .action-text-btn#btn-modal-search-selector:hover span.material-icons-round {
   transform: rotate(180deg);
 }
 
 /* Send / Microphone Action Button */
-.action-icon-btn#chat-action-btn {
+.action-icon-btn#chat-action-btn, .action-icon-btn#modal-search-action-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -1208,7 +1208,7 @@ input:checked + .toggle-slider:before {
   transition: all var(--transition);
 }
 
-.action-icon-btn#chat-action-btn:hover {
+.action-icon-btn#chat-action-btn:hover, .action-icon-btn#modal-search-action-btn:hover {
   background: var(--accent-primary);
   color: #fff;
   border-color: var(--accent-primary);
@@ -1216,7 +1216,7 @@ input:checked + .toggle-slider:before {
   box-shadow: 0 0 14px rgba(0, 232, 200, 0.25);
 }
 
-.action-icon-btn#chat-action-btn span.material-icons-round {
+.action-icon-btn#chat-action-btn span.material-icons-round, .action-icon-btn#modal-search-action-btn span.material-icons-round {
   font-size: 18px;
 }
 

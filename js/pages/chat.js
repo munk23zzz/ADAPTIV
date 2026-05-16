@@ -131,6 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        const modalDropdown = document.getElementById('modal-search-dropdown');
+        const btnModalSelector = document.getElementById('btn-modal-search-selector');
+        if (modalDropdown && !modalDropdown.classList.contains('hidden')) {
+            if (!modalDropdown.contains(e.target) && !btnModalSelector.contains(e.target)) {
+                modalDropdown.classList.add('hidden');
+            }
+        }
+
         const ctxMenu = document.getElementById('ctx-menu');
         if (ctxMenu && ctxMenu.classList.contains('show')) {
             if (!ctxMenu.contains(e.target)) {
@@ -534,37 +542,59 @@ spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
 document.head.appendChild(spinStyle);
 
 function setupModelSelector() {
-    const btn = document.getElementById('btn-model-selector');
-    const dropdown = document.getElementById('model-dropdown');
-    const options = document.querySelectorAll('.model-option');
-    const currentModelText = document.getElementById('current-model-text');
+    // 1. Main Chat Model Selector
+    const mainBtn = document.getElementById('btn-model-selector');
+    const mainDropdown = document.getElementById('model-dropdown');
+    const mainText = document.getElementById('current-model-text');
 
-    if (!btn || !dropdown) return;
-
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdown.classList.toggle('hidden');
-    });
-
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            const model = option.getAttribute('data-model');
-            
-            // If it's Ultra, maybe show a "coming soon" or redirect to upgrade
-            if (model === 'Ultra') {
-                alert('Tingkatkan ke paket Ultra untuk menggunakan model ini!');
-                return;
-            }
-
-            // Update UI
-            options.forEach(opt => opt.classList.remove('active'));
-            option.classList.add('active');
-            if (currentModelText) currentModelText.textContent = model;
-            
-            // Close dropdown
-            dropdown.classList.add('hidden');
-            
-            console.log(`Model switched to: ${model}`);
+    if (mainBtn && mainDropdown) {
+        mainBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mainDropdown.classList.toggle('hidden');
+            // Close the modal dropdown if open
+            const modalDropdown = document.getElementById('modal-search-dropdown');
+            if (modalDropdown) modalDropdown.classList.add('hidden');
         });
-    });
+
+        const mainOptions = mainDropdown.querySelectorAll('.model-option');
+        mainOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const model = option.getAttribute('data-model');
+                mainOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                if (mainText) mainText.textContent = model;
+                mainDropdown.classList.add('hidden');
+                console.log(`Main model switched to: ${model}`);
+            });
+        });
+    }
+
+    // 2. Modal Search Model Selector
+    const modalBtn = document.getElementById('btn-modal-search-selector');
+    const modalDropdown = document.getElementById('modal-search-dropdown');
+    const modalText = document.getElementById('modal-search-model-text');
+
+    if (modalBtn && modalDropdown) {
+        modalBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modalDropdown.classList.toggle('hidden');
+            // Close the main dropdown if open
+            const mainDropdownEl = document.getElementById('model-dropdown');
+            if (mainDropdownEl) mainDropdownEl.classList.add('hidden');
+        });
+
+        const modalOptions = modalDropdown.querySelectorAll('.model-option');
+        modalOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const model = option.getAttribute('data-model');
+                modalOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                if (modalText) modalText.textContent = model;
+                modalDropdown.classList.add('hidden');
+                console.log(`Modal search model switched to: ${model}`);
+            });
+        });
+    }
 }

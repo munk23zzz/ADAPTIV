@@ -418,22 +418,58 @@
         </div>
 
         <!-- 2. SEARCH AREA (Chat di bawah) -->
-        <div class="search-box-container">
-          <input type="text" class="search-input" placeholder="Cari web untuk sumber baru">
-          <div class="search-footer">
-            <div class="search-options">
-              <button class="option-btn">
-                <span class="material-icons-round" style="font-size: 16px;">public</span> Web
-                <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
-              </button>
-              <button class="option-btn">
-                <span class="material-icons-round" style="font-size: 16px;">auto_awesome</span> Riset Cepat
-                <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
+        <div class="input-box" id="modal-search-input-box" style="margin-bottom: 12px;">
+          <textarea id="modal-search-input" placeholder="Cari web atau masukkan tautan..." rows="1" maxlength="4000"></textarea>
+          <div class="input-actions-bar">
+            <div class="actions-left">
+              <div class="external-toggle-wrap" title="Enable Web Research">
+                <span class="material-icons-round external-toggle-icon">language</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggle-modal-external-source" onchange="handleModalExternalSourceToggle(this)">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="actions-right">
+              <div class="model-selector-wrap">
+                <button class="action-text-btn" id="btn-modal-search-selector">
+                  <span id="modal-search-model-text">Pro</span>
+                  <span class="material-icons-round">expand_more</span>
+                </button>
+
+                <!-- Model Selection Dropdown (Gemini style) -->
+                <div class="model-dropdown hidden" id="modal-search-dropdown">
+                  <div class="model-dropdown-header">ADAPTIV AI</div>
+
+                  <div class="model-option" data-model="Flash" data-desc="Answers quickly">
+                    <div class="model-option-info">
+                      <div class="model-option-title">Flash</div>
+                      <div class="model-option-desc">Menjawab dengan cepat</div>
+                    </div>
+                    <span class="material-icons-round model-check">check</span>
+                  </div>
+
+                  <div class="model-option active" data-model="Pro" data-desc="Advanced math and code with 3.1 Pro">
+                    <div class="model-option-info">
+                      <div class="model-option-title">Pro</div>
+                      <div class="model-option-desc">Matematika dan kode tingkat lanjut dengan 3.1 Pro</div>
+                    </div>
+                    <span class="material-icons-round model-check">check</span>
+                  </div>
+
+                  <div class="model-option" data-model="Master" data-desc="Get the highest access to models &amp; features">
+                    <div class="model-option-info">
+                      <div class="model-option-title">Master</div>
+                      <div class="model-option-desc">Dapatkan akses tertinggi ke model &amp; fitur</div>
+                    </div>
+                    <button class="model-upgrade-btn">Upgrade</button>
+                  </div>
+                </div>
+              </div>
+              <button class="action-icon-btn" id="modal-search-action-btn" aria-label="Action">
+                <span class="material-icons-round">search</span>
               </button>
             </div>
-            <button class="search-icon-btn">
-              <span class="material-icons-round" style="font-size: 18px;">search</span>
-            </button>
           </div>
         </div>
 
