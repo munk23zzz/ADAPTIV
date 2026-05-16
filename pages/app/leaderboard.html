@@ -23,6 +23,44 @@
 <body class="app-body">
 
   <div id="app-container" class="app-container">
+    <!-- ════════════ NAVBAR (PRESERVED) ════════════ -->
+    <header class="app-header" id="app-header" role="banner">
+      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
+
+        <div class="topnav__left">
+          <!-- Global Menu (Hamburger) -->
+          <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
+            aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
+            <span class="material-icons-round">menu</span>
+          </button>
+
+          <a class="logo-wrap" href="dashboard.html">
+            <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
+            <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
+            <span class="logo-text">ADAPTIV</span>
+          </a>
+        </div>
+
+        <div class="topnav__right">
+          <!-- Theme Toggle -->
+          <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
+            aria-label="Toggle dark/light mode" title="Ganti tema">
+            <span class="material-icons-round" id="theme-icon">light_mode</span>
+          </button>
+
+          <div class="topbar-divider"></div>
+
+          <!-- User Profile Section -->
+          <div class="user-profile-top">
+            <span class="badge-pro">PRO</span>
+            <div class="user-logo">
+              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
     <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
@@ -30,8 +68,8 @@
 
       <!-- Header -->
       <div class="drawer-header">
-        <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
-        <button class="icon-btn" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+        <span class="logo-text logo-text--small">ADAPTIV</span>
+        <button class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
       </div>
 
       <!-- Zone 1: Menu Utama -->
@@ -111,46 +149,8 @@
     </div>
 
 
-    <!-- ═══════════════ TOPBAR ═══════════════ -->
-    <header class="app-header" id="app-header" role="banner">
-      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
 
-        <div class="topnav__left">
-          <!-- Global Menu (Hamburger) -->
-          <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
-            aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
-            <span class="material-icons-round">menu</span>
-          </button>
-
-          <a class="logo-wrap" href="dashboard.html">
-            <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
-            <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
-            <span class="logo-text">ADAPTIV</span>
-          </a>
-        </div>
-
-        <div class="topnav__right">
-          <!-- Theme Toggle -->
-          <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
-            aria-label="Toggle dark/light mode" title="Ganti tema">
-            <span class="material-icons-round" id="theme-icon">light_mode</span>
-          </button>
-
-          <div class="topbar-divider"></div>
-
-          <!-- User Profile Section -->
-          <div class="user-profile-top">
-            <span class="badge-pro">PRO</span>
-            <div class="user-logo">
-              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
-              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main class="main-content" style="padding-top: 80px;">
+    <main class="main-content">
       <div class="leaderboard-wrapper">
         <!-- Podium Section (Top 3) -->
         <section class="podium-section" id="podiumSection">
