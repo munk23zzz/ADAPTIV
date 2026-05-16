@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="../../css/base/variables.css">
   <link rel="stylesheet" href="../../css/components/navbar.css">
   <link rel="stylesheet" href="../../css/components/terms-modal.css">
-  <link rel="stylesheet" href="../../css/components/onboarding.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
 </head>
 
@@ -445,79 +444,9 @@
 
   </div>
 
-  <!-- ════════════ UPLOAD MODAL ════════════ -->
-  <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true"
-    aria-labelledby="upload-modal-title">
-    <div class="modal">
-      <button class="modal__close-btn" id="close-upload-modal" aria-label="Close">
-        <span class="material-icons-round">close</span>
-      </button>
-      <div class="modal__header">
-        <h2 class="modal__title" id="upload-modal-title">Upload Dokumen Baru</h2>
-      </div>
-      <div class="modal__body">
-        <div class="dropzone" onclick="document.getElementById('file-input').click()">
-          <div class="dropzone-icon">📁</div>
-          <div class="dropzone-title">Seret file ke sini atau klik untuk pilih</div>
-          <div class="dropzone-hint">PDF, PPT, PPTX, DOC, DOCX, TXT didukung</div>
-        </div>
-        <div class="pill-btns" style="margin-top:14px;">
-          <button class="pill-btn" onclick="document.getElementById('file-input').click()">
-            <span class="material-icons-round">upload</span> Upload Files
-          </button>
-          <button class="pill-btn">
-            <span class="material-icons-round">link</span> Websites
-          </button>
-          <button class="pill-btn">
-            <span class="material-icons-round">add_to_drive</span> Drive
-          </button>
-          <button class="pill-btn">
-            <span class="material-icons-round">content_paste</span> Teks
-          </button>
-        </div>
-        <input type="file" id="file-input" style="display:none;" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
-      </div>
-    </div>
-  </div>
-
   <div class="toast-container" id="toast-container" role="region" aria-live="polite"></div>
 
-  <!-- Onboarding Overlay -->
-  <div class="onboarding-overlay" id="onboarding-overlay">
-    <div class="onboarding-card">
-      
-      <!-- Step 1 -->
-      <div class="onboarding-step active">
-        <div class="onboarding-visual">📁</div>
-        <h2 class="onboarding-title">Pusat Materi</h2>
-        <p class="onboarding-text">Unggah dokumen belajar Anda (PDF, DOCX, Slide) dan biarkan ADAPTIV menganalisis semuanya untuk Anda.</p>
-      </div>
 
-      <!-- Step 2 -->
-      <div class="onboarding-step">
-        <div class="onboarding-visual">✨</div>
-        <h2 class="onboarding-title">Tutor AI</h2>
-        <p class="onboarding-text">Tanyakan apa saja tentang materi Anda. Dapatkan ringkasan, penjelasan mendalam, hingga kuis interaktif.</p>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="onboarding-step">
-        <div class="onboarding-visual">🏆</div>
-        <h2 class="onboarding-title">Papan Peringkat</h2>
-        <p class="onboarding-text">Belajar lebih giat, kumpulkan poin, dan jadi yang teratas di Papan Peringkat ADAPTIV.</p>
-      </div>
-
-      <div class="onboarding-footer">
-        <button class="onboarding-skip" id="onboarding-skip">Lewati</button>
-        <div class="onboarding-dots">
-          <div class="onboarding-dot active"></div>
-          <div class="onboarding-dot"></div>
-          <div class="onboarding-dot"></div>
-        </div>
-        <button class="onboarding-btn" id="onboarding-next">Lanjut</button>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -613,7 +542,6 @@
   <script src="../../js/core/theme.js"></script>
   <script src="../../js/pages/dashboard.js"></script>
   <script src="../../js/components/terms-modal.js"></script>
-  <script src="../../js/components/onboarding.js"></script>
   <script src="../../js/core/flow-manager.js"></script>
 </body>
 

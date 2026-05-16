@@ -42,20 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (accountPopup) accountPopup.classList.add('hidden');
     });
 
-    /* ══════════════════════════════════
-       UPLOAD MODAL
-    ══════════════════════════════════ */
-    const uploadOverlay = document.getElementById('upload-modal-overlay');
-    const openUploadBtn = document.getElementById('open-upload-btn');
-    const closeUploadBtn = document.getElementById('close-upload-modal');
 
-    if (openUploadBtn) openUploadBtn.addEventListener('click', () => uploadOverlay.classList.add('open'));
-    if (closeUploadBtn) closeUploadBtn.addEventListener('click', () => uploadOverlay.classList.remove('open'));
-    if (uploadOverlay) {
-        uploadOverlay.addEventListener('click', (e) => { 
-            if (e.target === uploadOverlay) uploadOverlay.classList.remove('open'); 
-        });
-    }
 
     /* ══════════════════════════════════
        PERFORMANCE BAR CHART
