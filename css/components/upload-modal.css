@@ -1,6 +1,5 @@
 /* ═══════════════════════════════════════════════
-   MODAL & UPLOAD COMPONENT
-   Shared between Dashboard and Chat
+   ADAPTIV PREMIUM GLASSMORPHIC UPLOAD MODAL STYLES
    ═══════════════════════════════════════════════ */
 
 .modal-overlay {
@@ -9,8 +8,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg-overlay);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -25,11 +24,21 @@
 }
 
 .modal--upload {
-  max-width: 720px;
-  background: #111518;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 680px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
   padding: 40px;
+  border-radius: 28px;
   position: relative;
+  box-shadow: var(--shadow-xl), 0 0 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .modal__header--premium {
@@ -37,104 +46,151 @@
   flex-direction: column;
   padding: 0;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .modal__title--premium {
-  font-size: 2rem;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
 }
 
 .text-accent--notes {
-  color: #6C8EEF; /* Sesuai gambar blue/green accent */
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
 }
 
 /* 1. UPLOAD AREA (Up di atas) */
 .dropzone--premium {
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.02);
+  border: 2px dashed var(--border-strong);
+  background: var(--bg-surface-2);
   border-radius: 20px;
-  padding: 60px 40px;
+  padding: 48px 32px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.dropzone--premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.04), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.dropzone--premium:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(var(--accent-primary-rgb), 0.06);
+}
+
+.dropzone--premium:hover::before {
+  opacity: 1;
 }
 
 .dropzone__title--premium {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #fff;
-  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
 }
 
 .dropzone__hint--premium {
-  color: #8E9196;
-  font-size: 0.9rem;
-  margin-bottom: 32px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 28px;
 }
 
 .action-pills {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
+  z-index: 2;
 }
 
 .pill-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
-  padding: 10px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 18px;
   border-radius: 99px;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .pill-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--bg-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.15);
 }
 
 .pill-btn .icon {
-  font-size: 18px;
+  font-size: 16px;
+  color: var(--accent-primary);
 }
 
 /* 2. SEARCH / CHAT AREA (Chat di bawah) */
 .search-box-container {
-  background: #0D1117;
-  border: 1.5px solid #2B3A5A; /* Deep blue border */
+  background: var(--bg-surface-2);
+  border: 1.5px solid var(--border);
   border-radius: 20px;
-  padding: 12px 20px;
+  padding: 14px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.search-box-container:focus-within {
+  border-color: var(--accent-tertiary);
+  box-shadow: 0 0 0 3px rgba(var(--accent-tertiary-rgb), 0.15);
+  background: var(--bg-hover);
 }
 
 .search-input {
   background: transparent;
   border: none;
-  color: #fff;
-  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
   outline: none;
   width: 100%;
 }
 
 .search-input::placeholder {
-  color: #575C66;
+  color: var(--text-muted);
 }
 
 .search-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
 }
 
 .search-options {
@@ -143,42 +199,73 @@
 }
 
 .option-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
   padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 0.85rem;
+  border-radius: 10px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.option-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.option-btn .material-icons-round {
+  color: var(--accent-tertiary);
 }
 
 .search-icon-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--accent-primary);
+  color: black;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: grid;
   place-items: center;
-  color: #575C66;
   border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.search-icon-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.45);
+  opacity: 0.95;
 }
 
 .modal__close-btn--top {
   position: absolute;
   top: 24px;
   right: 24px;
-  background: transparent;
-  border: none;
-  color: #fff;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
   cursor: pointer;
-  opacity: 0.7;
+  transition: var(--transition);
 }
 
 .modal__close-btn--top:hover {
-  opacity: 1;
+  background: var(--bg-hover);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: rotate(90deg);
 }
 
 /* Hide original modal footer if not needed */
