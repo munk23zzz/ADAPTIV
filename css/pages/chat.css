@@ -1249,10 +1249,6 @@ input:checked + .toggle-slider:before {
   display: none;
 }
 
-#modal-search-dropdown {
-  right: -44px; /* Align perfectly to the right edge of the action button / input box */
-}
-
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

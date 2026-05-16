@@ -301,3 +301,38 @@
 .modal--upload .modal__footer {
   display: none;
 }
+
+/* ──────── Fix for Modal Search Input Box & Model Dropdown ──────── */
+#modal-search-input-box {
+  position: relative;
+  z-index: 10 !important; /* Force input box and its children to render above dropzone (z-index:1) */
+}
+
+#modal-search-dropdown {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0 !important;
+  left: auto !important; /* Keep perfectly aligned to the right side of the button */
+  width: 280px;
+  background: #13171f !important; /* Solid opaque dark background to eliminate text bleed */
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+  opacity: 1 !important;
+  z-index: 2000 !important; /* Absolute top stacking inside the modal container */
+  backdrop-filter: none !important; /* Avoid double blur semi-transparency overlap */
+}
+
+/* Modal Selector Option hover polish */
+#modal-search-dropdown .model-option {
+  background: rgba(255, 255, 255, 0.015) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+#modal-search-dropdown .model-option:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+#modal-search-dropdown .model-option.active {
+  background: rgba(0, 232, 200, 0.08) !important;
+  border: 1px solid rgba(0, 232, 200, 0.25) !important;
+}
