@@ -144,9 +144,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    /* ── Model Selector ────────────────────────────────────────── */
+    setupModelSelector();
+
     // Close menus when clicking outside
     document.addEventListener('click', (e) => {
-        // add logic if needed
+        const modelDropdown = document.getElementById('model-dropdown');
+        const btnModelSelector = document.getElementById('btn-model-selector');
+        
+        if (modelDropdown && !modelDropdown.classList.contains('hidden')) {
+            if (!modelDropdown.contains(e.target) && !btnModelSelector.contains(e.target)) {
+                modelDropdown.classList.add('hidden');
+            }
+        }
+
+        const ctxMenu = document.getElementById('ctx-menu');
+        if (ctxMenu && ctxMenu.classList.contains('show')) {
+            if (!ctxMenu.contains(e.target)) {
+                ctxMenu.classList.remove('show');
+            }
+        }
     });
 });
 
@@ -542,3 +559,39 @@ function handleToolAction(type, menuId) {
 const spinStyle = document.createElement('style');
 spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
 document.head.appendChild(spinStyle);
+
+function setupModelSelector() {
+    const btn = document.getElementById('btn-model-selector');
+    const dropdown = document.getElementById('model-dropdown');
+    const options = document.querySelectorAll('.model-option');
+    const currentModelText = document.getElementById('current-model-text');
+
+    if (!btn || !dropdown) return;
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('hidden');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const model = option.getAttribute('data-model');
+            
+            // If it's Ultra, maybe show a "coming soon" or redirect to upgrade
+            if (model === 'Ultra') {
+                alert('Tingkatkan ke paket Ultra untuk menggunakan model ini!');
+                return;
+            }
+
+            // Update UI
+            options.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+            if (currentModelText) currentModelText.textContent = model;
+            
+            // Close dropdown
+            dropdown.classList.add('hidden');
+            
+            console.log(`Model switched to: ${model}`);
+        });
+    });
+}

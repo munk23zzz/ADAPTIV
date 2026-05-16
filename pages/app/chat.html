@@ -42,7 +42,8 @@
       <div class="drawer-recents">
         <div class="drawer-search-wrap">
           <span class="material-icons-round drawer-search-icon">search</span>
-          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
+          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..."
+            aria-label="Cari riwayat belajar">
         </div>
         <div class="recents-label">Terkini</div>
         <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
@@ -134,10 +135,11 @@
         <!-- Temporary Chat -->
         <button class="icon-btn" id="btn-temp-chat" type="button" aria-label="Mulai temporary chat"
           title="Temporary Chat">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
-            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" 
-                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" 
-                  stroke-dasharray="4 3"/>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            style="display: block;">
+            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              stroke-dasharray="4 3" />
           </svg>
         </button>
         <!-- Theme Toggle -->
@@ -190,8 +192,10 @@
             <!-- Empty state -->
             <div class="empty-state" id="empty-state">
               <div class="empty-icon">
-                <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV AI" class="empty-state-img empty-state-img--dark">
-                <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV AI" class="empty-state-img empty-state-img--light">
+                <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV AI"
+                  class="empty-state-img empty-state-img--dark">
+                <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV AI"
+                  class="empty-state-img empty-state-img--light">
               </div>
               <h2 class="empty-title">Tanyakan apa saja</h2>
               <p class="empty-sub">Mulai percakapan tentang sumber Anda. NotebookLM akan menjawab berdasarkan materi
@@ -221,10 +225,42 @@
                   </div>
                 </div>
                 <div class="actions-right">
-                  <button class="action-text-btn">
-                    <span>Pro</span>
-                    <span class="material-icons-round">expand_more</span>
-                  </button>
+                  <div class="model-selector-wrap">
+                    <button class="action-text-btn" id="btn-model-selector">
+                      <span id="current-model-text">Pro</span>
+                      <span class="material-icons-round">expand_more</span>
+                    </button>
+
+                    <!-- Model Selection Dropdown (Gemini style) -->
+                    <div class="model-dropdown hidden" id="model-dropdown">
+                      <div class="model-dropdown-header">ADAPTIV AI</div>
+
+                      <div class="model-option" data-model="Flash" data-desc="Answers quickly">
+                        <div class="model-option-info">
+                          <div class="model-option-title">Flash</div>
+                          <div class="model-option-desc">Answers quickly</div>
+                        </div>
+                        <span class="material-icons-round model-check">check</span>
+                      </div>
+
+                      <div class="model-option active" data-model="Pro" data-desc="Advanced math and code with 3.1 Pro">
+                        <div class="model-option-info">
+                          <div class="model-option-title">Pro</div>
+                          <div class="model-option-desc">Advanced math and code with 3.1 Pro</div>
+                        </div>
+                        <span class="material-icons-round model-check">check</span>
+                      </div>
+
+                      <div class="model-option" data-model="Master"
+                        data-desc="Get the highest access to models & features">
+                        <div class="model-option-info">
+                          <div class="model-option-title">Master</div>
+                          <div class="model-option-desc">Get the highest access to models & features</div>
+                        </div>
+                        <button class="model-upgrade-btn">Upgrade</button>
+                      </div>
+                    </div>
+                  </div>
                   <button class="action-icon-btn" id="chat-action-btn" aria-label="Action">
                     <span class="material-icons-round">mic</span>
                   </button>
