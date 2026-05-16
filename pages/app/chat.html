@@ -27,7 +27,7 @@
       <!-- Header -->
       <div class="drawer-header">
         <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
-        <button type="button" class="icon-btn" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+        <button class="icon-btn" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
       </div>
 
       <!-- Zone 1: Menu Utama -->
@@ -107,88 +107,6 @@
         </button>
       </div>
 
-    <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
-    <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
-    <div class="global-drawer" id="global-drawer" role="dialog" aria-label="Navigation drawer">
-      <div class="drawer-header">
-        <div class="logo-wrap">
-          <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark" style="width:24px; height:24px;">
-          <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light" style="width:24px; height:24px;">
-          <span class="logo-text" style="font-size:1.05rem;">ADAPTIV</span>
-        </div>
-        <button type="button" class="btn--icon" id="btn-close-drawer">
-          <span class="material-icons-round">close</span>
-        </button>
-      </div>
-      <nav class="drawer-main-nav">
-        <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Beranda</a>
-        <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
-        <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Papan Peringkat</a>
-        <a href="chat.html" class="active"><span class="material-icons-round">chat</span> Tutor AI</a>
-      </nav>
-      <div class="drawer-recents">
-        <div class="drawer-search-wrap">
-          <span class="material-icons-round drawer-search-icon">search</span>
-          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
-        </div>
-        <div class="recents-label">Terkini</div>
-        <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
-        <a class="recent-item" href="chat.html?session=os">📁 Sistem Operasi</a>
-        <a class="recent-item" href="chat.html?session=kimia">📁 Kimia Organik</a>
-        <a class="recent-item" href="chat.html?session=kalkulus">📁 Kalkulus</a>
-        <a class="recent-item" href="chat.html?session=database">📁 Basis Data</a>
-        <a class="recent-item" href="chat.html?session=jaringan">📁 Jaringan Komputer</a>
-        <a class="recent-item" href="chat.html?session=web">📁 Pemrograman Web</a>
-      </div>
-
-      <!-- Zone 3: Account Bar -->
-      <div class="drawer-account">
-        <!-- Sub-popup Level 2 -->
-        <div class="account-sub-popup hidden" id="account-sub-popup">
-          <div class="sub-popup-email">
-            <span class="material-icons-round">account_circle</span>
-            nabil@student.binus.ac.id
-          </div>
-          <div class="sub-popup-account-row">
-            <div class="account-avatar">NK</div>
-            <span class="sub-popup-account-name">Nabil Kurniawan</span>
-            <span class="material-icons-round sub-popup-check">check</span>
-          </div>
-          <div class="sub-popup-add">
-            <span class="material-icons-round">add</span>
-            Tambah Akun
-          </div>
-        </div>
-
-        <!-- Main Popup Level 1 -->
-        <div class="account-popup hidden" id="account-popup">
-          <div class="popup-user-row" id="popup-user-row">
-            <div class="account-avatar">NK</div>
-            <div>
-              <div class="popup-user-name">Nabil Kurniawan</div>
-              <div class="popup-user-plan">Pro</div>
-            </div>
-            <span class="material-icons-round popup-user-chevron">chevron_right</span>
-          </div>
-          <div class="popup-menu">
-            <button type="button" class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
-            <button type="button" class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
-            <button type="button" class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
-            <div class="popup-divider"></div>
-            <button type="button" class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
-            <button type="button" class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
-          </div>
-        </div>
-
-        <!-- Account Bar -->
-        <button type="button" class="account-bar" id="account-bar-btn">
-          <div class="account-avatar">NK</div>
-          <div class="account-info">
-            <div class="account-name">Nabil Kurniawan</div>
-            <div class="account-plan">Pro</div>
-          </div>
-        </button>
-      </div>
     </div>
 
 
@@ -196,11 +114,11 @@
     <header id="topbar">
       <div class="topbar-left">
         <!-- Global Menu (Hamburger) -->
-        <button type="button" class="icon-btn" id="btn-global-menu">
+        <button class="icon-btn" id="btn-global-menu">
           <span class="material-icons-round">menu</span>
         </button>
 
-        <a class="logo-wrap" href="../../index.html">
+        <a class="logo-wrap" href="dashboard.html">
           <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
           <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
           <span class="logo-text">ADAPTIV</span>
@@ -251,12 +169,12 @@
       <aside id="sidebar">
         <div class="panel-header">
           <span class="panel-title">Sumber</span>
-          <button type="button" class="icon-btn" id="btn-toggle-sidebar">
+          <button class="icon-btn" id="btn-toggle-sidebar">
             <span class="material-icons-round">vertical_split</span>
           </button>
         </div>
 
-        <button type="button" class="add-source-btn" id="btn-add-source" data-modal-target="upload-modal">
+        <button class="add-source-btn" id="btn-add-source" data-modal-target="upload-modal">
           <span class="material-icons-round">add</span>
           <span class="add-text">Tambah sumber</span>
         </button>
@@ -341,11 +259,11 @@
                           <div class="model-option-title">Master</div>
                           <div class="model-option-desc">Dapatkan akses tertinggi ke model & fitur</div>
                         </div>
-                        <button type="button" class="model-upgrade-btn">Upgrade</button>
+                        <button class="model-upgrade-btn">Upgrade</button>
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="action-icon-btn" id="chat-action-btn" aria-label="Action">
+                  <button class="action-icon-btn" id="chat-action-btn" aria-label="Action">
                     <span class="material-icons-round">mic</span>
                   </button>
                 </div>
@@ -363,37 +281,37 @@
         <!-- Studio Collapsed Toolbar only -->
 
         <div class="studio-collapsed-toolbar">
-          <button type="button" class="studio-collapsed-btn bg-audio" title="Ringkasan Audio"
+          <button class="studio-collapsed-btn bg-audio" title="Ringkasan Audio"
             onclick="generateStudioContent('Ringkasan Audio')">
             <span class="material-icons-round mat-icon">graphic_eq</span>
             <span class="collapsed-label">Audio</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-mindmap" title="Studio Podcast"
+          <button class="studio-collapsed-btn bg-mindmap" title="Studio Podcast"
             onclick="generateStudioContent('Studio Podcast')">
             <span class="material-icons-round mat-icon">tune</span>
             <span class="collapsed-label">Podcast</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-slide" title="Slide Presentasi"
+          <button class="studio-collapsed-btn bg-slide" title="Slide Presentasi"
             onclick="generateStudioContent('Slide Presentasi')">
             <span class="material-icons-round mat-icon">branding_watermark</span>
             <span class="collapsed-label">Slide Presentasi</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-video" title="Ringkasan Video"
+          <button class="studio-collapsed-btn bg-video" title="Ringkasan Video"
             onclick="generateStudioContent('Ringkasan Video')">
             <span class="material-icons-round mat-icon">smart_display</span>
             <span class="collapsed-label">Ringkasan Video</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-mindmap" title="Peta Pikiran"
+          <button class="studio-collapsed-btn bg-mindmap" title="Peta Pikiran"
             onclick="generateStudioContent('Peta Pikiran')">
             <span class="material-icons-round mat-icon">account_tree</span>
             <span class="collapsed-label">Peta Pikiran</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-flashcards" title="Kartu Belajar"
+          <button class="studio-collapsed-btn bg-flashcards" title="Kartu Belajar"
             onclick="generateStudioContent('Kartu Belajar')">
             <span class="material-icons-round mat-icon">style</span>
             <span class="collapsed-label">Kartu Belajar</span>
@@ -404,13 +322,13 @@
             <span class="collapsed-label">Kuis</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-infographic" title="Infografis"
+          <button class="studio-collapsed-btn bg-infographic" title="Infografis"
             onclick="generateStudioContent('Infografis')">
             <span class="material-icons-round mat-icon">insert_chart_outlined</span>
             <span class="collapsed-label">Infografis</span>
           </button>
 
-          <button type="button" class="studio-collapsed-btn bg-datatable" title="Tabel Data"
+          <button class="studio-collapsed-btn bg-datatable" title="Tabel Data"
             onclick="generateStudioContent('Tabel Data')">
             <span class="material-icons-round mat-icon">table_view</span>
             <span class="collapsed-label">Tabel Data</span>
@@ -452,12 +370,13 @@
   <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true"
     aria-labelledby="upload-modal-title" aria-describedby="upload-modal-desc" hidden data-modal="upload-modal">
     <div class="modal modal--upload" id="upload-modal">
-      <button type="button" class="modal__close-btn--top" data-modal-close="upload-modal" aria-label="Close">
+      <button class="modal__close-btn--top" data-modal-close="upload-modal" aria-label="Close">
         <span class="material-icons-round">close</span>
       </button>
 
       <header class="modal__header--premium">
-        <h2 class="modal__title--premium">Buat Ringkasan Audio dan Video dari <span class="text-accent--notes">sumber Anda</span></h2>
+        <h2 class="modal__title--premium">Buat Ringkasan Audio dan Video dari <span class="text-accent--notes">sumber
+            Anda</span></h2>
       </header>
 
       <div class="modal__body">
@@ -468,12 +387,12 @@
               more</span></div>
 
           <div class="action-pills">
-            <button type="button" class="pill-btn" onclick="document.getElementById('file-input').click()">
+            <button class="pill-btn" onclick="document.getElementById('file-input').click()">
               <span class="material-icons-round icon">upload</span> Unggah file
             </button>
-            <button type="button" class="pill-btn"><span class="material-icons-round icon">link</span> Situs Web</button>
-            <button type="button" class="pill-btn"><span class="material-icons-round icon">add_to_drive</span> Drive</button>
-            <button type="button" class="pill-btn"><span class="material-icons-round icon">content_paste</span> Teks Salinan</button>
+            <button class="pill-btn"><span class="material-icons-round icon">link</span> Situs Web</button>
+            <button class="pill-btn"><span class="material-icons-round icon">add_to_drive</span> Drive</button>
+            <button class="pill-btn"><span class="material-icons-round icon">content_paste</span> Teks Salinan</button>
           </div>
           <input type="file" id="file-input" style="display: none;" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
         </div>
@@ -492,7 +411,7 @@
                 <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
               </button>
             </div>
-            <button type="button" class="search-icon-btn">
+            <button class="search-icon-btn">
               <span class="material-icons-round" style="font-size: 18px;">search</span>
             </button>
           </div>

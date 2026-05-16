@@ -49,18 +49,6 @@ body::after {
     align-items: center;
 }
 
-/* Brand Branding */
-.auth-brand {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-
-.auth-brand .logo-wrap {
-    background: var(--bg-surface-2);
-    border: 1px solid var(--border-strong);
-}
-
 /* Logo */
 .auth-logo {
     display: flex;

@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════════════
+   ADAPTIV — DARK THEME (DEFAULT)
+   ═══════════════════════════════════════════════ */
+
+:root, [data-theme="dark"] {
+    /* ── BACKGROUNDS ── */
+    --bg-base:      #0C1117;
+    --bg-surface:   #151C25;
+    --bg-surface-2: #1C2633;
+    --bg-panel:     #111820;
+    --bg-hover:     #1E2D3D;
+    --bg-active:    #0D3D3D;
+    --bg-input:     #151C25;
+    --bg-overlay:   rgba(4, 6, 10, 0.72);
+
+    /* ── BRAND ACCENTS ── */
+    --accent-primary:   #00E8C8;
+    --accent-secondary: #00B8A0;
+    --accent-tertiary:  #7C5CFC;
+    --accent-subtle:    rgba(0, 232, 200, 0.08);
+    --accent-on:        #0C1117;
+    --accent-glow:      rgba(0, 232, 200, 0.25);
+
+    /* ── TEXT ── */
+    --text-primary:   #E6EDF3;
+    --text-secondary: #8B949E;
+    --text-muted:     #636C76;
+    --text-disabled:  #3D444D;
+    --text-on-accent: #0C1117;
+    --text-link:      #00E8C8;
+
+    /* ── BORDERS ── */
+    --border:        rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.14);
+    --divider:       rgba(255, 255, 255, 0.04);
+
+    /* ── SEMANTIC ── */
+    --color-success:        #2DD4A8;
+    --color-success-subtle: rgba(45, 212, 168, 0.10);
+    --color-warning:        #F5A623;
+    --color-warning-subtle: rgba(245, 166, 35, 0.10);
+    --color-error:          #F85149;
+    --color-error-subtle:   rgba(248, 81, 73, 0.10);
+    --color-info:           #58A6FF;
+    --color-info-subtle:    rgba(88, 166, 255, 0.10);
+
+    /* ── SHADOWS ── */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.40), 0 1px 2px rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.50), 0 2px 4px rgba(0, 0, 0, 0.30);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.60), 0 4px 12px rgba(0, 0, 0, 0.40);
+    
+    /* ── GLOW ── */
+    --glow-accent: 0 0 20px rgba(0, 232, 200, 0.30), 0 0 60px rgba(0, 232, 200, 0.10);
+
+    /* ── LEGACY MAPPING (For Dashboard compatibility) ── */
+    --accent: var(--accent-primary);
+    --bg: var(--bg-base);
+    --bg-card: var(--bg-surface);
+    --cyan: var(--accent-primary);
+    --violet: var(--accent-tertiary);
+    --lime: var(--color-success);
+    --gold: var(--color-warning);
+    --nav-bg: var(--bg-surface);
+    --nav-border: var(--border);
+}

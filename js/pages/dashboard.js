@@ -1,304 +1,257 @@
 /**
- * ADAPTIV AI - Dashboard Logic
- * Enterprise-grade Vanilla JS.
- * Menangani interaksi UI, Modals, Upload Zone, dan Animasi Data.
+ * ADAPTIV DASHBOARD PAGE LOGIC
  */
 
-class DashboardController {
-    constructor() {
-        // 1. Inisialisasi DOM Elements
-        this.body = document.body;
-        
-        // Upload Elements
-        this.dropzone = document.getElementById('upload-dropzone');
-        this.fileInput = document.getElementById('file-input');
-        this.uploadBtn = document.getElementById('start-upload-btn');
-        this.primaryText = this.dropzone ? this.dropzone.querySelector('.dropzone__primary-text') : null;
-        this.secondaryText = this.dropzone ? this.dropzone.querySelector('.dropzone__secondary-text') : null;
-
-        // Modal Triggers
-        this.modalTriggers = document.querySelectorAll('[data-modal-target]');
-        this.modalCloseBtns = document.querySelectorAll('[data-modal-close]');
-
-        // State
-        this.uploadedFiles = [];
-
-        // Jalankan semua setup
-        this.init();
-    }
-
-    init() {
-        this.setupModals();
-        this.setupUploadZone();
-        this.animateCounters();
-        this.updateUserGreeting();
-        this.checkWelcomeAnimation();
-    }
-
-    /**
-     * Update Greeting dengan nama dari localStorage
-     */
-    updateUserGreeting() {
-        const dashboardUserName = document.getElementById('dashboard-user-name');
-        if (dashboardUserName) {
-            const storedName = localStorage.getItem('adaptiv_user_name') || 'Nabil';
-            dashboardUserName.textContent = storedName.split(' ')[0]; // Ambil nama depan saja
-        }
-    }
-
-    /**
-     * Apple-style Welcome Animation
-     * Dipicu jika ada parameter ?newuser=true di URL
-     */
-    checkWelcomeAnimation() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const isNewUser = urlParams.get('newuser') === 'true';
-        const welcomeOverlay = document.getElementById('welcome-overlay');
-        const userDisplayName = document.getElementById('user-display-name');
-
-        if (isNewUser && welcomeOverlay) {
-            // Ambil nama dari localStorage
-            const storedName = localStorage.getItem('adaptiv_user_name') || 'User';
-            if (userDisplayName) userDisplayName.textContent = storedName;
-
-            // Tampilkan Overlay & Blur Dashboard
-            welcomeOverlay.style.display = 'flex';
-            document.body.classList.add('welcome-active');
-
-            // Trigger Fade In & Scale
-            requestAnimationFrame(() => {
-                welcomeOverlay.classList.add('active');
-            });
-
-            // Sembunyikan setelah beberapa detik
-            setTimeout(() => {
-                welcomeOverlay.classList.remove('active');
-                document.body.classList.remove('welcome-active');
-                
-                // Hapus overlay sepenuhnya setelah transisi selesai
-                setTimeout(() => {
-                    welcomeOverlay.style.display = 'none';
-                    // Bersihkan URL agar tidak re-trigger saat refresh
-                    const newUrl = window.location.pathname;
-                    window.history.replaceState({}, document.title, newUrl);
-                }, 1200);
-            }, 3000);
-        }
-    }
-
-    // ═══════════════════════════════════════════════
-    // 1. MODAL MANAGEMENT
-    // ═══════════════════════════════════════════════
-    setupModals() {
-        this.modalTriggers.forEach(trigger => {
-            trigger.addEventListener('click', () => {
-                const targetId = trigger.getAttribute('data-modal-target');
-                const overlay = document.getElementById(`${targetId}-overlay`);
-                if (overlay) this.openModal(overlay);
-            });
-        });
-
-        this.modalCloseBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const targetId = btn.getAttribute('data-modal-close');
-                const overlay = document.getElementById(`${targetId}-overlay`);
-                if (overlay) this.closeModal(overlay);
-            });
-        });
-
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const openOverlay = document.querySelector('.modal-overlay:not([hidden])');
-                if (openOverlay) this.closeModal(openOverlay);
-            }
-        });
-    }
-
-    openModal(overlay) {
-        overlay.removeAttribute('hidden');
-        this.body.style.overflow = 'hidden'; // Prevent background scrolling
-
-        // Focus management untuk aksesibilitas
-        const focusable = overlay.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        if (focusable) {
-            setTimeout(() => focusable.focus(), 100);
-        }
-    }
-
-    closeModal(overlay) {
-        overlay.setAttribute('hidden', 'true');
-        this.body.style.overflow = '';
-    }
-
-    // ═══════════════════════════════════════════════
-    // 4. UPLOAD ZONE (Drag & Drop)
-    // ═══════════════════════════════════════════════
-    setupUploadZone() {
-        if (!this.dropzone || !this.fileInput) return;
-
-        // Prevent default browser behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            this.dropzone.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        // Highlight dropzone on drag over
-        ['dragenter', 'dragover'].forEach(eventName => {
-            this.dropzone.addEventListener(eventName, () => {
-                this.dropzone.setAttribute('data-state', 'dragover');
-                this.dropzone.style.borderColor = 'var(--color-accent-cyan)';
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            this.dropzone.addEventListener(eventName, () => {
-                this.dropzone.setAttribute('data-state', 'idle');
-                this.dropzone.style.borderColor = '';
-            }, false);
-        });
-
-        // Handle dropped files
-        this.dropzone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            this.handleFiles(files);
-        });
-
-        // Handle clicked files
-        this.fileInput.addEventListener('change', (e) => {
-            this.handleFiles(e.target.files);
-        });
-    }
-
-    handleFiles(files) {
-        if (files.length === 0) return;
-
-        // Ambil file pertama saja untuk demo ini
-        const file = files[0];
-        const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
-
-        // Keamanan: Validasi tipe file di frontend
-        if (!validTypes.includes(file.type) && !file.name.match(/\.(pdf|txt|doc|docx|ppt|pptx)$/i)) {
-            this.showToast('Format file tidak didukung.', 'error');
-            return;
-        }
-
-        this.uploadedFiles = [file];
-
-        // Update UI: Tampilkan nama file di dropzone premium
-        const dropzoneTitle = this.dropzone.querySelector('.dropzone__title--premium');
-        if (dropzoneTitle) {
-            dropzoneTitle.innerHTML = `Memproses: <span class="text--accent-cyan">${file.name}</span>`;
-        }
-
-        // Jalankan upload otomatis
-        this.simulateUploadProcess();
-    }
-
-    simulateUploadProcess() {
-        // Simulasi delay jaringan/AI processing
-        setTimeout(() => {
-            this.showToast('Dokumen berhasil diupload dan diproses!', 'success');
-            this.closeModal(document.getElementById('upload-modal-overlay'));
-
-            // Reset Dropzone state setelah tertutup
-            setTimeout(() => {
-                const dropzoneTitle = this.dropzone.querySelector('.dropzone__title--premium');
-                if (dropzoneTitle) dropzoneTitle.textContent = 'atau seret file Anda';
-                this.uploadedFiles = [];
-            }, 500);
-        }, 2500);
-    }
-
-    // ═══════════════════════════════════════════════
-    // 5. ANIMATED COUNTERS (Stat Cards)
-    // ═══════════════════════════════════════════════
-    animateCounters() {
-        const statValues = document.querySelectorAll('.stat-card__value');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.getAttribute('data-count'));
-                    this.countUp(entry.target, target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        statValues.forEach(stat => observer.observe(stat));
-    }
-
-    countUp(element, target) {
-        const duration = 1500; // 1.5 detik
-        const frameRate = 1000 / 60;
-        const totalFrames = Math.round(duration / frameRate);
-        let frame = 0;
-
-        const isPercentage = element.textContent.includes('%');
-        const isHours = element.textContent.includes('j');
-
-        const counter = setInterval(() => {
-            frame++;
-            const progress = frame / totalFrames;
-            const currentCount = Math.round(target * progress);
-
-            if (isPercentage) {
-                element.textContent = `${currentCount}%`;
-            } else if (isHours) {
-                element.textContent = `${currentCount}j`;
-            } else {
-                element.textContent = currentCount;
-            }
-
-            if (frame === totalFrames) {
-                clearInterval(counter);
-            }
-        }, frameRate);
-    }
-
-    // ═══════════════════════════════════════════════
-    // 6. UTILITIES (Keamanan & Toast)
-    // ═══════════════════════════════════════════════
-    sanitizeHTML(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-
-    showToast(message, type = 'info') {
-        const container = document.getElementById('toast-container');
-        if (!container) return;
-
-        const toast = document.createElement('div');
-        toast.className = `toast toast--${type} fade-in`;
-
-        let icon = 'ℹ️';
-        if (type === 'success') icon = '✅';
-        if (type === 'error') icon = '❌';
-
-        toast.innerHTML = `
-      <span aria-hidden="true">${icon}</span>
-      <p class="toast__message">${this.sanitizeHTML(message)}</p>
-    `;
-
-        container.appendChild(toast);
-
-        // Hapus toast setelah 3 detik
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(10px)';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-}
-
-// Inisialisasi class saat DOM sudah siap
 document.addEventListener('DOMContentLoaded', () => {
-    window.adaptivDashboard = new DashboardController();
+    /* ══════════════════════════════════
+       DRAWER
+    ══════════════════════════════════ */
+    const drawer = document.getElementById('global-drawer');
+    const overlay = document.getElementById('global-drawer-overlay');
+    const toggleBtn = document.getElementById('sidebar-toggle-btn');
+    const closeBtn = document.getElementById('btn-close-drawer');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', () => drawer.classList.contains('open') ? closeDrawer() : openDrawer());
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (overlay) overlay.addEventListener('click', closeDrawer);
+
+    /* ══════════════════════════════════
+       ACCOUNT POPUP
+    ══════════════════════════════════ */
+    const accountBar = document.getElementById('account-bar-btn');
+    const accountPopup = document.getElementById('account-popup');
+
+    if (accountBar) {
+        accountBar.addEventListener('click', (e) => {
+          e.stopPropagation();
+          accountPopup.classList.toggle('hidden');
+        });
+    }
+    document.addEventListener('click', () => {
+        if (accountPopup) accountPopup.classList.add('hidden');
+    });
+
+    /* ══════════════════════════════════
+       UPLOAD MODAL
+    ══════════════════════════════════ */
+    const uploadOverlay = document.getElementById('upload-modal-overlay');
+    const openUploadBtn = document.getElementById('open-upload-btn');
+    const closeUploadBtn = document.getElementById('close-upload-modal');
+
+    if (openUploadBtn) openUploadBtn.addEventListener('click', () => uploadOverlay.classList.add('open'));
+    if (closeUploadBtn) closeUploadBtn.addEventListener('click', () => uploadOverlay.classList.remove('open'));
+    if (uploadOverlay) {
+        uploadOverlay.addEventListener('click', (e) => { 
+            if (e.target === uploadOverlay) uploadOverlay.classList.remove('open'); 
+        });
+    }
+
+    /* ══════════════════════════════════
+       PERFORMANCE BAR CHART
+    ══════════════════════════════════ */
+    const chartData = [
+      { date: '2/5', h: 10.8 },
+      { date: '3/5', h: 8.4 },
+      { date: '4/5', h: 5.6 },
+      { date: '5/5', h: 4.2 },
+      { date: '6/5', h: 2.2 },
+      { date: '7/5', h: 6.5 },
+      { date: '8/5', h: 7.4 },
+      { date: '9/5', h: 5.5 },
+      { date: '10/5', h: 7.1 },
+      { date: '11/5', h: 8.0 },
+      { date: '12/5', h: 8.7 },
+      { date: '13/5', h: 6.3 },
+      { date: '14/5', h: 9.2 },
+      { date: '15/5', h: 6.5 },
+      { date: '16/5', h: 4.0 },
+    ];
+
+    const tooltip = document.getElementById('chart-tooltip');
+    const chartWrap = document.getElementById('chart-wrap');
+
+    function renderChart() {
+      const svg = document.getElementById('perf-chart');
+      if (!svg) return;
+
+      const W = 560, H = 155, padL = 24, padR = 10, padT = 14, padB = 24;
+      const innerW = W - padL - padR;
+      const innerH = H - padT - padB;
+      const maxH = 12;
+      const n = chartData.length;
+      const barW = (innerW / n) * 0.55;
+      const gap = (innerW / n) * 0.45;
+
+      let html = '';
+
+      // Grid lines
+      [0, 3, 6, 9, 12].forEach(v => {
+        const y = padT + innerH - (v / maxH) * innerH;
+        html += `<line class="chart-grid-line" x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}"/>`;
+        if (v > 0) html += `<text class="chart-label" x="${padL - 4}" y="${y + 3.5}" text-anchor="end">${v}</text>`;
+      });
+
+      chartData.forEach((d, i) => {
+        const x = padL + i * (innerW / n) + gap / 2;
+        const barH = (d.h / maxH) * innerH;
+        const y = padT + innerH - barH;
+        const isToday = i === chartData.length - 1;
+        const opacity = isToday ? '1' : '0.72';
+
+        const rectId = `bar-${i}`;
+        html += `<rect class="chart-bar${isToday ? ' today' : ''}" id="${rectId}"
+          x="${x}" y="${y}" width="${barW}" height="${barH}" rx="3" ry="3"
+          opacity="${opacity}"
+          data-date="${d.date}" data-h="${d.h}j"
+          />`;
+
+        if (i % 2 === 0) {
+          html += `<text class="chart-label" x="${x + barW / 2}" y="${H - 6}" text-anchor="middle">${d.date}</text>`;
+        }
+      });
+
+      svg.innerHTML = html;
+
+      // Add event listeners after innerHTML set
+      chartData.forEach((d, i) => {
+          const rect = document.getElementById(`bar-${i}`);
+          if (rect) {
+              rect.addEventListener('mouseenter', (e) => showTooltip(e, d.date, d.h + 'j'));
+              rect.addEventListener('mouseleave', hideTooltip);
+          }
+      });
+    }
+
+    function showTooltip(e, date, val) {
+      if (!tooltip) return;
+      tooltip.textContent = `${date} · ${val}`;
+      tooltip.style.opacity = '1';
+      const rect = chartWrap.getBoundingClientRect();
+      const bar = e.target.getBoundingClientRect();
+      tooltip.style.left = (bar.left - rect.left + bar.width / 2) + 'px';
+      tooltip.style.top = (bar.top - rect.top - 4) + 'px';
+    }
+    function hideTooltip() { if (tooltip) tooltip.style.opacity = '0'; }
+
+    renderChart();
+
+    /* ══════════════════════════════════
+       LEADERBOARD DATA
+    ══════════════════════════════════ */
+    const lbData = [
+      { rank: 1, name: 'RizkyAlfaz', time: '52j 10m', zone: 'up', initials: 'RA', alt: 'alt2' },
+      { rank: 2, name: 'SariWulandari', time: '48j 30m', zone: 'up', initials: 'SW', alt: 'alt3' },
+      { rank: 3, name: 'FaisalHakim', time: '41j 55m', zone: 'up', initials: 'FH', alt: 'alt1' },
+      { rank: 4, name: 'NabilK', time: '30j 45m', zone: 'up', initials: 'NK', alt: '', mine: true },
+      { rank: 5, name: 'AyuPratiwi', time: '29j 20m', zone: 'safe', initials: 'AP', alt: 'alt2' },
+      { rank: 6, name: 'BimaNugraha', time: '24j 10m', zone: 'safe', initials: 'BN', alt: 'alt3' },
+      { rank: 7, name: 'CindySirait', time: '21j 45m', zone: 'safe', initials: 'CS', alt: 'alt1' },
+      { rank: 8, name: 'DewiRahayu', time: '18j 30m', zone: 'down', initials: 'DR', alt: '' },
+      { rank: 9, name: 'EkoSantoso', time: '15j 20m', zone: 'down', initials: 'ES', alt: 'alt2' },
+      { rank: 10, name: 'FitriAndini', time: '12j 05m', zone: 'down', initials: 'FA', alt: 'alt3' },
+    ];
+
+    function renderLeaderboard() {
+      const zoneLabel = { up: '▲ Promosi', safe: '● Aman', down: '▼ Degradasi' };
+      const list = document.getElementById('lb-list');
+      if (!list) return;
+
+      list.innerHTML = lbData.map(d => `
+        <div class="lb-item${d.mine ? ' mine' : ''}">
+          <div class="lb-rank${d.rank <= 3 ? ' top' : ''}">${d.rank <= 3 ? ['🥇', '🥈', '🥉'][d.rank - 1] : d.rank}</div>
+          <div class="lb-avatar ${d.alt}">${d.initials}</div>
+          <div class="lb-name">${d.name}</div>
+          <div class="lb-time">${d.time}</div>
+          <div class="lb-zone lb-zone--${d.zone}">${zoneLabel[d.zone]}</div>
+        </div>
+      `).join('');
+    }
+
+    renderLeaderboard();
+
+    const tabMonthly = document.getElementById('tab-monthly');
+    const tabWeekly = document.getElementById('tab-weekly');
+
+    if (tabMonthly) {
+        tabMonthly.addEventListener('click', () => {
+          tabMonthly.classList.add('active');
+          tabWeekly.classList.remove('active');
+        });
+    }
+    if (tabWeekly) {
+        tabWeekly.addEventListener('click', () => {
+          tabWeekly.classList.add('active');
+          tabMonthly.classList.remove('active');
+        });
+    }
+
+    /* ══════════════════════════════════
+       MONTHLY LEVEL GEMS
+    ══════════════════════════════════ */
+    const gems = ['💜', '💙', '💎', '🩵', '💚', '💛', '🧡', '🔥', '✨', '💫', '○', '○'];
+    const levelGrid = document.getElementById('level-grid');
+    if (levelGrid) {
+        levelGrid.innerHTML = gems.map((g, i) =>
+          g === '○'
+            ? `<div class="level-gem locked" title="Terkunci">🔒</div>`
+            : `<div class="level-gem" title="Level ${i + 1}">${g}</div>`
+        ).join('');
+    }
+
+    /* ══════════════════════════════════
+       STREAK DAYS
+    ══════════════════════════════════ */
+    const streakDays = document.getElementById('streak-days');
+    const days = ['Sn', 'Sl', 'Rb', 'Km', 'Jm', 'Sb', 'Mn'];
+    if (streakDays) {
+        streakDays.innerHTML = days.map((d, i) => {
+          const active = i < 5; // Mon-Fri active
+          return `<div class="streak-day ${active ? 'active' : ''}">
+            <div class="fire">${active ? '🔥' : ''}</div>
+            <div class="num">${d}</div>
+          </div>`;
+        }).join('');
+    }
+
+    /* ══════════════════════════════════
+       WELCOME ANIMATION LOGIC
+    ══════════════════════════════════ */
+    function checkNewUser() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('newuser') === 'true') {
+        const overlay = document.getElementById('welcome-overlay');
+        if (!overlay) return;
+
+        overlay.style.display = 'flex';
+
+        // Trigger reflow for transition
+        setTimeout(() => {
+          overlay.classList.add('show');
+        }, 100);
+
+        // Hide after 4 seconds
+        setTimeout(() => {
+          overlay.classList.remove('show');
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            // Clean up URL without refreshing
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+          }, 1000);
+        }, 4000);
+      }
+    }
+
+    checkNewUser();
 });
