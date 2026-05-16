@@ -79,6 +79,12 @@
   background: var(--accent-subtle);
 }
 
+.logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
 .logo-icon {
   font-size: 20px;
   filter: drop-shadow(0 0 5px var(--accent-glow));
