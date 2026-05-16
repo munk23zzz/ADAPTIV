@@ -37,8 +37,11 @@ class TermsModal {
 
     show() {
         if (this.overlay) {
-            this.overlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; 
+            this.overlay.style.display = 'flex'; // Ensure it's visible
+            setTimeout(() => {
+                this.overlay.classList.add('show');
+                document.body.style.overflow = 'hidden'; 
+            }, 10);
         }
     }
 
@@ -48,9 +51,16 @@ class TermsModal {
             this.overlay.classList.remove('show');
             document.body.style.overflow = '';
             
+            // Clean up display after fade out
+            setTimeout(() => {
+                this.overlay.style.display = 'none';
+            }, 400);
+
             // TRIGGER NEXT IN FLOW: Welcome Overlay
             if (window.adaptivFlowManager) {
-                window.adaptivFlowManager.next('welcome');
+                setTimeout(() => {
+                    window.adaptivFlowManager.next('welcome');
+                }, 400); 
             }
         }
     }

@@ -83,9 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Tombol Skip (Langsung lompat ke dashboard pakai settingan default)
+    // Tombol Skip (Redirect ke dashboard dengan parameter newuser=true)
     btnSkip.addEventListener('click', () => {
-        window.location.href = '../app/dashboard.html';
+        // Sembunyikan UI utama
+        document.getElementById('onboarding-form').style.display = 'none';
+        document.querySelector('.onboarding-header').style.display = 'none';
+        
+        // Tampilkan loading state sebentar biar premium
+        document.getElementById('loading-state').style.display = 'block';
+        
+        setTimeout(() => {
+            window.location.href = '../app/dashboard.html?newuser=true';
+        }, 1500);
     });
 
     // Tombol Submit Form (Langkah Terakhir)
@@ -97,14 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.onboarding-header').style.display = 'none';
         document.getElementById('loading-state').style.display = 'block';
 
-        // Di sini lu bisa kumpulin datanya pakai FormData untuk dikirim ke Backend
-        // const formData = new FormData(e.target);
-        // console.log(Object.fromEntries(formData));
-
         // Simulasi AI memproses profil
         setTimeout(() => {
-            // Setelah analisis selesai, lempar ke dashboard dengan parameter newuser=true
-            // Parameter ini akan memicu animasi welcome di halaman dashboard
             window.location.href = '../app/dashboard.html?newuser=true';
         }, 3000);
     });

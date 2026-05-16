@@ -149,22 +149,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = document.querySelectorAll('.dot');
     
     if (testiGrid && dots.length > 0) {
-        testiGrid.addEventListener('scroll', () => {
-            const index = Math.round(testiGrid.scrollLeft / (testiGrid.offsetWidth / 2));
+        let currentIndex = 0;
+        let autoScrollTimer = null;
+
+        const getCardWidth = () => {
+            const card = testiGrid.querySelector('.testi-card');
+            return card ? card.offsetWidth + 32 : 412; // 380px card + 32px gap
+        };
+
+        const updateDots = (index) => {
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === index);
             });
+        };
+
+        // Scroll listener to sync active dot during manual scrolls
+        testiGrid.addEventListener('scroll', () => {
+            const cardWidth = getCardWidth();
+            // Calculate active index based on scroll position
+            const index = Math.round(testiGrid.scrollLeft / cardWidth);
+            if (index >= 0 && index < dots.length) {
+                currentIndex = index;
+                updateDots(currentIndex);
+            }
         });
 
+        const scrollToCard = (index) => {
+            const cardWidth = getCardWidth();
+            testiGrid.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+        };
+
+        // Manual dot clicks
         dots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const index = parseInt(dot.dataset.index);
-                const cardWidth = testiGrid.querySelector('.testi-card').offsetWidth + 32; // card + gap
-                testiGrid.scrollTo({
-                    left: index * cardWidth,
-                    behavior: 'smooth'
-                });
+                scrollToCard(index);
+                resetAutoScroll(); // Reset timer on user interaction
             });
         });
+
+        // Automatic sliding loop
+        const startAutoScroll = () => {
+            autoScrollTimer = setInterval(() => {
+                currentIndex = (currentIndex + 1) % dots.length;
+                scrollToCard(currentIndex);
+            }, 4000); // Shift every 4 seconds
+        };
+
+        const resetAutoScroll = () => {
+            if (autoScrollTimer) {
+                clearInterval(autoScrollTimer);
+            }
+            startAutoScroll();
+        };
+
+        // Pause auto-scroll on hover/touch interactions to protect readability
+        testiGrid.addEventListener('mouseenter', () => {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+        });
+        testiGrid.addEventListener('mouseleave', () => {
+            startAutoScroll();
+        });
+        testiGrid.addEventListener('touchstart', () => {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+        }, { passive: true });
+        testiGrid.addEventListener('touchend', () => {
+            startAutoScroll();
+        }, { passive: true });
+
+        // Start initial auto scroll
+        startAutoScroll();
     }
 });

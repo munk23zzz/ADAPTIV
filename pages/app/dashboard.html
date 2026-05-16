@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id">
 
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,9 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
 
+  <!-- Theme Initalization Script -->
+  <script src="../../js/core/theme.js"></script>
+
   <!-- Core & Theme Styles -->
   <link rel="stylesheet" href="../../css/base/variables.css">
   <link rel="stylesheet" href="../../css/components/navbar.css">
@@ -19,7 +22,7 @@
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
 </head>
 
-<body data-theme="light">
+<body>
   <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
 
   <div class="app-shell">
@@ -164,82 +167,96 @@
           </div>
 
           <!-- Quick Stats -->
-          <div class="card">
+          <div class="card qs-card-container">
             <div class="card-title">Statistik Kamu</div>
             <div class="quick-stats-grid">
               <div class="qs-item">
-                <div class="qs-icon qs-icon--cyan">📄</div>
-                <div class="qs-val">12</div>
-                <div class="qs-label">Dokumen</div>
-                <div class="qs-trend">+3 minggu ini</div>
+                <div class="qs-badge qs-badge--cyan">
+                  <span class="material-icons-round">description</span>
+                </div>
+                <div class="qs-content">
+                  <div class="qs-val">12</div>
+                  <div class="qs-label">Dokumen</div>
+                  <div class="qs-trend positive">+3 minggu ini</div>
+                </div>
               </div>
               <div class="qs-item">
-                <div class="qs-icon qs-icon--violet">🃏</div>
-                <div class="qs-val">248</div>
-                <div class="qs-label">Kartu Belajar</div>
-                <div class="qs-trend">+47 minggu ini</div>
+                <div class="qs-badge qs-badge--violet">
+                  <span class="material-icons-round">style</span>
+                </div>
+                <div class="qs-content">
+                  <div class="qs-val">248</div>
+                  <div class="qs-label">Kartu Belajar</div>
+                  <div class="qs-trend positive">+47 minggu ini</div>
+                </div>
               </div>
               <div class="qs-item">
-                <div class="qs-icon qs-icon--lime">❓</div>
-                <div class="qs-val">78%</div>
-                <div class="qs-label">Rata-rata Kuis</div>
-                <div class="qs-trend">+5% minggu ini</div>
+                <div class="qs-badge qs-badge--lime">
+                  <span class="material-icons-round">quiz</span>
+                </div>
+                <div class="qs-content">
+                  <div class="qs-val">78%</div>
+                  <div class="qs-label">Rata-rata Kuis</div>
+                  <div class="qs-trend positive">+5% minggu ini</div>
+                </div>
               </div>
               <div class="qs-item">
-                <div class="qs-icon qs-icon--gold">⏱</div>
-                <div class="qs-val">14j</div>
-                <div class="qs-label">Jam Belajar</div>
-                <div class="qs-trend">+2j minggu ini</div>
+                <div class="qs-badge qs-badge--gold">
+                  <span class="material-icons-round">schedule</span>
+                </div>
+                <div class="qs-content">
+                  <div class="qs-val">14j</div>
+                  <div class="qs-label">Jam Belajar</div>
+                  <div class="qs-trend positive">+2j minggu ini</div>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Subject Progress -->
-          <div class="card">
+          <div class="card subject-card">
             <div class="card-title">Progres Mata Pelajaran</div>
-            <div class="subject-row">
-              <div class="subject-hdr">
-                <span class="subject-name">Sistem Operasi</span>
-                <span class="subject-pct">72%</span>
+            <div class="subject-list">
+              <div class="subject-row">
+                <div class="subject-icon">💻</div>
+                <div class="subject-details">
+                  <div class="subject-hdr">
+                    <span class="subject-name">Sistem Operasi</span>
+                    <span class="subject-pct">72%</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill prog-fill--cyan" style="width:72%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="prog-track">
-                <div class="prog-fill prog-fill--cyan" style="width:72%"></div>
+              <div class="subject-row">
+                <div class="subject-icon">🧪</div>
+                <div class="subject-details">
+                  <div class="subject-hdr">
+                    <span class="subject-name">Kimia Organik</span>
+                    <span class="subject-pct">35%</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill prog-fill--violet" style="width:35%"></div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="subject-row">
-              <div class="subject-hdr">
-                <span class="subject-name">Kimia Organik</span>
-                <span class="subject-pct">35%</span>
-              </div>
-              <div class="prog-track">
-                <div class="prog-fill prog-fill--violet" style="width:35%"></div>
-              </div>
-            </div>
-            <div class="subject-row">
-              <div class="subject-hdr">
-                <span class="subject-name">Algoritma &amp; Sorting</span>
-                <span class="subject-pct">89%</span>
-              </div>
-              <div class="prog-track">
-                <div class="prog-fill prog-fill--lime" style="width:89%"></div>
+              <div class="subject-row">
+                <div class="subject-icon">🧬</div>
+                <div class="subject-details">
+                  <div class="subject-hdr">
+                    <span class="subject-name">Algoritma &amp; Sorting</span>
+                    <span class="subject-pct">89%</span>
+                  </div>
+                  <div class="prog-track">
+                    <div class="prog-fill prog-fill--lime" style="width:89%"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Weekly Goal -->
-          <div class="card">
-            <div class="card-title">Target Minggu Ini 🔥</div>
-            <div class="card-subtitle-alt">5 dari 7 hari terpenuhi</div>
-            <div class="day-track">
-              <div class="day-dot done">Sen</div>
-              <div class="day-dot done">Sel</div>
-              <div class="day-dot done">Rab</div>
-              <div class="day-dot done">Kam</div>
-              <div class="day-dot done">Jum</div>
-              <div class="day-dot today">Sab</div>
-              <div class="day-dot">Min</div>
-            </div>
-          </div>
+
 
         </div>
 
@@ -253,11 +270,18 @@
                 <div class="chart-card-title">Performa Belajar</div>
                 <div class="chart-subtitle">Waktu belajar harian (jam)</div>
               </div>
-              <button class="chart-period-btn" id="period-btn">
-                <span class="material-icons-round icon-inline-sm">today</span>
-                Bulan ini
-                <span class="material-icons-round">expand_more</span>
-              </button>
+              <div class="chart-period-selector">
+                <button class="chart-period-btn" id="period-btn">
+                  <span class="material-icons-round icon-inline-sm">today</span>
+                  <span id="period-text">Bulan ini</span>
+                  <span class="material-icons-round">expand_more</span>
+                </button>
+                <div class="chart-period-dropdown" id="period-dropdown">
+                  <button class="period-item" data-period="weekly">Minggu ini</button>
+                  <button class="period-item active" data-period="monthly">Bulan ini</button>
+                  <button class="period-item" data-period="all">Semua waktu</button>
+                </div>
+              </div>
             </div>
 
             <div class="chart-wrap" id="chart-wrap">
@@ -292,20 +316,115 @@
 
           <!-- Monthly Level + Badges -->
           <div class="badges-card-wrap">
-            <div class="card">
+            <div class="card" id="card-level-bulanan" style="cursor: pointer;">
               <div class="card-title">Level Bulanan</div>
               <div class="level-grid" id="level-grid">
                 <!-- filled by JS -->
               </div>
             </div>
-            <div class="card">
+            <div class="card" id="card-lencana" style="cursor: pointer;">
               <div class="card-title">Lencana</div>
               <div class="badge-items">
-                <div class="badge-item" title="7 Hari Beruntun">⏱</div>
-                <div class="badge-item" title="14 Hari Beruntun">⏱</div>
-                <div class="badge-item" title="30 Hari Beruntun">⏱</div>
-                <div class="badge-item" title="Ahli Kuis">❓</div>
-                <div class="badge-item" title="Bangun Pagi">🌅</div>
+                <div class="badge-item m-badge--orange" title="7 Hari Beruntun">
+                  <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                    <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                    <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                    <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                    <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                    <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                    <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                    <circle cx="50" cy="55" r="32" fill="#fff" />
+                    <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                    <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                    <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                    <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                  </svg>
+                </div>
+                <div class="badge-item m-badge--yellow" title="14 Hari Beruntun">
+                  <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                    <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                    <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                    <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                    <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                    <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                    <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                    <circle cx="50" cy="55" r="32" fill="#fff" />
+                    <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                    <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                    <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                    <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                  </svg>
+                </div>
+                <div class="badge-item m-badge--lime" title="30 Hari Beruntun">
+                  <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                    <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                    <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                    <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                    <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                    <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                    <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                    <circle cx="50" cy="55" r="32" fill="#fff" />
+                    <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                    <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                    <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                    <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                  </svg>
+                </div>
+                <div class="badge-item m-badge--green" title="Ahli Kuis">
+                  <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                    <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                    <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                    <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                    <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                    <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                    <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                    <circle cx="50" cy="55" r="32" fill="#fff" />
+                    <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                    <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                    <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                    <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                  </svg>
+                </div>
+                <div class="badge-item m-badge--blue" title="Bangun Pagi">
+                  <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                    <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                    <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                    <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                    <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                    <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                    <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                    <circle cx="50" cy="55" r="32" fill="#fff" />
+                    <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                    <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                    <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                    <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                    <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                  </svg>
+                </div>
                 <div class="badge-more" title="4 lencana lagi">+4</div>
               </div>
             </div>
@@ -320,56 +439,87 @@
               </span>
             </div>
             <div class="streak-card-inner">
-              <div class="streak-main">
-                <div class="streak-fire">🔥</div>
-                <div class="streak-num">40</div>
-                <div class="streak-label">Runtutan Saat Ini</div>
+              <div class="streak-main-wrapper">
+                <div class="streak-circle-progress">
+                  <svg viewBox="0 0 100 100">
+                    <circle class="streak-circle-bg" cx="50" cy="50" r="45"></circle>
+                    <circle class="streak-circle-fill" cx="50" cy="50" r="45" style="stroke-dashoffset: 60;"></circle>
+                  </svg>
+                  <div class="streak-main-content">
+                    <div class="streak-fire-icon">🔥</div>
+                    <div class="streak-num">40</div>
+                    <div class="streak-label">Hari</div>
+                  </div>
+                </div>
               </div>
-              <div class="streak-stat">
-                <div class="streak-stat-val">7</div>
-                <div class="streak-stat-label">Minggu Ini</div>
+              <div class="streak-side-stats">
+                <div class="streak-mini-card">
+                  <div class="streak-stat-val">7</div>
+                  <div class="streak-stat-label">Minggu Ini</div>
+                </div>
+                <div class="streak-mini-card">
+                  <div class="streak-stat-val">40</div>
+                  <div class="streak-stat-label">Terbaik</div>
+                </div>
               </div>
-              <div class="streak-stat">
-                <div class="streak-stat-val">40</div>
-                <div class="streak-stat-label">Runtutan Terpanjang</div>
+              <div class="streak-days-container">
+                <div class="streak-days-grid" id="streak-days">
+                  <!-- filled by JS -->
+                </div>
               </div>
-              <div class="streak-days-grid" id="streak-days">
-                <!-- filled by JS -->
+            </div>
+          </div>
+          <!-- Continue Session -->
+          <div class="card resume-card">
+            <div class="resume-header">
+              <div class="resume-badge">
+                <span class="material-icons-round">play_arrow</span>
+              </div>
+              <div class="resume-info">
+                <div class="resume-label">Lanjutkan Sesi</div>
+                <div class="resume-title">Kartu Belajar — Sistem Operasi</div>
+              </div>
+              <a href="flashcard.html" class="resume-btn-mini" aria-label="Lanjutkan">
+                <span class="material-icons-round">arrow_forward</span>
+              </a>
+            </div>
+            <div class="resume-progress-wrap">
+              <div class="resume-progress-bar">
+                <div class="resume-progress-fill" style="width: 48%"></div>
+              </div>
+              <div class="resume-progress-stats">
+                <span>Kartu 23 dari 47</span>
+                <span>48%</span>
               </div>
             </div>
           </div>
 
-          <!-- Recommendations -->
-          <div class="card">
-            <div class="card-title">Rekomendasi ADAPTIV ✨</div>
-            <div class="reco-list">
-              <a href="flashcard.html?doc=doc-002" class="reco-item">
-                <div class="reco-icon">⚠️</div>
-                <div>
-                  <div class="reco-text-title">Review Kimia Organik</div>
-                  <div class="reco-text-desc">Belum belajar 3 hari — spaced repetition menyarankan review sekarang</div>
-                </div>
-                <div class="reco-arrow">→</div>
-              </a>
-              <a href="podcast.html?doc=doc-001" class="reco-item">
-                <div class="reco-icon">💡</div>
-                <div>
-                  <div class="reco-text-title">Coba Mode Podcast</div>
-                  <div class="reco-text-desc">Gaya belajarmu cenderung Auditori — konversi Modul SisOp ke podcast</div>
-                </div>
-                <div class="reco-arrow">→</div>
-              </a>
-              <a href="flashcard.html?doc=doc-003" class="reco-item">
-                <div class="reco-icon">🏆</div>
-                <div>
-                  <div class="reco-text-title">Hampir Master Algoritma!</div>
-                  <div class="reco-text-desc">89% tercapai — selesaikan 5 kartu untuk unlock badge "Algorithm Master"
+          <!-- Upload Quick Action -->
+          <div class="card upload-quick-card">
+            <div class="upload-quick-bg"></div>
+            <div class="upload-quick-content">
+              <div class="upload-quick-main">
+                <div class="upload-quick-icon-wrap">
+                  <div class="upload-quick-icon">
+                    <span class="material-icons-round">cloud_upload</span>
                   </div>
+                  <!-- Floating decorative icons -->
+                  <div class="float-icon fi-1">📄</div>
+                  <div class="float-icon fi-2">📊</div>
+                  <div class="float-icon fi-3">💡</div>
                 </div>
-                <div class="reco-arrow">→</div>
-              </a>
+                <div class="upload-quick-text">
+                  <h3 class="upload-quick-title">Upload Materi Baru</h3>
+                  <p class="upload-quick-desc">PDF, PPT, atau DOCX. AI akan merangkumnya untukmu.</p>
+                </div>
+              </div>
+              <button id="open-upload-btn" class="btn-upload-premium">
+                <span>Mulai Belajar</span>
+                <span class="material-icons-round">chevron_right</span>
+              </button>
             </div>
           </div>
+
 
         </div>
 
@@ -377,16 +527,24 @@
         <div class="col-right">
 
           <!-- My Rank Banner -->
-          <div class="card">
-            <div class="my-rank-banner">
-              <div class="my-rank-left">
-                <div class="my-rank-label">Peringkat Kamu</div>
-                <div class="my-rank-val">#4</div>
-                <div class="my-rank-zone">▲ Zona Promosi</div>
+          <div class="card my-rank-card">
+            <div class="my-rank-banner" id="my-rank-banner">
+              <div class="my-rank-info">
+                <div class="my-rank-badge">🏆</div>
+                <div>
+                  <div class="my-rank-label" id="my-rank-period-label">Peringkat Mingguan</div>
+                  <div class="my-rank-val" id="my-rank-val">#4</div>
+                </div>
               </div>
-              <div class="my-rank-right">
-                <div class="my-rank-time-label">Waktu Belajar</div>
-                <div class="my-rank-time">30j 45m</div>
+              <div class="my-rank-stats">
+                <div class="my-rank-stat">
+                  <div class="my-rank-stat-label">Status</div>
+                  <div class="my-rank-zone zone--up" id="my-rank-zone">▲ Promosi</div>
+                </div>
+                <div class="my-rank-stat">
+                  <div class="my-rank-stat-label">Waktu</div>
+                  <div class="my-rank-time" id="my-rank-time">10j 30m</div>
+                </div>
               </div>
             </div>
           </div>
@@ -397,11 +555,11 @@
               <div class="league-name">Liga Obsidian</div>
               <div class="league-gem">💎</div>
             </div>
-            <div class="league-reset">Reset dalam 14 hari</div>
+            <div class="league-reset" id="league-reset-timer">Reset dalam 14 hari</div>
 
             <div class="lb-tabs">
-              <button class="lb-tab active" id="tab-monthly">Bulanan</button>
-              <button class="lb-tab" id="tab-weekly">Mingguan</button>
+              <button class="lb-tab active" id="tab-weekly">Mingguan</button>
+              <button class="lb-tab" id="tab-monthly">Bulanan</button>
             </div>
 
             <div class="lb-list" id="lb-list">
@@ -413,30 +571,7 @@
             </div>
           </div>
 
-          <!-- Continue Session -->
-          <div class="card">
-            <div class="card-title">Lanjutkan Sesi</div>
-            <div class="session-resume-item">
-              <div class="session-resume-icon">🃏</div>
-              <div class="session-resume-text">
-                <div class="session-resume-title">Kartu Belajar — Sistem Operasi</div>
-                <div class="session-resume-desc">Kartu 23 dari 47</div>
-              </div>
-              <a href="flashcard.html" class="btn-resume">
-                Lanjutkan
-              </a>
-            </div>
-          </div>
 
-          <!-- Upload Quick Action -->
-          <div class="card upload-card-quick">
-            <div class="upload-card-icon">📤</div>
-            <div class="upload-card-title">Upload Dokumen Baru</div>
-            <div class="upload-card-subtitle">PDF, PPT, DOCX, dan lainnya</div>
-            <button id="open-upload-btn" class="btn-upload-full">
-              + Upload Sekarang
-            </button>
-          </div>
 
         </div>
       </div>
@@ -446,29 +581,49 @@
 
   <div class="toast-container" id="toast-container" role="region" aria-live="polite"></div>
 
-
-
-
-
-
-
-
-  <!-- Welcome Overlay (iPhone Style) -->
-  <div id="welcome-overlay" class="welcome-overlay">
-    <div class="welcome-content">
-      <h1 class="welcome-text">Selamat datang, <span id="user-display-name">Nabil</span> 👋</h1>
-      <p class="welcome-subtext">AI telah menyesuaikan profil belajarmu. Mari jelajahi pengalaman belajar baru di
-        ADAPTIV.</p>
+  <!-- ════════════ UPLOAD MODAL (adopted from doc 1) ════════════ -->
+  <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true"
+    aria-labelledby="upload-modal-title">
+    <div class="modal">
+      <button class="modal__close-btn" id="close-upload-modal" aria-label="Tutup modal upload">
+        <span class="material-icons-round">close</span>
+      </button>
+      <div class="modal__header">
+        <h2 class="modal__title" id="upload-modal-title">Upload Dokumen Baru</h2>
+      </div>
+      <div class="modal__body">
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">📁</div>
+          <div class="dropzone-title">Seret file ke sini atau klik untuk pilih</div>
+          <div class="dropzone-hint">PDF, PPT, PPTX, DOC, DOCX, TXT didukung</div>
+        </div>
+        <div class="pill-btns">
+          <button class="pill-btn" id="pill-upload-file">
+            <span class="material-icons-round">upload</span> Upload Files
+          </button>
+          <button class="pill-btn">
+            <span class="material-icons-round">link</span> Websites
+          </button>
+          <button class="pill-btn">
+            <span class="material-icons-round">add_to_drive</span> Drive
+          </button>
+          <button class="pill-btn">
+            <span class="material-icons-round">content_paste</span> Teks
+          </button>
+        </div>
+        <input type="file" id="file-input" class="sr-only" multiple
+          accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
+      </div>
     </div>
   </div>
 
   <!-- Terms of Agreement Modal -->
-  <div class="terms-overlay" id="terms-overlay">
+  <div class="terms-overlay" id="terms-overlay" style="display: none;">
     <div class="terms-card">
       <div class="terms-header">
         <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV" class="logo-img logo-dark">
         <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV" class="logo-img logo-light">
-        <h2>Syarat & Ketentuan</h2>
+        <h2>Syarat &amp; Ketentuan</h2>
       </div>
 
       <div class="terms-body">
@@ -482,7 +637,7 @@
         </div>
 
         <div class="terms-section">
-          <h3>Kebijakan Privasi & Penggunaan Data AI</h3>
+          <h3>Kebijakan Privasi &amp; Penggunaan Data AI</h3>
           <p><strong>Privasi Data Pengguna:</strong> ADAPTIV berkomitmen untuk menjaga keamanan dan kerahasiaan seluruh
             data pengguna. Dokumen, catatan, file, maupun percakapan yang diunggah ke dalam sistem hanya digunakan untuk
             mendukung pengalaman belajar pengguna di dalam aplikasi.</p>
@@ -495,7 +650,7 @@
         </div>
 
         <div class="terms-section">
-          <h3>Hak Cipta & Tanggung Jawab Pengguna</h3>
+          <h3>Hak Cipta &amp; Tanggung Jawab Pengguna</h3>
           <p><strong>Kepemilikan Konten:</strong> Pengguna bertanggung jawab penuh atas seluruh dokumen, gambar, maupun
             materi yang diunggah ke dalam aplikasi. Pengguna dilarang mengunggah konten yang melanggar hak cipta, hak
             kekayaan intelektual, atau hukum yang berlaku.</p>
@@ -521,7 +676,7 @@
         <div class="terms-section">
           <h3>Pembaruan Layanan</h3>
           <p>ADAPTIV dapat memperbarui fitur, kebijakan, maupun syarat penggunaan sewaktu-waktu untuk meningkatkan
-            kualitas layanan dan keamanan pengguna. Pengguna disarankan untuk meninjau Terms of Agreement secara
+            quality layanan dan keamanan pengguna. Pengguna disarankan untuk meninjau Terms of Agreement secara
             berkala.</p>
         </div>
       </div>
@@ -538,8 +693,414 @@
     </div>
   </div>
 
+  <!-- Welcome Overlay (iPhone Style) -->
+  <div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-content">
+      <h1 class="welcome-text">Selamat datang, <span id="user-display-name">Nabil</span> 👋</h1>
+      <p class="welcome-subtext">AI telah menyesuaikan profil belajarmu. Mari jelajahi pengalaman belajar baru di
+        ADAPTIV.</p>
+    </div>
+  </div>
+
+  <!-- ════════════ LENCANA (BADGES) MODAL ════════════ -->
+  <div class="modal-overlay" id="badges-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="badges-modal-title">
+    <div class="modal modal--dashboard">
+      <button class="modal__close-btn" id="close-badges-modal" aria-label="Tutup modal lencana">
+        <span class="material-icons-round">close</span>
+      </button>
+      <div class="modal__header">
+        <h2 class="modal__title" id="badges-modal-title">
+          <span class="material-icons-round modal-title-icon">info</span> Lencana
+        </h2>
+      </div>
+      <div class="modal__body modal__body--scroll">
+        <div class="modal-section">
+          <h3>Cara kerjanya</h3>
+          <p>Meskipun peran belajar Anda di-reset di setiap akhir bulan, lencana akan tetap tersimpan selamanya. Semakin banyak Anda belajar, semakin banyak lencana yang akan Anda kumpulkan - dan akan ada beberapa kejutan di sepanjang jalan.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Lencana saya</h3>
+          <div class="modal-badge-grid">
+            <div class="m-badge m-badge--pink" title="7 Hari Beruntun">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--purple" title="14 Hari Beruntun">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--blue" title="30 Hari Beruntun">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--cyan" title="60 Hari Beruntun">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--teal" title="90 Hari Beruntun">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--green" title="Ahli Kuis">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--lime" title="Bangun Pagi">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--yellow" title="Belajar Malam">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--orange" title="Kutu Buku">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--locked" title="Terkunci">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--locked" title="Terkunci">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--locked" title="Terkunci">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+            <div class="m-badge m-badge--locked" title="Terkunci">
+              <span class="m-badge-icon">
+                <svg viewBox="0 0 100 100" class="cat-clock-svg" width="24" height="24" style="display:block;">
+                  <polygon points="25,30 35,5 48,25" fill="#fff" stroke="none" />
+                  <polygon points="75,30 65,5 52,25" fill="#fff" stroke="none" />
+                  <polygon points="28,26 35,9 43,22" fill="#FFA3A3" stroke="none" />
+                  <polygon points="72,26 65,9 57,22" fill="#FFA3A3" stroke="none" />
+                  <ellipse cx="35" cy="92" rx="10" ry="6" fill="#fff" />
+                  <ellipse cx="65" cy="92" rx="10" ry="6" fill="#fff" />
+                  <circle cx="50" cy="55" r="32" fill="#fff" />
+                  <circle cx="50" cy="55" r="26" fill="#FFF5F5" />
+                  <circle cx="36" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="64" cy="58" r="3" fill="#FFA3A3" opacity="0.8" />
+                  <circle cx="42" cy="50" r="2" fill="#5F6368" />
+                  <circle cx="58" cy="50" r="2" fill="#5F6368" />
+                  <path d="M 46,55 Q 50,58 54,55" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M 50,55 L 50,40" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <path d="M 50,55 L 62,47" fill="none" stroke="#E8534A" stroke-width="2.5" stroke-linecap="round" />
+                  <circle cx="50" cy="55" r="3.5" fill="#E8534A" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions-center">
+          <button class="btn btn-got-it" id="btn-badges-got-it">Mengerti</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ LEVEL BELAJAR BULANAN MODAL ════════════ -->
+  <div class="modal-overlay" id="level-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="level-modal-title">
+    <div class="modal modal--dashboard">
+      <button class="modal__close-btn" id="close-level-modal" aria-label="Tutup modal level">
+        <span class="material-icons-round">close</span>
+      </button>
+      <div class="modal__header">
+        <h2 class="modal__title" id="level-modal-title">
+          <span class="material-icons-round modal-title-icon">info</span> Level belajar bulanan
+        </h2>
+      </div>
+      <div class="modal__body modal__body--scroll">
+        <div class="modal-section">
+          <h3>Cara kerjanya</h3>
+          <p>Setelah 10 menit bergabung dengan sesi belajar pertama Anda, Anda akan mulai mengumpulkan permata dan meningkatkan level belajar bulanan Anda. Anda juga dapat membandingkan pencapaian Anda dengan teman-teman Anda di papan peringkat. Untuk mendorong Anda menjaga keseimbangan yang sehat, kami berhenti menghitung jam belajar Anda setelah 8 jam setiap harinya.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Peran &amp; Permata</h3>
+          <div class="modal-roles-grid">
+            <div class="role-column">
+              <div class="role-item" style="color: #A78BFA;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 22,12 12,22 2,12" fill="#A78BFA" stroke="#fff" stroke-width="1.5"/><polygon points="12,6 18,12 12,18 6,12" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.7"/></svg></span>
+                <span class="role-name-text">Anggota (0-10m)</span>
+              </div>
+              <div class="role-item" style="color: #818CF8;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 22,9 18,21 6,21 2,9" fill="#818CF8" stroke="#fff" stroke-width="1.5"/><line x1="12" y1="2" x2="12" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="22" y1="9" x2="12" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="18" y1="21" x2="12" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="6" y1="21" x2="12" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="2" y1="9" x2="12" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></span>
+                <span class="role-name-text">Pemula (10m-60m)</span>
+              </div>
+              <div class="role-item" style="color: #3B82F6;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 21,7 21,17 12,22 3,17 3,7" fill="#3B82F6" stroke="#fff" stroke-width="1.5"/><polygon points="12,6 17,9 17,15 12,18 7,15 7,9" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.6"/><line x1="12" y1="2" x2="12" y2="6" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="21" y1="7" x2="17" y2="9" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="21" y1="17" x2="17" y2="15" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="12" y1="22" x2="12" y2="18" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="3" y1="17" x2="7" y2="15" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="3" y1="7" x2="7" y2="9" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></span>
+                <span class="role-name-text">Pembelajar (1-3j)</span>
+              </div>
+              <div class="role-item" style="color: #60A5FA;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 19,5 22,12 19,19 12,22 5,19 2,12 5,5" fill="#60A5FA" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.6"/><line x1="12" y1="2" x2="12" y2="7" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="22" y1="12" x2="17" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="12" y1="22" x2="12" y2="17" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="2" y1="12" x2="7" y2="12" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></span>
+                <span class="role-name-text">Menengah (3-6j)</span>
+              </div>
+              <div class="role-item" style="color: #22D3EE;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 20,4 22,11 17,20 7,20 2,11 4,4" fill="#22D3EE" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="11" r="4" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.6"/><line x1="12" y1="2" x2="12" y2="7" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="20" y1="4" x2="15" y2="9" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="22" y1="11" x2="16" y2="11" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="17" y1="20" x2="14" y2="15" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="7" y1="20" x2="10" y2="15" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="2" y1="11" x2="8" y2="11" stroke="#fff" stroke-width="1" opacity="0.6"/><line x1="4" y1="4" x2="9" y2="9" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></span>
+                <span class="role-name-text">Cakap (6-10j)</span>
+              </div>
+              <div class="role-item" style="color: #34D399;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="#34D399" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.6"/><line x1="12" y1="2" x2="12" y2="22" stroke="#fff" stroke-width="1" opacity="0.5"/><line x1="2" y1="12" x2="22" y2="12" stroke="#fff" stroke-width="1" opacity="0.5"/><line x1="5" y1="5" x2="19" y2="19" stroke="#fff" stroke-width="1" opacity="0.5"/><line x1="5" y1="19" x2="19" y2="5" stroke="#fff" stroke-width="1" opacity="0.5"/></svg></span>
+                <span class="role-name-text">Mahir (10-20j)</span>
+              </div>
+            </div>
+            <div class="role-column">
+              <div class="role-item" style="color: #FBBF24;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="#FBBF24" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.6"/><polygon points="12,5 14,10 19,12 14,14 12,19 10,14 5,12 10,10" fill="none" stroke="#fff" stroke-width="1" opacity="0.7"/></svg></span>
+                <span class="role-name-text">Ahli (20-40j)</span>
+              </div>
+              <div class="role-item" style="color: #F97316;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 15,6 20,6 18,10 22,13 18,16 20,20 15,20 12,24 9,20 4,20 6,16 2,13 6,10 4,6 9,6" fill="#F97316" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="13" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.7"/></svg></span>
+                <span class="role-name-text">Siswa A+ (40-60j)</span>
+              </div>
+              <div class="role-item" style="color: #EF4444;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,2 16,8 22,9 17,14 18,20 12,17 6,20 7,14 2,9 8,8" fill="#EF4444" stroke="#fff" stroke-width="1.5"/><polygon points="12,6 14,10 18,10 15,13 16,17 12,15 8,17 9,13 6,10 10,10" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.6"/></svg></span>
+                <span class="role-name-text">Master (60-80j)</span>
+              </div>
+              <div class="role-item" style="color: #EC4899;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><polygon points="12,4 16,10 22,11 17,16 18,22 12,19 6,22 7,16 2,11 8,10" fill="#EC4899" stroke="#fff" stroke-width="1.5"/><polygon points="12,0 15,3 12,6 9,3" fill="#EC4899" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="14" r="3" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.7"/></svg></span>
+                <span class="role-name-text">Grandmaster (80-140j)</span>
+              </div>
+              <div class="role-item" style="color: #F43F5E;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="none" stroke="#F43F5E" stroke-width="2.5"/></svg></span>
+                <span class="role-name-text">Mesin Belajar (140-200j)</span>
+              </div>
+              <div class="role-item" style="color: #B91C1C;">
+                <span class="role-gem"><svg viewBox="0 0 24 24" width="20" height="20" style="display:inline-block;vertical-align:middle;"><circle cx="12" cy="12" r="10" fill="none" stroke="#B91C1C" stroke-width="2.5"/></svg></span>
+                <span class="role-name-text">Master Belajar (200+j)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Reset setiap bulan</h3>
+          <p>Setiap orang berhak mendapatkan awal yang baru, jadi kami mereset peran, permata, dan papan peringkat di setiap akhir bulan. Namun, Anda tetap dapat melihat dan dengan bangga memamerkan pencapaian masa lalu Anda karena pencapaian tersebut akan terus ditampilkan di profil Anda. Waktu mingguan di-reset setiap hari Senin pukul 17.00 UTC, sedangkan waktu bulanan dan peran di-reset pada akhir bulan.</p>
+        </div>
+        <div class="modal-actions-center">
+          <button class="btn btn-got-it" id="btn-level-got-it">Mengerti</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Core & Page Scripts -->
-  <script src="../../js/core/theme.js"></script>
   <script src="../../js/pages/dashboard.js"></script>
   <script src="../../js/components/terms-modal.js"></script>
   <script src="../../js/core/flow-manager.js"></script>

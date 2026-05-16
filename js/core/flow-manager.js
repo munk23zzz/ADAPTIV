@@ -42,16 +42,30 @@ class FlowManager {
         const overlay = document.getElementById('welcome-overlay');
         if (!overlay) return;
 
+        // Start animation
         overlay.style.display = 'flex';
+        overlay.style.pointerEvents = 'auto';
+        document.body.style.overflow = 'hidden'; // Lock during greeting
+
         setTimeout(() => overlay.classList.add('show'), 100);
 
-        // Auto-hide welcome after 3 seconds
+        // Auto-hide and cleanup after 3 seconds
         setTimeout(() => {
             overlay.classList.remove('show');
+            
+            // Wait for transition to finish
             setTimeout(() => {
                 overlay.style.display = 'none';
+                overlay.style.pointerEvents = 'none';
+                document.body.style.overflow = ''; // Explicitly unlock
+                
                 console.log("ADAPTIV Flow: Flow Complete");
-            }, 800);
+                
+                // Redirect if we are on the onboarding page
+                if (window.location.pathname.includes('onboarding.html')) {
+                    window.location.href = '../app/dashboard.html';
+                }
+            }, 1000);
         }, 3000);
     }
 }

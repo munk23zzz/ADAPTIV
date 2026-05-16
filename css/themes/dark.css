@@ -54,6 +54,7 @@
 
     /* ── LEGACY MAPPING (For Dashboard compatibility) ── */
     --accent: var(--accent-primary);
+    --accent-light: var(--accent-subtle);
     --bg: var(--bg-base);
     --bg-card: var(--bg-surface);
     --cyan: var(--accent-primary);

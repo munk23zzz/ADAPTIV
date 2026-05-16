@@ -7,23 +7,35 @@ const ThemeManager = {
     storageKey: 'edumentor-theme',
 
     init() {
+        // 1. Get saved theme or default to 'dark'
         const savedTheme = localStorage.getItem(this.storageKey) || 'dark';
+        
+        // 2. Apply theme immediately to documentElement
         this.apply(savedTheme);
 
-        // Sync across tabs
+        // 3. Sync across tabs/windows
         window.addEventListener('storage', (e) => {
-            if (e.key === this.storageKey) {
+            if (e.key === this.storageKey && e.newValue) {
                 this.apply(e.newValue);
             }
         });
 
-        // Initialize any theme toggles on the page
-        document.addEventListener('DOMContentLoaded', () => {
-            this.updateToggleIcons();
-            
-            const themeBtn = document.getElementById('btn-theme');
+        // 4. Set up UI listeners once DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setupUI());
+        } else {
+            this.setupUI();
+        }
+    },
+
+    setupUI() {
+        this.updateToggleIcons();
+        
+        // Use event delegation for theme toggles to handle dynamic content
+        document.addEventListener('click', (e) => {
+            const themeBtn = e.target.closest('#btn-theme');
             if (themeBtn) {
-                themeBtn.addEventListener('click', () => this.toggle());
+                this.toggle();
             }
         });
     },
@@ -36,7 +48,12 @@ const ThemeManager = {
     },
 
     apply(theme) {
+        if (!theme) return;
+        
+        // Apply to <html> tag
         document.documentElement.setAttribute('data-theme', theme);
+        
+        // Update icons if DOM is ready
         this.updateToggleIcons();
         
         // Trigger custom event for components that need to re-render
@@ -47,10 +64,11 @@ const ThemeManager = {
         const themeIcon = document.getElementById('theme-icon');
         if (themeIcon) {
             const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            // Invert the icon: if dark mode, show light_mode icon (to switch to light)
             themeIcon.textContent = current === 'dark' ? 'light_mode' : 'dark_mode';
         }
     }
 };
 
-// Initialize immediately to prevent flash of unstyled content (FOUC)
+// Initialize immediately
 ThemeManager.init();

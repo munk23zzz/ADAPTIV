@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/components/terms-modal.css">
     <link rel="stylesheet" href="../../css/pages/onboarding.css">
-    <script src="../../js/core/theme.js" defer></script>
+    <!-- Inline style for welcome overlay since it's usually in dashboard.css -->
+    <style>
+        .welcome-overlay {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(0, 0, 0, 0.2); 
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            display: none; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        [data-theme="dark"] .welcome-overlay { background: rgba(12, 17, 23, 0.3); }
+        .welcome-overlay.show { opacity: 1; visibility: visible; }
+        .welcome-content { 
+            text-align: center; 
+            max-width: 600px; 
+            padding: 40px; 
+            transform: scale(0.95) translateY(20px) translateZ(0); 
+            -webkit-font-smoothing: antialiased;
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); 
+        }
+        .welcome-overlay.show .welcome-content { transform: scale(1) translateY(0); }
+        .welcome-text {
+            font-family: var(--font-display); font-size: 2.8rem; font-weight: 800;
+            margin-bottom: 16px; background: linear-gradient(135deg, var(--accent-primary) 0%, var(--violet) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px;
+        }
+        .welcome-subtext {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+    </style>
+    <script src="../../js/core/theme.js"></script>
 </head>
 
 <body>
