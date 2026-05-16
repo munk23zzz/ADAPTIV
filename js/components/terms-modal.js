@@ -16,15 +16,6 @@ class TermsModal {
     init() {
         if (!this.overlay) return;
 
-        // Check if user already agreed
-        const hasAgreed = localStorage.getItem(this.storageKey);
-        
-        // For development/demo purposes, we might want to show it after onboarding
-        // We'll trigger it if it's the first time
-        if (!hasAgreed) {
-            this.show();
-        }
-
         // Listen for checkbox changes
         if (this.checkbox) {
             this.checkbox.addEventListener('change', () => {
@@ -45,11 +36,10 @@ class TermsModal {
     }
 
     show() {
-        // Wait a bit after page load or onboarding
-        setTimeout(() => {
+        if (this.overlay) {
             this.overlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }, 1000);
+            document.body.style.overflow = 'hidden'; 
+        }
     }
 
     handleAgree() {
@@ -58,8 +48,10 @@ class TermsModal {
             this.overlay.classList.remove('show');
             document.body.style.overflow = '';
             
-            // Trigger welcome toast or something else
-            console.log('ADAPTIV: Terms Agreed');
+            // TRIGGER NEXT IN FLOW: Welcome Overlay
+            if (window.adaptivFlowManager) {
+                window.adaptivFlowManager.next('welcome');
+            }
         }
     }
 }

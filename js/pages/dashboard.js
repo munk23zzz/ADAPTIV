@@ -227,31 +227,5 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ══════════════════════════════════
        WELCOME ANIMATION LOGIC
     ══════════════════════════════════ */
-    function checkNewUser() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('newuser') === 'true') {
-        const overlay = document.getElementById('welcome-overlay');
-        if (!overlay) return;
-
-        overlay.style.display = 'flex';
-
-        // Trigger reflow for transition
-        setTimeout(() => {
-          overlay.classList.add('show');
-        }, 100);
-
-        // Hide after 4 seconds
-        setTimeout(() => {
-          overlay.classList.remove('show');
-          setTimeout(() => {
-            overlay.style.display = 'none';
-            // Clean up URL without refreshing
-            const newUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, newUrl);
-          }, 1000);
-        }, 4000);
-      }
-    }
-
-    checkNewUser();
+    // Flow orchestration is now handled by js/core/flow-manager.js
 });
