@@ -1742,6 +1742,63 @@
     .col-right {
       animation: fadeUp .4s .16s ease both;
     }
+
+    /* ══════════════════════════════════
+       WELCOME OVERLAY (iPhone Style)
+    ══════════════════════════════════ */
+    .welcome-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(255, 255, 255, 0.01);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s;
+    }
+
+    [data-theme="dark"] .welcome-overlay {
+      background: rgba(12, 17, 23, 0.3);
+    }
+
+    .welcome-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .welcome-content {
+      text-align: center;
+      max-width: 600px;
+      padding: 40px;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .welcome-overlay.show .welcome-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .welcome-text {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--violet) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -1px;
+    }
+
+    .welcome-subtext {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -2199,6 +2256,14 @@
 
   <div class="toast-container" id="toast-container" role="region" aria-live="polite"></div>
 
+  <!-- Welcome Overlay (iPhone Style) -->
+  <div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-content">
+      <h1 class="welcome-text">Selamat datang, <span id="user-display-name">Nabil</span> 👋</h1>
+      <p class="welcome-subtext">AI telah menyesuaikan profil belajarmu. Mari jelajahi pengalaman belajar baru di ADAPTIV.</p>
+    </div>
+  </div>
+
   <script>
     /* ══════════════════════════════════
        THEME TOGGLE
@@ -2401,6 +2466,35 @@
         <div class="num">${d}</div>
       </div>`;
     }).join('');
+
+    /* ══════════════════════════════════
+       WELCOME ANIMATION LOGIC
+    ══════════════════════════════════ */
+    function checkNewUser() {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('newuser') === 'true') {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.style.display = 'flex';
+        
+        // Trigger reflow for transition
+        setTimeout(() => {
+          overlay.classList.add('show');
+        }, 100);
+
+        // Hide after 4 seconds
+        setTimeout(() => {
+          overlay.classList.remove('show');
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            // Clean up URL without refreshing
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+          }, 1000);
+        }, 4000);
+      }
+    }
+
+    window.addEventListener('load', checkNewUser);
   </script>
 </body>
 

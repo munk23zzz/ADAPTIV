@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return `
                 <article class="folder-card" data-folder-id="${folder.id}" tabindex="0" role="button" aria-label="Buka folder ${folder.name}">
                     <div class="folder-card__icon-area" style="background: linear-gradient(135deg, ${folder.color}15, transparent);">
-                        <span class="material-icons-round" style="position: absolute; font-size: 80px; color: ${folder.color}; opacity: 0.8; filter: drop-shadow(0 2px 8px ${folder.color}40);">folder</span>
-                        <div style="position: relative; z-index: 2; margin-top: 6px; font-size: 22px;">${iconContent}</div>
+                        <span class="material-icons-round" style="position: absolute; font-size: 72px; color: ${folder.color}; opacity: 0.75; filter: drop-shadow(0 4px 12px ${folder.color}30);">folder</span>
+                        <div style="position: relative; z-index: 2; margin-top: 10px; font-size: 22px;">${iconContent}</div>
                     </div>
                     <div class="folder-card__body">
                         <h3 class="folder-card__name">${folder.name}</h3>

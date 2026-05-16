@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnSkip = document.getElementById('btn-skip');
     const progressFill = document.getElementById('progress-fill');
     const currentStepText = document.getElementById('current-step');
-    const toolsCheckboxes = document.querySelectorAll('input[name="tools"]');
-    const toolsError = document.getElementById('tools-error');
+
 
     let currentStep = 1;
     const totalSteps = steps.length;
@@ -46,18 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function validateCurrentStep() {
         const currentActiveCard = document.querySelector(`.step-card[data-step="${currentStep}"]`);
 
-        if (currentStep === 7) {
-            // Logika khusus step 7 (Checkbox max 3)
-            const checkedCount = document.querySelectorAll('input[name="tools"]:checked').length;
-            btnSubmit.disabled = checkedCount === 0 || checkedCount > 3;
-            toolsError.style.display = checkedCount > 3 ? 'block' : 'none';
+        // Logika Radio button biasa untuk semua step
+        const radioGroup = currentActiveCard.querySelectorAll('input[type="radio"]');
+        let isChecked = false;
+        radioGroup.forEach(radio => {
+            if (radio.checked) isChecked = true;
+        });
+
+        if (currentStep === totalSteps) {
+            btnSubmit.disabled = !isChecked;
         } else {
-            // Logika Radio button biasa
-            const radioGroup = currentActiveCard.querySelectorAll('input[type="radio"]');
-            let isChecked = false;
-            radioGroup.forEach(radio => {
-                if (radio.checked) isChecked = true;
-            });
             btnNext.disabled = !isChecked;
         }
     }
@@ -69,10 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Event Listener khusus Checkbox di Step 7
-    toolsCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', validateCurrentStep);
-    });
+
 
     // Tombol Navigasi
     btnNext.addEventListener('click', () => {
