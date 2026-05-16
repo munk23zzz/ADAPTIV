@@ -6,26 +6,27 @@
 class FlowManager {
     constructor() {
         this.urlParams = new URLSearchParams(window.location.search);
-        this.isNewUser = this.urlParams.get('newuser') === 'true';
+        this.isDashboard = window.location.pathname.includes('dashboard.html');
+        this.isOnboardingPage = window.location.pathname.includes('onboarding.html');
         this.init();
     }
 
     init() {
-        if (this.isNewUser) {
-            // Clean up URL immediately to prevent re-triggering on refresh
-            const newUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, newUrl);
-            
-            // Start the flow
-            this.start();
+        // Flow logic on Dashboard (Return user vs New user from onboarding)
+        if (this.isDashboard) {
+            // Dashboard should only show welcome if coming from onboarding with a flag
+            if (this.urlParams.get('welcome') === 'true') {
+                this.showWelcome();
+                const newUrl = window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+            }
         }
     }
 
-    start() {
-        console.log("ADAPTIV Flow: Starting Onboarding");
-        if (window.onboardingManager) {
-            window.onboardingManager.start();
-        }
+    startOnboardingFlow() {
+        console.log("ADAPTIV Flow: Starting Onboarding Sequence");
+        // This is called by onboarding.js when the survey is done or skipped
+        this.next('terms');
     }
 
     next(target) {
@@ -42,19 +43,36 @@ class FlowManager {
 
     showWelcome() {
         const overlay = document.getElementById('welcome-overlay');
+        const welcomeName = document.getElementById('user-display-name-welcome');
+        
+        // Update name from local storage if possible
+        const storedName = localStorage.getItem('adaptiv_user_name');
+        if (storedName && welcomeName) {
+            welcomeName.textContent = storedName.split(' ')[0];
+        }
+
         if (!overlay) return;
 
         overlay.style.display = 'flex';
-        setTimeout(() => overlay.classList.add('show'), 100);
+        // Force reflow
+        overlay.offsetHeight;
+        overlay.classList.add('show');
+        overlay.classList.add('active'); // onboarding.css uses .active
 
-        // Auto-hide welcome after 3 seconds
+        // Auto-hide welcome after 3.5 seconds
         setTimeout(() => {
             overlay.classList.remove('show');
+            overlay.classList.remove('active');
             setTimeout(() => {
                 overlay.style.display = 'none';
                 console.log("ADAPTIV Flow: Flow Complete");
-            }, 800);
-        }, 3000);
+                
+                // If on onboarding page, redirect to dashboard
+                if (this.isOnboardingPage) {
+                    window.location.href = '../app/dashboard.html';
+                }
+            }, 1000);
+        }, 3500);
     }
 }
 
