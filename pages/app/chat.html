@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NotebookLM Clone</title>
+  <title>ADAPTIV — Tutor AI</title>
   <link rel="stylesheet" href="../../css/base/variables.css" />
   <link rel="stylesheet" href="../../css/components/sidebar.css">
   <link rel="stylesheet" href="../../css/components/upload-modal.css">
@@ -32,9 +32,9 @@
 
       <!-- Zone 1: Menu Utama -->
       <nav class="drawer-main-nav">
-        <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Dashboard</a>
+        <a href="dashboard.html"><span class="material-icons-round">dashboard</span> Beranda</a>
         <a href="documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
-        <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Leaderboard</a>
+        <a href="leaderboard.html"><span class="material-icons-round">emoji_events</span> Papan Peringkat</a>
         <a href="chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
       </nav>
 
@@ -166,7 +166,7 @@
       <!-- ═══ LEFT SIDEBAR — Sources ═══ -->
       <aside id="sidebar">
         <div class="panel-header">
-          <span class="panel-title">Sources</span>
+          <span class="panel-title">Sumber</span>
           <button class="icon-btn" id="btn-toggle-sidebar">
             <span class="material-icons-round">vertical_split</span>
           </button>
@@ -174,7 +174,7 @@
 
         <button class="add-source-btn" id="btn-add-source" data-modal-target="upload-modal">
           <span class="material-icons-round">add</span>
-          <span class="add-text">Add sources</span>
+          <span class="add-text">Tambah sumber</span>
         </button>
 
         <div class="sources-list" id="sources-list">
@@ -212,7 +212,7 @@
         <div class="input-wrap">
           <div class="input-inner">
             <div class="input-box" id="input-box">
-              <textarea id="chat-input" placeholder="Ask ADAPTIV" rows="1" maxlength="4000"></textarea>
+              <textarea id="chat-input" placeholder="Tanya ADAPTIV" rows="1" maxlength="4000"></textarea>
               <div class="input-actions-bar">
                 <div class="actions-left">
 
@@ -238,7 +238,7 @@
                       <div class="model-option" data-model="Flash" data-desc="Answers quickly">
                         <div class="model-option-info">
                           <div class="model-option-title">Flash</div>
-                          <div class="model-option-desc">Answers quickly</div>
+                          <div class="model-option-desc">Menjawab dengan cepat</div>
                         </div>
                         <span class="material-icons-round model-check">check</span>
                       </div>
@@ -246,7 +246,7 @@
                       <div class="model-option active" data-model="Pro" data-desc="Advanced math and code with 3.1 Pro">
                         <div class="model-option-info">
                           <div class="model-option-title">Pro</div>
-                          <div class="model-option-desc">Advanced math and code with 3.1 Pro</div>
+                          <div class="model-option-desc">Matematika dan kode tingkat lanjut dengan 3.1 Pro</div>
                         </div>
                         <span class="material-icons-round model-check">check</span>
                       </div>
@@ -255,7 +255,7 @@
                         data-desc="Get the highest access to models & features">
                         <div class="model-option-info">
                           <div class="model-option-title">Master</div>
-                          <div class="model-option-desc">Get the highest access to models & features</div>
+                          <div class="model-option-desc">Dapatkan akses tertinggi ke model & fitur</div>
                         </div>
                         <button class="model-upgrade-btn">Upgrade</button>
                       </div>
@@ -282,13 +282,13 @@
           <button class="studio-collapsed-btn bg-audio" title="Ringkasan Audio"
             onclick="generateStudioContent('Ringkasan Audio')">
             <span class="material-icons-round mat-icon">graphic_eq</span>
-            <span class="collapsed-label">Ringkasan Audio</span>
+            <span class="collapsed-label">Audio</span>
           </button>
 
           <button class="studio-collapsed-btn bg-mindmap" title="Studio Podcast"
-            onclick="window.location.href='podcast.html?view=customizer'">
+            onclick="generateStudioContent('Studio Podcast')">
             <span class="material-icons-round mat-icon">tune</span>
-            <span class="collapsed-label">Studio Podcast</span>
+            <span class="collapsed-label">Podcast</span>
           </button>
 
           <button class="studio-collapsed-btn bg-slide" title="Slide Presentasi"
@@ -373,31 +373,30 @@
       </button>
 
       <header class="modal__header--premium">
-        <h2 class="modal__title--premium">Create Audio and Video Overviews from <span class="text-accent--notes">your
-            sources</span></h2>
+        <h2 class="modal__title--premium">Buat Ringkasan Audio dan Video dari <span class="text-accent--notes">sumber Anda</span></h2>
       </header>
 
       <div class="modal__body">
         <!-- 1. UPLOAD AREA (Up di atas) -->
         <div class="dropzone--premium" id="upload-dropzone">
-          <div class="dropzone__title--premium">or drop your files</div>
+          <div class="dropzone__title--premium">atau seret file Anda</div>
           <div class="dropzone__hint--premium">pdf, images, docs, audio, <span style="text-decoration: underline;">and
               more</span></div>
 
           <div class="action-pills">
             <button class="pill-btn" onclick="document.getElementById('file-input').click()">
-              <span class="material-icons-round icon">upload</span> Upload files
+              <span class="material-icons-round icon">upload</span> Unggah file
             </button>
-            <button class="pill-btn"><span class="material-icons-round icon">link</span> Websites</button>
+            <button class="pill-btn"><span class="material-icons-round icon">link</span> Situs Web</button>
             <button class="pill-btn"><span class="material-icons-round icon">add_to_drive</span> Drive</button>
-            <button class="pill-btn"><span class="material-icons-round icon">content_paste</span> Copied text</button>
+            <button class="pill-btn"><span class="material-icons-round icon">content_paste</span> Teks Salinan</button>
           </div>
           <input type="file" id="file-input" style="display: none;" multiple accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
         </div>
 
         <!-- 2. SEARCH AREA (Chat di bawah) -->
         <div class="search-box-container">
-          <input type="text" class="search-input" placeholder="Search the web for new sources">
+          <input type="text" class="search-input" placeholder="Cari web untuk sumber baru">
           <div class="search-footer">
             <div class="search-options">
               <button class="option-btn">
@@ -405,7 +404,7 @@
                 <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
               </button>
               <button class="option-btn">
-                <span class="material-icons-round" style="font-size: 16px;">auto_awesome</span> Fast Research
+                <span class="material-icons-round" style="font-size: 16px;">auto_awesome</span> Riset Cepat
                 <span class="material-icons-round" style="font-size: 14px;">expand_more</span>
               </button>
             </div>

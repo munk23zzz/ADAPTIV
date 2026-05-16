@@ -209,7 +209,7 @@ class DashboardController {
             // Reset Dropzone state setelah tertutup
             setTimeout(() => {
                 const dropzoneTitle = this.dropzone.querySelector('.dropzone__title--premium');
-                if (dropzoneTitle) dropzoneTitle.textContent = 'or drop your files';
+                if (dropzoneTitle) dropzoneTitle.textContent = 'atau seret file Anda';
                 this.uploadedFiles = [];
             }, 500);
         }, 2500);

@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Signing in...';
+            submitBtn.textContent = 'Masuk...';
             setTimeout(() => {
                 window.location.href = '../app/dashboard.html';
             }, 1200);
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Validate Match
             if (confirm.length > 0) {
                 matchError.style.display = isMatch ? 'none' : 'block';
-                matchError.textContent = 'Password tidak cocok';
+                matchError.textContent = 'Kata sandi tidak cocok';
             } else {
                 matchError.style.display = 'none';
             }
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Creating Account...';
+            submitBtn.textContent = 'Membuat Akun...';
             
             const fullName = nameInput.value.trim();
             localStorage.setItem('adaptiv_user_name', fullName);
