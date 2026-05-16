@@ -211,13 +211,14 @@
               <textarea id="chat-input" placeholder="Ask ADAPTIV" rows="1" maxlength="4000"></textarea>
               <div class="input-actions-bar">
                 <div class="actions-left">
-                  <button class="action-pill-btn" title="Add source">
-                    <span class="material-icons-round">add</span>
-                  </button>
-                  <button class="action-pill-btn">
-                    <span class="material-icons-round">tune</span>
-                    <span>Tools</span>
-                  </button>
+
+                  <div class="external-toggle-wrap" title="Enable Web Research">
+                    <span class="material-icons-round external-toggle-icon">language</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="toggle-external-source" onchange="handleExternalSourceToggle(this)">
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
                 </div>
                 <div class="actions-right">
                   <button class="action-text-btn">

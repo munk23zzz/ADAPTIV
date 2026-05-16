@@ -131,8 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
         btnGenAudio.addEventListener('click', () => {
             window.location.href = 'podcast.html';
         });
+    }
     /* ── History Restoration ──────────────────────────────────── */
     checkHistorySession();
+
+    window.handleExternalSourceToggle = function(checkbox) {
+        const isActive = checkbox.checked;
+        if (isActive) {
+            console.log('External Source Activated');
+        } else {
+            console.log('External Source Deactivated');
+        }
+    };
+
+    // Close menus when clicking outside
+    document.addEventListener('click', (e) => {
+        // add logic if needed
+    });
 });
 
 const sessionHistory = {
@@ -509,6 +524,18 @@ function ctxAction(action) {
 /* ── Studio ───────────────────────────────────────────────── */
 function generateStudioContent(type) {
     sendMessage(`Buat ${type} dari sumber yang saya miliki`);
+}
+
+function handleToolAction(type, menuId) {
+    const menu = document.getElementById(menuId);
+    if (menu) menu.classList.remove('show');
+
+    if (type === 'external') {
+        alert('Membuka sumber eksternal...');
+    } else if (type === 'internal') {
+        const uploadModal = document.getElementById('upload-modal-overlay');
+        if (uploadModal) openModal(uploadModal);
+    }
 }
 
 // Spin animation for loading
