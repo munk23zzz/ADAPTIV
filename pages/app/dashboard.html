@@ -8,9 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-  <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/sidebar.css">
+  <script src="../../js/core/theme.js"></script>
 
   <style>
     /* ══════════════════════════════════
@@ -1806,7 +1809,7 @@
             aria-expanded="false" aria-controls="global-drawer">
             <span class="material-icons-round">menu</span>
           </button>
-          <a class="logo-wrap" href="dashboard.html">
+          <a class="logo-wrap" href="../../index.html">
             <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
             <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
             <span class="logo-text">ADAPTIV</span>
@@ -1829,8 +1832,12 @@
     <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
     <div class="global-drawer" id="global-drawer" role="dialog" aria-label="Navigation drawer">
       <div class="drawer-header">
-        <span class="logo-text" style="font-size:1.05rem;">ADAPTIV</span>
-        <button class="btn--icon" id="btn-close-drawer">
+        <div class="logo-wrap">
+          <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark" style="width:24px; height:24px;">
+          <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light" style="width:24px; height:24px;">
+          <span class="logo-text" style="font-size:1.05rem;">ADAPTIV</span>
+        </div>
+        <button type="button" class="btn--icon" id="btn-close-drawer">
           <span class="material-icons-round">close</span>
         </button>
       </div>
@@ -1843,7 +1850,7 @@
       <div class="drawer-recents">
         <div class="drawer-search-wrap">
           <span class="material-icons-round drawer-search-icon">search</span>
-          <input type="text" class="drawer-search" placeholder="Cari history..." aria-label="Cari riwayat belajar">
+          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..." aria-label="Cari riwayat belajar">
         </div>
         <div class="recents-label">Terkini</div>
         <a class="recent-item" href="chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
@@ -1865,20 +1872,20 @@
             <span class="material-icons-round popup-user-chevron">chevron_right</span>
           </div>
           <div class="popup-menu">
-            <button class="popup-item"><span class="material-icons-round">tune</span> Personalisasi</button>
-            <button class="popup-item"><span class="material-icons-round">person_outline</span> Profil</button>
-            <button class="popup-item"><span class="material-icons-round">settings</span> Pengaturan</button>
+            <button type="button" class="popup-item"><span class="material-icons-round">tune</span> Personalisasi</button>
+            <button type="button" class="popup-item"><span class="material-icons-round">person_outline</span> Profil</button>
+            <button type="button" class="popup-item"><span class="material-icons-round">settings</span> Pengaturan</button>
             <div class="popup-divider"></div>
-            <button class="popup-item">
+            <button type="button" class="popup-item">
               <span class="material-icons-round">help_outline</span> Bantuan
               <span class="material-icons-round popup-item-chevron">chevron_right</span>
             </button>
-            <button class="popup-item popup-item--danger">
+            <button type="button" class="popup-item popup-item--danger">
               <span class="material-icons-round">logout</span> Keluar
             </button>
           </div>
         </div>
-        <button class="account-bar" id="account-bar-btn">
+        <button type="button" class="account-bar" id="account-bar-btn">
           <div class="account-avatar">NK</div>
           <div class="account-info">
             <div class="account-name">Nabil Kurniawan</div>
@@ -2013,7 +2020,7 @@
                 <div class="chart-card-title">Performa Belajar</div>
                 <div class="chart-subtitle">Waktu belajar harian (jam)</div>
               </div>
-              <button class="chart-period-btn" id="period-btn">
+              <button type="button" class="chart-period-btn" id="period-btn">
                 <span class="material-icons-round" style="font-size:14px;">today</span>
                 Bulan ini
                 <span class="material-icons-round">expand_more</span>
@@ -2160,8 +2167,8 @@
             <div class="league-reset">Reset dalam 14 hari</div>
 
             <div class="lb-tabs">
-              <button class="lb-tab active" id="tab-monthly">Bulanan</button>
-              <button class="lb-tab" id="tab-weekly">Mingguan</button>
+              <button type="button" class="lb-tab active" id="tab-monthly">Bulanan</button>
+              <button type="button" class="lb-tab" id="tab-weekly">Mingguan</button>
             </div>
 
             <div class="lb-list" id="lb-list">
@@ -2198,7 +2205,7 @@
             <div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;margin-bottom:4px;">Upload
               Dokumen Baru</div>
             <div style="font-size:.78rem;color:var(--text-muted);margin-bottom:14px;">PDF, PPT, DOCX, dan lainnya</div>
-            <button id="open-upload-btn"
+            <button type="button" id="open-upload-btn"
               style="width:100%;background:var(--accent);color:#fff;padding:10px;border-radius:var(--radius-sm);font-family:var(--font-display);font-size:.83rem;font-weight:700;transition:background .15s;"
               onmouseover="this.style.background='var(--accent-hover)'"
               onmouseout="this.style.background='var(--accent)'">
@@ -2216,7 +2223,7 @@
   <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true"
     aria-labelledby="upload-modal-title">
     <div class="modal">
-      <button class="modal__close-btn" id="close-upload-modal" aria-label="Close">
+      <button type="button" class="modal__close-btn" id="close-upload-modal" aria-label="Close">
         <span class="material-icons-round">close</span>
       </button>
       <div class="modal__header">
@@ -2229,16 +2236,16 @@
           <div class="dropzone-hint">PDF, PPT, PPTX, DOC, DOCX, TXT didukung</div>
         </div>
         <div class="pill-btns" style="margin-top:14px;">
-          <button class="pill-btn" onclick="document.getElementById('file-input').click()">
+          <button type="button" class="pill-btn" onclick="document.getElementById('file-input').click()">
             <span class="material-icons-round">upload</span> Upload Files
           </button>
-          <button class="pill-btn">
+          <button type="button" class="pill-btn">
             <span class="material-icons-round">link</span> Websites
           </button>
-          <button class="pill-btn">
+          <button type="button" class="pill-btn">
             <span class="material-icons-round">add_to_drive</span> Drive
           </button>
-          <button class="pill-btn">
+          <button type="button" class="pill-btn">
             <span class="material-icons-round">content_paste</span> Teks
           </button>
         </div>
@@ -2489,6 +2496,7 @@
 
     window.addEventListener('load', checkNewUser);
   </script>
+  <script src="../../js/core/navigation.js"></script>
 </body>
 
 </html>

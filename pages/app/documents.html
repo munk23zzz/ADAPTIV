@@ -35,7 +35,7 @@
                         <span class="material-icons-round">menu</span>
                     </button>
 
-                    <a class="logo-wrap" href="dashboard.html">
+                    <a class="logo-wrap" href="../../index.html">
                         <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
                         <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
                         <span class="logo-text">ADAPTIV</span>
@@ -72,8 +72,12 @@
 
               <!-- Header -->
               <div class="drawer-header">
-                <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
-                <button class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+                <div class="logo-wrap">
+                  <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark" style="width:24px; height:24px;">
+                  <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light" style="width:24px; height:24px;">
+                  <span class="logo-text" style="font-size:1.1rem;font-weight:700;letter-spacing:1px;">ADAPTIV</span>
+                </div>
+                <button type="button" class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
               </div>
 
               <!-- Zone 1: Menu Utama -->
@@ -131,17 +135,17 @@
                     <span class="material-icons-round popup-user-chevron">chevron_right</span>
                   </div>
                   <div class="popup-menu">
-                    <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
-                    <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
-                    <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
+                    <button type="button" class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
+                    <button type="button" class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
+                    <button type="button" class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
                     <div class="popup-divider"></div>
-                    <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
-                    <button class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
+                    <button type="button" class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span class="material-icons-round popup-item-chevron">chevron_right</span></button>
+                    <button type="button" class="popup-item popup-item--danger"><span class="material-icons-round">logout</span>Keluar</button>
                   </div>
                 </div>
 
                 <!-- Account Bar -->
-                <button class="account-bar" id="account-bar-btn">
+                <button type="button" class="account-bar" id="account-bar-btn">
                   <div class="account-avatar">NK</div>
                   <div class="account-info">
                     <div class="account-name">Nabil Kurniawan</div>
@@ -272,7 +276,8 @@
           <button class="nf-btn nf-btn--confirm" id="up-confirm" disabled>Unggah Sekarang</button>
         </div>
       </div>
-    </div>
+    <script src="../../js/core/navigation.js"></script>
+    <script src="../../js/pages/documents.js"></script>
 </body>
 
 </html>

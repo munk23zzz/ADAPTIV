@@ -34,11 +34,27 @@ body {
     gap: 20px;
 }
 
-.logo {
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+}
+
+.logo-wrap:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-primary);
+}
+
+.logo-text {
     font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--accent-primary);
-    letter-spacing: 1px;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
 }
 
 .progress-container {
