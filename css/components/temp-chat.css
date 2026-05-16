@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════
+   TEMPORARY CHAT MODE — Styles
+   ═══════════════════════════════════════════════ */
+
+body.temp-mode-active {
+  --bg-base: #080a0c;
+  --bg-surface: #0f141a;
+  --bg-panel: #0b0f14;
+  --accent-primary: #8B949E; /* Desaturated/Ghostly accent */
+  --accent-glow: rgba(139, 148, 158, 0.2);
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+body.temp-mode-active #btn-temp-chat {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Temporary Mode Banner */
+body.temp-mode-active .chat-area::before {
+  content: "Mode Chat Sementara Aktif — Percakapan tidak akan disimpan dalam riwayat.";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-family: var(--font-ui);
+  border-bottom: 1px solid var(--border);
+  animation: fadeInDown 0.4s ease;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ghostly Chat Bubbles for Temp Mode */
+body.temp-mode-active .msg-bubble {
+  border: 1px dashed var(--border-strong);
+  background: transparent;
+}
+
+body.temp-mode-active .msg-group--user .msg-bubble {
+  background: rgba(139, 148, 158, 0.1);
+}
+
+/* Hide some UI elements in temp mode if needed */
+body.temp-mode-active #suggested-prompts {
+  opacity: 0.5;
+}
+
+/* Empty State adjustment */
+body.temp-mode-active .empty-state-img {
+  filter: grayscale(1) opacity(0.5);
+}
+
+body.temp-mode-active .empty-title::after {
+  content: " (Sementara)";
+  font-size: 0.5em;
+  vertical-align: middle;
+  color: var(--text-muted);
+}
