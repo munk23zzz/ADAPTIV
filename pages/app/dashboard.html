@@ -15,6 +15,7 @@
   <!-- Core & Theme Styles -->
   <link rel="stylesheet" href="../../css/base/variables.css">
   <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/terms-modal.css">
   <link rel="stylesheet" href="../../css/pages/dashboard.css">
 </head>
 
@@ -489,9 +490,66 @@
     </div>
   </div>
 
+  <!-- Terms of Agreement Modal -->
+  <div class="terms-overlay" id="terms-overlay">
+    <div class="terms-card">
+      <div class="terms-header">
+        <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV" class="logo-img logo-dark">
+        <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV" class="logo-img logo-light">
+        <h2>Syarat & Ketentuan</h2>
+      </div>
+
+      <div class="terms-body">
+        <div class="terms-section">
+          <p>
+            Dengan menggunakan aplikasi <strong>ADAPTIV</strong>, pengguna dianggap telah membaca, memahami, dan menyetujui seluruh syarat dan ketentuan yang berlaku pada platform ini. 
+            ADAPTIV merupakan aplikasi pembelajaran berbasis AI yang dirancang untuk membantu pengguna dalam mencatat, merangkum materi, menyesuaikan metode belajar, serta meningkatkan efektivitas pembelajaran secara personal.
+          </p>
+        </div>
+
+        <div class="terms-section">
+          <h3>Kebijakan Privasi & Penggunaan Data AI</h3>
+          <p><strong>Privasi Data Pengguna:</strong> ADAPTIV berkomitmen untuk menjaga keamanan dan kerahasiaan seluruh data pengguna. Dokumen, catatan, file, maupun percakapan yang diunggah ke dalam sistem hanya digunakan untuk mendukung pengalaman belajar pengguna di dalam aplikasi.</p>
+          <p><strong>Penggunaan Data AI:</strong> Data dan materi yang diunggah pengguna tidak akan digunakan untuk melatih model AI publik tanpa izin pengguna. Sistem AI ADAPTIV hanya memproses data untuk memberikan rekomendasi pembelajaran yang lebih personal dan relevan.</p>
+          <p><strong>Akses dan Keamanan:</strong> Riwayat pembelajaran dan dokumen pengguna bersifat pribadi dan tidak akan ditinjau secara manual oleh pihak internal, kecuali jika pengguna memberikan laporan, umpan balik, atau izin tertentu untuk keperluan evaluasi layanan.</p>
+        </div>
+
+        <div class="terms-section">
+          <h3>Hak Cipta & Tanggung Jawab Pengguna</h3>
+          <p><strong>Kepemilikan Konten:</strong> Pengguna bertanggung jawab penuh atas seluruh dokumen, gambar, maupun materi yang diunggah ke dalam aplikasi. Pengguna dilarang mengunggah konten yang melanggar hak cipta, hak kekayaan intelektual, atau hukum yang berlaku.</p>
+          <p><strong>Penggunaan yang Bertanggung Jawab:</strong> Pengguna wajib menggunakan ADAPTIV untuk tujuan pendidikan, pengembangan diri, dan aktivitas yang tidak melanggar hukum maupun merugikan pihak lain.</p>
+          <p><strong>Konten Sensitif:</strong> Pengguna tidak diperkenankan mengunggah data yang bersifat sangat rahasia atau sensitif tanpa perlindungan tambahan, termasuk informasi medis, finansial, maupun data pribadi tertentu.</p>
+        </div>
+
+        <div class="terms-section">
+          <h3>Batasan Penggunaan Layanan</h3>
+          <p><strong>Kapasitas Sistem:</strong> ADAPTIV dapat menerapkan batas ukuran file, jumlah dokumen, maupun kapasitas penyimpanan tertentu untuk menjaga stabilitas dan performa layanan.</p>
+          <p><strong>Persyaratan Akun:</strong> Pengguna wajib menggunakan akun yang valid dan menjaga keamanan informasi login masing-masing. Segala aktivitas yang dilakukan melalui akun pengguna menjadi tanggung jawab pemilik akun.</p>
+          <p><strong>Kebijakan Penggunaan:</strong> ADAPTIV berhak membatasi atau menghentikan akses pengguna apabila ditemukan pelanggaran terhadap syarat penggunaan, penyalahgunaan sistem, atau aktivitas yang membahayakan platform dan pengguna lain.</p>
+        </div>
+
+        <div class="terms-section">
+          <h3>Pembaruan Layanan</h3>
+          <p>ADAPTIV dapat memperbarui fitur, kebijakan, maupun syarat penggunaan sewaktu-waktu untuk meningkatkan kualitas layanan dan keamanan pengguna. Pengguna disarankan untuk meninjau Terms of Agreement secara berkala.</p>
+        </div>
+      </div>
+
+      <div class="terms-footer">
+        <label class="terms-consent">
+          <input type="checkbox" id="terms-checkbox">
+          <span>Saya telah membaca dan menyetujui seluruh Terms of Agreement aplikasi ADAPTIV.</span>
+        </label>
+        <div class="terms-actions">
+          <button class="btn-agree" id="btn-terms-agree">Mulai Belajar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Core & Page Scripts -->
   <script src="../../js/core/theme.js"></script>
   <script src="../../js/pages/dashboard.js"></script>
+  <script src="../../js/components/terms-modal.js"></script>
 </body>
 
 </html>
