@@ -15,8 +15,10 @@
 
     /* ── BRAND ACCENTS ── */
     --accent-primary:   #00A892;
+    --accent-primary-rgb: 0, 168, 146;
     --accent-secondary: #008577;
     --accent-tertiary:  #6246EA;
+    --accent-tertiary-rgb: 98, 70, 234;
     --accent-subtle:    rgba(0, 168, 146, 0.06);
     --accent-on:        #FFFFFF;
     --accent-glow:      rgba(0, 168, 146, 0.15);
@@ -36,6 +38,7 @@
 
     /* ── SEMANTIC ── */
     --color-success:        #059669;
+    --color-success-rgb:    5, 150, 105;
     --color-success-subtle: rgba(5, 150, 105, 0.08);
     --color-warning:        #D97706;
     --color-warning-subtle: rgba(217, 119, 6, 0.08);

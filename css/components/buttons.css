@@ -3,48 +3,42 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    color: var(--text-on-accent) !important;
+    background: var(--accent-primary);
+    color: var(--text-on-accent);
     padding: 14px 28px;
     font-family: var(--font-ui);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1rem;
     border-radius: var(--radius-pill);
     border: none;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: var(--transition);
     text-decoration: none;
-    box-shadow: 0 8px 25px rgba(0, 232, 200, 0.2);
 }
 
 .neon-btn:hover, .cta-btn-large:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 
-        0 12px 30px rgba(0, 232, 200, 0.35),
-        0 0 15px rgba(0, 232, 200, 0.2),
-        0 0 30px rgba(124, 92, 252, 0.1);
+    opacity: 0.9;
+    transform: scale(1.02);
+    box-shadow: var(--glow-accent);
 }
 
 .ghost-btn, .btn-social {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-primary) !important;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
     padding: 14px 28px;
     font-family: var(--font-ui);
     font-weight: 500;
     font-size: 1rem;
     border-radius: var(--radius-pill);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    text-decoration: none;
+    transition: var(--transition);
 }
 
 .ghost-btn:hover, .btn-social:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: var(--bg-surface-2);
+    border-color: var(--text-primary);
 }
 
 .btn-submit {
