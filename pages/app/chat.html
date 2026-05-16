@@ -20,6 +20,61 @@
 <body>
 
   <div id="app">
+    <!-- ════════════ NAVBAR (PRESERVED) ════════════ -->
+    <header class="app-header" id="app-header" role="banner">
+      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
+
+        <div class="topnav__left">
+          <!-- Global Menu (Hamburger) -->
+          <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
+            aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
+            <span class="material-icons-round">menu</span>
+          </button>
+
+          <!-- Logo -->
+          <a class="logo-wrap" href="dashboard.html">
+            <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
+            <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
+            <span class="logo-text">ADAPTIV</span>
+          </a>
+
+          <div class="topbar-divider"></div>
+
+          <!-- Notebook Title (Chat Specific) -->
+          <span class="notebook-title" id="notebook-title" contenteditable="true" title="Klik untuk ubah nama">
+            Notebook Penelitian Saya
+          </span>
+        </div>
+
+        <div class="topnav__right">
+          <!-- Temporary Chat (Chat Specific) -->
+          <button class="btn btn--icon topnav__icon-btn" id="btn-temp-chat" type="button" aria-label="Mulai temporary chat" title="Temporary Chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+              <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                stroke-dasharray="4 3" />
+            </svg>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
+            aria-label="Toggle dark/light mode" title="Ganti tema">
+            <span class="material-icons-round" id="theme-icon">light_mode</span>
+          </button>
+
+          <div class="topbar-divider"></div>
+
+          <!-- User Profile Section -->
+          <div class="user-profile-top">
+            <span class="badge-pro">PRO</span>
+            <div class="user-logo">
+              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
     <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
@@ -109,62 +164,6 @@
       </div>
 
     </div>
-
-    <!-- ════════════ NAVBAR (PRESERVED) ════════════ -->
-    <header class="app-header" id="app-header" role="banner">
-      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
-
-        <div class="topnav__left">
-          <!-- Global Menu (Hamburger) -->
-          <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
-            aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
-            <span class="material-icons-round">menu</span>
-          </button>
-
-          <!-- Logo -->
-          <a class="logo-wrap" href="dashboard.html">
-            <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
-            <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
-            <span class="logo-text">ADAPTIV</span>
-          </a>
-
-          <div class="topbar-divider"></div>
-
-          <!-- Notebook Title (Chat Specific) -->
-          <span class="notebook-title" id="notebook-title" contenteditable="true" title="Klik untuk ubah nama">
-            Notebook Penelitian Saya
-          </span>
-        </div>
-
-        <div class="topnav__right">
-          <!-- Temporary Chat (Chat Specific) -->
-          <button class="btn btn--icon topnav__icon-btn" id="btn-temp-chat" type="button" aria-label="Mulai temporary chat" title="Temporary Chat">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
-              <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
-                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-                stroke-dasharray="4 3" />
-            </svg>
-          </button>
-
-          <!-- Theme Toggle -->
-          <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
-            aria-label="Toggle dark/light mode" title="Ganti tema">
-            <span class="material-icons-round" id="theme-icon">light_mode</span>
-          </button>
-
-          <div class="topbar-divider"></div>
-
-          <!-- User Profile Section -->
-          <div class="user-profile-top">
-            <span class="badge-pro">PRO</span>
-            <div class="user-logo">
-              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
-              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
 
     <!-- ═══════════════ MAIN LAYOUT ═══════════════ -->
     <div id="layout">
