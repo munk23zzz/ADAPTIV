@@ -83,13 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Tombol Skip (Langsung lompat ke Terms & Welcome)
+    // Tombol Skip (Langsung lompat ke dashboard pakai settingan default)
     btnSkip.addEventListener('click', () => {
-        if (window.adaptivFlowManager) {
-            window.adaptivFlowManager.startOnboardingFlow();
-        } else {
-            window.location.href = '../app/dashboard.html';
-        }
+        window.location.href = '../app/dashboard.html';
     });
 
     // Tombol Submit Form (Langkah Terakhir)
@@ -107,14 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Simulasi AI memproses profil
         setTimeout(() => {
-            if (window.adaptivFlowManager) {
-                // Sembunyikan loading
-                document.getElementById('loading-state').style.display = 'none';
-                // Mulai flow Terms -> Welcome -> Dashboard
-                window.adaptivFlowManager.startOnboardingFlow();
-            } else {
-                window.location.href = '../app/dashboard.html?newuser=true';
-            }
+            // Setelah analisis selesai, lempar ke dashboard dengan parameter newuser=true
+            // Parameter ini akan memicu animasi welcome di halaman dashboard
+            window.location.href = '../app/dashboard.html?newuser=true';
         }, 3000);
     });
 
