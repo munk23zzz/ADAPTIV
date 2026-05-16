@@ -40,22 +40,29 @@
     <header id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo-wrap" aria-label="ADAPTIV Home">
+                <div class="logo-symbol">
+                    <span class="material-icons-round">auto_awesome</span>
+                </div>
                 <span class="logo-text">ADAPTIV</span>
             </a>
-            <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
-                <a href="#fitur">Fitur</a>
-                <a href="#pricing">Harga</a>
-                <a href="#carakerja">Cara Kerja</a>
-                <a href="#testimoni">Testimoni</a>
+            
+            <button class="mobile-toggle" id="mobile-menu-btn" aria-label="Menu Utama">
+                <span class="material-icons-round">menu</span>
+            </button>
 
-                <button class="icon-btn" id="btn-theme"
-                    style="background:transparent; border:none; color:var(--text-secondary); cursor:pointer; display:flex; align-items:center; justify-content:center; padding:8px; border-radius:50%; transition: var(--transition);"
-                    aria-label="Ganti Tema">
+            <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+                <a href="#fitur" class="nav-link">Fitur</a>
+                <a href="#carakerja" class="nav-link">Cara Kerja</a>
+                <a href="#pricing" class="nav-link">Harga</a>
+                <a href="#testimoni" class="nav-link">Testimoni</a>
+
+                <div class="nav-divider"></div>
+
+                <button class="icon-btn theme-toggle-btn" id="btn-theme" aria-label="Ganti Tema">
                     <span class="material-icons-round" id="theme-icon">light_mode</span>
                 </button>
 
-                <a href="pages/auth/registration.html" class="neon-btn"
-                    onclick="window.location.href='pages/auth/registration.html'; return false;">Mulai Gratis</a>
+                <a href="pages/auth/registration.html" class="neon-btn nav-cta">Mulai Gratis</a>
             </nav>
         </div>
     </header>
@@ -64,15 +71,15 @@
         <section class="hero container" id="home">
             <div class="hero-grid">
                 <div class="hero-text reveal">
-                    <div class="eyebrow">🧠 AI-POWERED PEDAGOGY</div>
+                    <div class="eyebrow">🧠 PEDAGOGI BERBASIS AI</div>
                     <h1>Belajar Lebih Cerdas.<br><span class="cyan-underline">Bukan Lebih Keras.</span></h1>
-                    <p class="subheadline">Upload materi kuliahmu. ADAPTIV mengubahnya menjadi flashcard, podcast, dan
+                    <p class="subheadline">Upload materi kuliahmu. ADAPTIV mengubahnya menjadi kartu belajar, ringkasan audio, dan
                         kuis interaktif — disesuaikan dengan cara belajarmu.</p>
 
                     <div class="trust-badges">
-                        <span class="badge-pill">✦ Zero Hallucination</span>
-                        <span class="badge-pill">✦ RAG-Powered</span>
-                        <span class="badge-pill">✦ Kurikulum-Locked</span>
+                        <span class="badge-pill">✦ Tanpa Halusinasi</span>
+                        <span class="badge-pill">✦ Berbasis RAG</span>
+                        <span class="badge-pill">✦ Terkunci Kurikulum</span>
                     </div>
 
                     <div class="cta-group">
@@ -110,8 +117,8 @@
                                 <span>Upload Dokumen</span>
                             </div>
                             <div class="mockup-pills">
-                                <span class="mpill active-1">🎵 Podcast</span>
-                                <span class="mpill active-2">🃏 Flashcard</span>
+                                <span class="mpill active-1">🎵 Ringkasan Audio</span>
+                                <span class="mpill active-2">🃏 Kartu Belajar</span>
                                 <span class="mpill active-3">❓ Kuis</span>
                             </div>
                             <div class="mockup-chat">
@@ -128,49 +135,45 @@
             <h2 class="orbitron reveal">Tiga Senjata Belajarmu</h2>
             <div class="features-grid">
                 <article class="glass-card feature-card fc-cyan reveal">
-                    <svg class="f-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z" />
-                    </svg>
-                    <h3>Audio Learning Engine</h3>
-                    <p>Materi berubah jadi percakapan natural. Dengarkan sambil commute, olahraga, atau sebelum tidur.
-                    </p>
+                    <div class="f-card-icon-wrap">
+                        <span class="material-icons-round">graphic_eq</span>
+                    </div>
+                    <h3>Ringkasan Audio AI</h3>
+                    <p>Ubah materi panjang menjadi ringkasan audio yang natural. Dengarkan materi kuliahmu layaknya mendengarkan podcast favorit.</p>
                     <ul class="feature-list">
-                        <li>Natural speech synthesis</li>
-                        <li>Dual-voice dialog</li>
-                        <li>Speed control</li>
+                        <li>Suara AI yang Manusiawi</li>
+                        <li>Dialog Dua Arah (Tanya-Jawab)</li>
+                        <li>Kontrol Kecepatan Pemutaran</li>
                     </ul>
-                    <span class="f-tag">Untuk: Auditory Learners</span>
+                    <span class="f-tag">Tipe: Auditory Learner</span>
                 </article>
 
                 <article class="glass-card feature-card fc-violet reveal">
-                    <svg class="f-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 6h16v16H4V6zm2 2v12h12V8H6zm-4-4h16v2H2V4zm2-4h16v2H4V0z" />
-                    </svg>
-                    <h3>Spaced Repetition Cards</h3>
-                    <p>Konsep kunci diekstrak otomatis. Didukung algoritma spaced repetition untuk retensi maksimal.</p>
+                    <div class="f-card-icon-wrap">
+                        <span class="material-icons-round">style</span>
+                    </div>
+                    <h3>Kartu Belajar Adaptif</h3>
+                    <p>Konsep kunci diekstrak otomatis dari dokumenmu. Didukung algoritma repetisi berjeda (Spaced Repetition) untuk ingatan jangka panjang.</p>
                     <ul class="feature-list">
-                        <li>Auto-extraction</li>
-                        <li>Visual mnemonics</li>
-                        <li>Progress tracking</li>
+                        <li>Ekstraksi Konsep Otomatis</li>
+                        <li>Mnemonic Visual Cerdas</li>
+                        <li>Pelacakan Progres Retensi</li>
                     </ul>
-                    <span class="f-tag">Untuk: Visual Learners</span>
+                    <span class="f-tag">Tipe: Visual Learner</span>
                 </article>
 
                 <article class="glass-card feature-card fc-lime reveal">
-                    <svg class="f-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13 2.05v3.03c3.39.49 6 3.39 6 6.92 0 .9-.18 1.75-.48 2.54l2.6 1.53c.56-1.24.88-2.62.88-4.07 0-5.18-3.95-9.45-9-9.95zM12 19c-3.87 0-7-3.13-7-7 0-3.53 2.61-6.43 6-6.92V2.05c-5.06.5-9 4.76-9 9.95 0 5.52 4.47 10 9.99 10 3.31 0 6.24-1.61 8.06-4.09l-2.6-1.53C16.17 17.98 14.21 19 12 19z" />
-                    </svg>
-                    <h3>Adaptive Quiz Engine</h3>
-                    <p>Latihan soal dari materimu sendiri. Feedback instan, scoring real-time, dan analisis kelemahan.
-                    </p>
+                    <div class="f-card-icon-wrap">
+                        <span class="material-icons-round">quiz</span>
+                    </div>
+                    <h3>Kuis Interaktif Otomatis</h3>
+                    <p>Uji pemahamanmu dengan kuis yang dibuat langsung dari materimu. Feedback instan membantu kamu tahu bagian mana yang perlu dipelajari lagi.</p>
                     <ul class="feature-list">
-                        <li>Auto-generated questions</li>
-                        <li>Instant feedback</li>
-                        <li>Weakness analysis</li>
+                        <li>Pembuatan Soal Berbasis AI</li>
+                        <li>Umpan Balik (Feedback) Instan</li>
+                        <li>Analisis Titik Lemah</li>
                     </ul>
-                    <span class="f-tag">Untuk: Kinesthetic Learners</span>
+                    <span class="f-tag">Tipe: Kinesthetic Learner</span>
                 </article>
             </div>
         </section>
@@ -205,7 +208,7 @@
                             </svg>
                         </div>
                         <h3>Pilih Format</h3>
-                        <p>Pilih Podcast, Flashcard, atau Kuis. Atau biarkan AI mendeteksi gaya belajarmu secara
+                        <p>Pilih Ringkasan Audio, Kartu Belajar, atau Kuis. Atau biarkan AI mendeteksi gaya belajarmu secara
                             otomatis.</p>
                     </div>
 
@@ -275,12 +278,12 @@
 
                 <div class="trust-right reveal">
                     <div class="rag-anim-container animating">
-                        <div class="rag-box rag-doc">Document</div>
+                        <div class="rag-box rag-doc">Dokumen</div>
                         <div class="rag-arrow"></div>
-                        <div class="rag-box rag-core">RAG Retrieval</div>
+                        <div class="rag-box rag-core">Pengambilan RAG</div>
                         <div class="rag-arrow"></div>
-                        <div class="rag-box rag-ai">AI Response</div>
-                        <div class="rag-label">Agentic RAG Architecture</div>
+                        <div class="rag-box rag-ai">Respon AI</div>
+                        <div class="rag-label">Arsitektur RAG Agentic</div>
                     </div>
                 </div>
             </div>
@@ -289,7 +292,7 @@
         <!-- PRICING SECTION -->
         <section class="pricing container" id="pricing">
             <div class="section-header reveal" style="text-align: center; margin-bottom: 4rem;">
-                <div class="eyebrow">Pricing Plans</div>
+                <div class="eyebrow">Pilihan Paket</div>
                 <h2 class="orbitron">Pilih Paket Belajarmu</h2>
                 <p class="section-subtitle">Investasi kecil untuk masa depan yang lebih cerdas.</p>
             </div>
@@ -298,16 +301,16 @@
                 <!-- Free Plan -->
                 <article class="glass-card pricing-card reveal">
                     <div class="pricing-header">
-                        <h3>Free</h3>
+                        <h3>Gratis</h3>
                         <div class="price">Rp 0<span>/bln</span></div>
                         <p>Cocok untuk mencoba fitur dasar ADAPTIV.</p>
                     </div>
                     <ul class="pricing-features">
                         <li><span class="material-icons-round">check_circle</span> 50 Dokumen / bulan</li>
                         <li><span class="material-icons-round">check_circle</span> Basic AI Tutor</li>
-                        <li><span class="material-icons-round">check_circle</span> Flashcard Standar</li>
-                        <li class="disabled"><span class="material-icons-round">cancel</span> Audio Podcast Mode</li>
-                        <li class="disabled"><span class="material-icons-round">cancel</span> Smart Mind Map</li>
+                        <li><span class="material-icons-round">check_circle</span> Kartu Belajar Standar</li>
+                        <li class="disabled"><span class="material-icons-round">cancel</span> Mode Ringkasan Audio</li>
+                        <li class="disabled"><span class="material-icons-round">cancel</span> Peta Pikiran Cerdas</li>
                     </ul>
                     <a href="pages/auth/registration.html" class="neon-btn pricing-btn">Mulai Gratis</a>
                 </article>
@@ -321,10 +324,10 @@
                         <p>Untuk pelajar yang haus akan efisiensi maksimal.</p>
                     </div>
                     <ul class="pricing-features">
-                        <li><span class="material-icons-round">check_circle</span> Unlimited Documents</li>
-                        <li><span class="material-icons-round">check_circle</span> Advanced Gemini AI (Pro)</li>
-                        <li><span class="material-icons-round">check_circle</span> Audio Overview (Podcast)</li>
-                        <li><span class="material-icons-round">check_circle</span> Smart Mind Map Generation</li>
+                        <li><span class="material-icons-round">check_circle</span> Dokumen Tanpa Batas</li>
+                        <li><span class="material-icons-round">check_circle</span> AI Gemini Lanjutan (Pro)</li>
+                        <li><span class="material-icons-round">check_circle</span> Ringkasan Audio</li>
+                        <li><span class="material-icons-round">check_circle</span> Pembuatan Peta Pikiran Cerdas</li>
                         <li><span class="material-icons-round">check_circle</span> Kuis Adaptif Tanpa Batas</li>
                     </ul>
                     <a href="pages/auth/registration.html" class="neon-btn pricing-btn">Pilih Pro Sekarang</a>
@@ -354,7 +357,7 @@
             <div class="testi-grid" id="testiGrid">
                 <article class="glass-card testi-card active reveal">
                     <div class="stars">★★★★★</div>
-                    <p class="quote">ADAPTIV ngubah 200 halaman thesis jadi 40 flashcard dalam 2 menit. Saya lulus
+                    <p class="quote">ADAPTIV ngubah 200 halaman tesis jadi 40 kartu belajar dalam 2 menit. Saya lulus
                         sidang TA dengan nilai A.</p>
                     <div class="author">
                         <div class="avatar avatar-1">RA</div>
@@ -380,7 +383,7 @@
 
                 <article class="glass-card testi-card reveal" style="transition-delay: 0.2s;">
                     <div class="stars">★★★★★</div>
-                    <p class="quote">Podcast mode is insane. I processed 3 research papers during my morning run.</p>
+                    <p class="quote">Mode ringkasan audio sangat luar biasa. Saya bisa memahami 3 jurnal penelitian sambil lari pagi.</p>
                     <div class="author">
                         <div class="avatar avatar-3">DR</div>
                         <div class="author-info">
@@ -503,6 +506,10 @@
         </div>
     </footer>
 
+
+    <button class="back-to-top" id="btn-back-to-top" aria-label="Kembali ke atas">
+        <span class="material-icons-round">arrow_upward</span>
+    </button>
 
     <script src="js/pages/landing.js"></script>
 </body>

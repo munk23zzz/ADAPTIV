@@ -3,13 +3,49 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('btn-back-to-top');
+    
     window.addEventListener('scroll', () => {
+        // Navbar scroll effect
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Back to top visibility
+        if (window.scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
     });
+
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 1.5 Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileBtn.querySelector('.material-icons-round');
+            icon.textContent = navLinks.classList.contains('active') ? 'close' : 'menu';
+        });
+
+        // Close menu when link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileBtn.querySelector('.material-icons-round').textContent = 'menu';
+            });
+        });
+    }
 
     // 2. Reveal on Scroll
     const reveals = document.querySelectorAll('.reveal');
@@ -31,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const texts = [
             "Analisis dokumen...",
             "Ekstraksi konsep kunci...",
-            "Membuat flashcard...",
+            "Membuat kartu belajar...",
             "Menyiapkan kuis personal...",
             "Sistem siap. Mari belajar!"
         ];

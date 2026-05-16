@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (e.key === 'Enter') { e.preventDefault(); titleEl.blur(); }
         });
         titleEl.addEventListener('blur', () => {
-          document.title = (titleEl.textContent.trim() || 'Notebook') + ' — NotebookLM';
+          document.title = (titleEl.textContent.trim() || 'Notebook') + ' — ADAPTIV';
         });
     }
 
@@ -323,7 +323,7 @@ function simulateUploadProcess(dropzone, fileName) {
         // Reset
         setTimeout(() => {
             const title = dropzone.querySelector('.dropzone__title--premium');
-            if (title) title.textContent = 'or drop your files';
+            if (title) title.textContent = 'atau seret file Anda';
         }, 500);
     }, 2000);
 }

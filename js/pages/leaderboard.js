@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const m = Math.floor((diff / (1000 * 60)) % 60);
       const s = Math.floor((diff / 1000) % 60);
 
-      countdownEl.innerHTML = `Berakhir dalam: <span>${d}h ${h}j ${m}m ${s}s</span>`;
+      countdownEl.innerHTML = `Berakhir dalam: <span>${d}h ${h}j ${m}m ${s}d</span>`;
     }
 
     tick();
