@@ -15,28 +15,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const PROMOTION_ZONE_LIMIT = 5;
   const DEMOTION_ZONE_START = 16; // Untuk 20 orang, 16-20 adalah Bottom 5
 
-  // Helper untuk generate mock data lebih banyak
-  function generateMockData(count, userRank = 3, timeRange = [500, 2000]) {
-    const names = [
-      "Sarah", "Budi", "Loid", "Alex", "Dina",
-      "Kevin", "Rina", "Ahmad", "Jessica", "Reza",
-      "Putri", "Doni", "Siska", "Galih", "Toni",
-      "Bruce", "Clark", "Diana", "Peter", "Barry"
-    ];
-    
-    return Array.from({ length: count }, (_, i) => ({
-      id: i + 1,
-      name: names[i] || `User ${i + 1}`,
-      timeInMinutes: Math.floor(Math.random() * (timeRange[1] - timeRange[0])) + timeRange[0],
-      isCurrentUser: (i + 1) === userRank
-    })).sort((a, b) => b.timeInMinutes - a.timeInMinutes);
-  }
-
-  // Data Mocking
+  // Data Papan Peringkat Statis (Sinkron dengan Halaman Dashboard)
   const datasets = {
-    weekly: generateMockData(20, 12, [300, 800]), // 20 Orang untuk Minggu Ini
-    monthly: generateMockData(15, 5, [1000, 3000]),
-    all: generateMockData(15, 8, [5000, 15000])
+    weekly: [
+      { rank: 1, name: "Sarah", timeInMinutes: 785 },
+      { rank: 2, name: "Budi", timeInMinutes: 742 },
+      { rank: 3, name: "Reza", timeInMinutes: 695 },
+      { rank: 4, name: "Loid", timeInMinutes: 630, isCurrentUser: true },
+      { rank: 5, name: "Alex", timeInMinutes: 580 },
+      { rank: 6, name: "Dina", timeInMinutes: 540 },
+      { rank: 7, name: "Ahmad", timeInMinutes: 510 },
+      { rank: 8, name: "Rina", timeInMinutes: 480 },
+      { rank: 9, name: "Jessica", timeInMinutes: 420 },
+      { rank: 10, name: "Kevin", timeInMinutes: 380 },
+      { rank: 11, name: "Putri", timeInMinutes: 350 },
+      { rank: 12, name: "Doni", timeInMinutes: 320 },
+      { rank: 13, name: "Siska", timeInMinutes: 300 },
+      { rank: 14, name: "Galih", timeInMinutes: 280 },
+      { rank: 15, name: "Toni", timeInMinutes: 250 },
+      { rank: 16, name: "Bruce", timeInMinutes: 220 },
+      { rank: 17, name: "Clark", timeInMinutes: 200 },
+      { rank: 18, name: "Diana", timeInMinutes: 180 },
+      { rank: 19, name: "Peter", timeInMinutes: 150 },
+      { rank: 20, name: "Barry", timeInMinutes: 120 }
+    ],
+    monthly: [
+      { rank: 1, name: "Alex", timeInMinutes: 2850 },
+      { rank: 2, name: "Sarah", timeInMinutes: 2740 },
+      { rank: 3, name: "Budi", timeInMinutes: 2610 },
+      { rank: 4, name: "Jessica", timeInMinutes: 2450 },
+      { rank: 5, name: "Loid", timeInMinutes: 2310, isCurrentUser: true },
+      { rank: 6, name: "Kevin", timeInMinutes: 2180 },
+      { rank: 7, name: "Dina", timeInMinutes: 2050 },
+      { rank: 8, name: "Rina", timeInMinutes: 1920 },
+      { rank: 9, name: "Ahmad", timeInMinutes: 1840 },
+      { rank: 10, name: "Reza", timeInMinutes: 1760 },
+      { rank: 11, name: "Putri", timeInMinutes: 1650 },
+      { rank: 12, name: "Doni", timeInMinutes: 1540 },
+      { rank: 13, name: "Siska", timeInMinutes: 1430 },
+      { rank: 14, name: "Galih", timeInMinutes: 1320 },
+      { rank: 15, name: "Toni", timeInMinutes: 1210 }
+    ],
+    all: [
+      { rank: 1, name: "Budi", timeInMinutes: 14200 },
+      { rank: 2, name: "Sarah", timeInMinutes: 13800 },
+      { rank: 3, name: "Alex", timeInMinutes: 12900 },
+      { rank: 4, name: "Reza", timeInMinutes: 11500 },
+      { rank: 5, name: "Jessica", timeInMinutes: 10800 },
+      { rank: 6, name: "Dina", timeInMinutes: 9800 },
+      { rank: 7, name: "Loid", timeInMinutes: 9240, isCurrentUser: true },
+      { rank: 8, name: "Kevin", timeInMinutes: 8700 },
+      { rank: 9, name: "Ahmad", timeInMinutes: 8100 },
+      { rank: 10, name: "Rina", timeInMinutes: 7500 },
+      { rank: 11, name: "Putri", timeInMinutes: 6900 },
+      { rank: 12, name: "Doni", timeInMinutes: 6300 },
+      { rank: 13, name: "Siska", timeInMinutes: 5700 },
+      { rank: 14, name: "Galih", timeInMinutes: 5100 },
+      { rank: 15, name: "Toni", timeInMinutes: 4500 }
+    ]
   };
 
   function formatTime(totalMinutes) {

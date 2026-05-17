@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { rank: 2, name: "Sarah", time: 2740 },
       { rank: 3, name: "Budi", time: 2610 },
       { rank: 4, name: "Jessica", time: 2450 },
-      { rank: 5, name: "Loid", time: 630, isCurrentUser: true }, // Updated as requested
+      { rank: 5, name: "Loid", time: 2310, isCurrentUser: true }, // Updated to match monthly rank
       { rank: 6, name: "Kevin", time: 2180 },
       { rank: 7, name: "Dina", time: 2050 },
       { rank: 8, name: "Rina", time: 1920 },
