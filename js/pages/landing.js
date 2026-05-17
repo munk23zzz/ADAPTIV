@@ -61,44 +61,127 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Initial check
 
-    // 3. Typewriter Effect
-    const typeTarget = document.getElementById('typewriter-output');
-    if (typeTarget) {
-        const texts = [
-            "Analisis dokumen...",
-            "Ekstraksi konsep kunci...",
-            "Membuat kartu belajar...",
-            "Menyiapkan kuis personal...",
-            "Sistem siap. Mari belajar!"
-        ];
-        let textIdx = 0;
-        let charIdx = 0;
-        let isDeleting = false;
+// 3. Typewriter Effect — Multi-line terminal
+const termBody = document.getElementById('term-text');
+if (termBody) {
+    const steps = [
+        { text: "Membaca dokumen PDF...",           status: "process" },
+        { text: "Ekstraksi konsep kunci selesai.",  status: "success" },
+        { text: "Membuat kartu belajar adaptif...", status: "process" },
+        { text: "Kartu siap: 24 item dibuat.",      status: "success" },
+        { text: "Menyiapkan kuis personal...",      status: "process" },
+        { text: "Sistem siap. Mari belajar! 🚀",    status: "done"    },
+    ];
 
-        const prefix = "adaptiv@ai:~$ ";
-        const type = () => {
-            const current = texts[textIdx];
-            if (isDeleting) {
-                typeTarget.textContent = prefix + current.substring(0, charIdx - 1);
-                charIdx--;
-            } else {
-                typeTarget.textContent = prefix + current.substring(0, charIdx + 1);
-                charIdx++;
-            }
+    const prefix = "adaptiv@ai:~$ ";
+    let stepIdx = 0;
 
-            let speed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIdx === current.length) {
-                speed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false;
-                textIdx = (textIdx + 1) % texts.length;
-                speed = 500;
+    const colorMap = {
+        process: "#e2e8f0",
+        success: "#00e8c8",
+        done:    "#a78bfa",
+    };
+
+    function typeStep(step, callback) {
+        const line = document.createElement('div');
+        line.style.cssText = `
+            display: flex; gap: 8px; align-items: flex-start;
+            margin-bottom: 6px; font-size: 1rem; line-height: 1.6;
+        `;
+
+        const prefixSpan = document.createElement('span');
+        prefixSpan.textContent = prefix;
+        prefixSpan.style.color = "var(--accent-primary)";
+        prefixSpan.style.flexShrink = "0";
+
+        const textSpan = document.createElement('span');
+        textSpan.style.color = colorMap[step.status];
+
+        const cursor = document.createElement('span');
+        cursor.style.cssText = `
+            display: inline-block; width: 8px; height: 1em;
+            background: var(--accent-primary); margin-left: 3px;
+            vertical-align: middle; animation: blink 1s step-end infinite;
+        `;
+
+        line.appendChild(prefixSpan);
+        line.appendChild(textSpan);
+        line.appendChild(cursor);
+        termBody.appendChild(line);
+
+        let i = 0;
+        const interval = setInterval(() => {
+            textSpan.textContent = step.text.substring(0, i + 1);
+            i++;
+            if (i === step.text.length) {
+                clearInterval(interval);
+                cursor.remove();
+
+                if (step.status === "success") {
+                    const badge = document.createElement('span');
+                    badge.textContent = " ✓";
+                    badge.style.color = "#00e8c8";
+                    badge.style.fontWeight = "700";
+                    textSpan.appendChild(badge);
+                } else if (step.status === "done") {
+                    const badge = document.createElement('span');
+                    badge.textContent = " ✓ DONE";
+                    badge.style.cssText = "color:#a78bfa; font-weight:700; margin-left:8px;";
+                    textSpan.appendChild(badge);
+
+                    setTimeout(() => {
+                        const barWrap = document.createElement('div');
+                        barWrap.style.cssText = `
+                            margin-top: 16px; 
+                            background: rgba(255,255,255,0.08); 
+                            border-radius: 4px; height: 6px; overflow: hidden;
+                        `;
+                        const bar = document.createElement('div');
+                        bar.style.cssText = `
+                            height: 100%; width: 0%;
+                            background: linear-gradient(90deg, var(--accent-primary), #a78bfa);
+                            border-radius: 4px;
+                            transition: width 1.8s cubic-bezier(0.4,0,0.2,1);
+                        `;
+                        barWrap.appendChild(bar);
+                        termBody.appendChild(barWrap);
+                        requestAnimationFrame(() => requestAnimationFrame(() => bar.style.width = "100%"));
+                    }, 300);
+                }
+
+                setTimeout(callback, step.status === "process" ? 300 : 600);
             }
-            setTimeout(type, speed);
-        };
-        type();
+        }, 45);
     }
+
+    function runTerminal() {
+        termBody.innerHTML = "";
+        stepIdx = 0;
+
+        function next() {
+            if (stepIdx < steps.length) {
+                typeStep(steps[stepIdx], () => {
+                    stepIdx++;
+                    next();
+                });
+            } else {
+                setTimeout(runTerminal, 4000);
+            }
+        }
+        next();
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            runTerminal();
+            observer.disconnect();
+        }
+    });
+}, { threshold: 0.3 });
+
+observer.observe(termBody);
+}
 
     // 4. Hero Stats Counter
     const stats = document.querySelectorAll('.stat-number');
