@@ -3,11 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ═══════════════ MOCK DATA ═══════════════
     const folders = [
         { id: 1, name: "Calculus", icon: "📐", color: "#7C5CFC", fileCount: 4, updated: "14 Jan 2025" },
-        { id: 2, name: "Fisika Dasar", icon: "⚡", color: "#F59E0B", fileCount: 3, updated: "12 Jan 2025" },
+        { id: 2, name: "PPKn", icon: "🏛️", color: "#EF4444", fileCount: 3, updated: "12 Jan 2025" },
         { id: 3, name: "Algoritma & Pemrograman", icon: "💻", color: "#10B981", fileCount: 5, updated: "10 Jan 2025" },
-        { id: 4, name: "Sistem Operasi", icon: "🖥️", color: "#EF4444", fileCount: 2, updated: "8 Jan 2025" },
-        { id: 5, name: "Kimia Organik", icon: "🧪", color: "#06B6D4", fileCount: 3, updated: "5 Jan 2025" },
-        { id: 6, name: "Bahasa Inggris", icon: "📝", color: "#EC4899", fileCount: 2, updated: "3 Jan 2025" },
     ];
 
     const files = {
@@ -18,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Catatan_Deret.docx", size: "0.5 MB", date: "10 Jan 2025", type: "docx", status: "ready" },
         ],
         2: [
-            { name: "Hukum_Newton.pdf", size: "3.1 MB", date: "12 Jan 2025", type: "pdf", status: "ready" },
-            { name: "Termodinamika.pdf", size: "2.7 MB", date: "11 Jan 2025", type: "pdf", status: "ready" },
-            { name: "Slide_Gelombang.pptx", size: "4.5 MB", date: "9 Jan 2025", type: "pptx", status: "ready" },
+            { name: "Pancasila_dan_UUD1945.pdf", size: "1.2 MB", date: "12 Jan 2025", type: "pdf", status: "ready" },
+            { name: "Hak_dan_Kewajiban_Warga_Negara.pdf", size: "1.5 MB", date: "11 Jan 2025", type: "pdf", status: "ready" },
+            { name: "Sistem_Pemerintahan_Indonesia.pptx", size: "2.8 MB", date: "9 Jan 2025", type: "pptx", status: "ready" },
         ],
         3: [
             { name: "Sorting_Algorithm.pdf", size: "1.5 MB", date: "10 Jan 2025", type: "pdf", status: "ready" },
@@ -28,19 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: "Slide_Dynamic_Programming.pptx", size: "3.8 MB", date: "8 Jan 2025", type: "pptx", status: "ready" },
             { name: "Tugas_Rekursi.docx", size: "0.3 MB", date: "7 Jan 2025", type: "docx", status: "ready" },
             { name: "Latihan_Struktur_Data.pdf", size: "1.2 MB", date: "6 Jan 2025", type: "pdf", status: "ready" },
-        ],
-        4: [
-            { name: "Modul_Sistem_Operasi.pdf", size: "2.4 MB", date: "8 Jan 2025", type: "pdf", status: "ready" },
-            { name: "Slide_Manajemen_Memori.pptx", size: "3.0 MB", date: "7 Jan 2025", type: "pptx", status: "ready" },
-        ],
-        5: [
-            { name: "Bab3_Kimia_Organik.pdf", size: "2.8 MB", date: "5 Jan 2025", type: "pdf", status: "ready" },
-            { name: "Catatan_Reaksi_Substitusi.docx", size: "0.6 MB", date: "4 Jan 2025", type: "docx", status: "ready" },
-            { name: "Slide_Senyawa_Aromatik.pptx", size: "4.1 MB", date: "3 Jan 2025", type: "pptx", status: "ready" },
-        ],
-        6: [
-            { name: "Grammar_Notes.pdf", size: "1.1 MB", date: "3 Jan 2025", type: "pdf", status: "ready" },
-            { name: "Essay_Writing_Guide.docx", size: "0.4 MB", date: "2 Jan 2025", type: "docx", status: "ready" },
         ],
     };
 

@@ -1,10 +1,8 @@
 /* ── Data ─────────────────────────────────────────────────── */
 let sources = [
-  { id: 1, name: 'Laporan Tahunan 2024.pdf', type: 'PDF', icon: '📄', checked: true },
-  { id: 2, name: 'Ringkasan Eksekutif.docx', type: 'Word', icon: '📝', checked: true },
-  { id: 3, name: 'Data Penjualan Q4.xlsx', type: 'Spreadsheet', icon: '📊', checked: false },
-  { id: 4, name: 'Presentasi Strategi.pptx', type: 'Slide', icon: '📋', checked: true },
-  { id: 5, name: 'https://example.com/artikel', type: 'Web', icon: '🌐', checked: false },
+  { id: 1, name: 'Limit_dan_Turunan.pdf', type: 'PDF', icon: '📄', checked: true },
+  { id: 2, name: 'Pancasila_dan_UUD1945.pdf', type: 'PDF', icon: '📄', checked: true },
+  { id: 3, name: 'Sorting_Algorithm.pdf', type: 'PDF', icon: '📄', checked: true },
 ];
 
 
@@ -149,36 +147,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const sessionHistory = {
-  'algoritma': {
-    title: 'Algoritma & Sorting',
+  'kalkulus': {
+    title: 'Kalkulus',
     sources: [
-      { id: 101, name: 'Sorting_Basics.pdf', type: 'PDF', icon: '📄', checked: true },
-      { id: 102, name: 'Big_O_CheatSheet.docx', type: 'Word', icon: '📝', checked: true }
+      { id: 101, name: 'Limit_dan_Turunan.pdf', type: 'PDF', icon: '📄', checked: true },
+      { id: 102, name: 'Integral_Tentu.pdf', type: 'PDF', icon: '📄', checked: true }
+    ],
+    messages: [
+      { role: 'user', text: 'Jelaskan konsep dasar tentang limit fungsi.' },
+      { role: 'ai', text: 'Berdasarkan sumber **Limit dan Turunan**, konsep dasar **limit** menjelaskan perilaku suatu fungsi mendekati nilai input tertentu.\n\n• **Limit Kiri & Kanan**: Fungsi $f(x)$ dikatakan memiliki limit $L$ di $c$ jika dan hanya jika limit dari kiri mendekati limit dari kanan <span class="citation">1</span>.\n• **Aplikasi**: Konsep ini mendasari definisi turunan dan kontinuitas fungsi.' }
+    ]
+  },
+  'ppkn': {
+    title: 'PPKn',
+    sources: [
+      { id: 201, name: 'Pancasila_dan_UUD1945.pdf', type: 'PDF', icon: '📄', checked: true },
+      { id: 202, name: 'Hak_dan_Kewajiban_Warga_Negara.pdf', type: 'PDF', icon: '📄', checked: true }
+    ],
+    messages: [
+      { role: 'user', text: 'Sebutkan hak dan kewajiban warga negara berdasarkan UUD 1945.' },
+      { role: 'ai', text: 'Berdasarkan sumber **Pancasila dan UUD 1945**, berikut adalah poin-poin penting hak dan kewajiban warga negara:\n\n• **Hak**: Mendapatkan pekerjaan & penghidupan yang layak (Pasal 27 ayat 2), berserikat dan berkumpul (Pasal 28) <span class="citation">1</span>.\n• **Kewajiban**: Menjunjung tinggi hukum dan pemerintahan (Pasal 27 ayat 1), ikut serta dalam pembelaan negara (Pasal 27 ayat 3) <span class="citation">2</span>.' }
+    ]
+  },
+  'algoritma': {
+    title: 'Algoritma & Pemrograman',
+    sources: [
+      { id: 301, name: 'Sorting_Algorithm.pdf', type: 'PDF', icon: '📄', checked: true },
+      { id: 302, name: 'Graph_Theory.pdf', type: 'PDF', icon: '📄', checked: true }
     ],
     messages: [
       { role: 'user', text: 'Jelaskan perbedaan mendasar antara Bubble Sort dan QuickSort.' },
-      { role: 'ai', text: 'Berdasarkan sumber **Sorting Basics**, perbedaan utamanya terletak pada efisiensi:\n\n• **Bubble Sort** memiliki kompleksitas O(n²) dan bekerja dengan menukar elemen tetangga secara berulang.\n• **QuickSort** menggunakan pendekatan *divide and conquer* dengan kompleksitas rata-rata O(n log n), yang jauh lebih cepat untuk data besar <span class="citation">1</span>.' }
-    ]
-  },
-  'os': {
-    title: 'Sistem Operasi',
-    sources: [
-      { id: 201, name: 'OS_Kernel_Architecture.pdf', type: 'PDF', icon: '📄', checked: true },
-      { id: 202, name: 'Process_Management.pptx', type: 'Slide', icon: '📋', checked: true }
-    ],
-    messages: [
-      { role: 'user', text: 'Apa itu Deadlock dan bagaimana cara menghindarinya?' },
-      { role: 'ai', text: 'Deadlock adalah kondisi di mana dua atau lebih proses saling menunggu sumber daya yang dipegang oleh proses lain <span class="citation">1</span>. \n\nCara menghindarinya meliputi:\n• **Mutual Exclusion**: Membatasi akses eksklusif.\n• **Banker\'s Algorithm**: Melakukan alokasi aman secara dinamis <span class="citation">2</span>.' }
-    ]
-  },
-  'kimia': {
-    title: 'Kimia Organik',
-    sources: [
-      { id: 301, name: 'Organic_Chemistry_Vol1.pdf', type: 'PDF', icon: '📄', checked: true }
-    ],
-    messages: [
-      { role: 'user', text: 'Gambarkan struktur Benzena.' },
-      { role: 'ai', text: 'Benzena adalah hidrokarbon aromatik dengan rumus C₆H₆. Strukturnya berupa cincin segi enam beraturan dengan ikatan rangkap dua yang beresonansi (delokalisasi elektron) <span class="citation">1</span>.' }
+      { role: 'ai', text: 'Berdasarkan sumber **Sorting Algorithm**, perbedaan utamanya terletak pada efisiensi:\n\n• **Bubble Sort** memiliki kompleksitas O(n²) dan bekerja dengan menukar elemen tetangga secara berulang.\n• **QuickSort** menggunakan pendekatan *divide and conquer* dengan kompleksitas rata-rata O(n log n), yang jauh lebih cepat untuk data besar <span class="citation">1</span>.' }
     ]
   }
 };
@@ -527,10 +526,6 @@ function ctxAction(action) {
 
 /* ── Studio ───────────────────────────────────────────────── */
 function generateStudioContent(type) {
-    if (type === 'Kuis') {
-        window.location.href = '../quiz/quiz.html';
-        return;
-    }
     sendMessage(`Buat ${type} dari sumber yang saya miliki`);
 }
 
@@ -608,433 +603,3 @@ function setupModelSelector() {
         });
     }
 }
-
-/* ── Split Screen Interactive Quiz Controller ───────────────── */
-const quizSplitData = [
-  {
-    question: "Properti CSS apa yang digunakan untuk mengubah warna latar belakang sebuah elemen?",
-    options: [
-      { text: "color", isCorrect: false, rationale: "Properti 'color' digunakan untuk mengubah warna teks, bukan latar belakang." },
-      { text: "background-style", isCorrect: false, rationale: "Tidak ada properti CSS yang bernama 'background-style'." },
-      { text: "background-color", isCorrect: true, rationale: "Tepat sekali! Properti 'background-color' mengatur warna latar belakang suatu elemen dalam CSS." },
-      { text: "bgcolor", isCorrect: false, rationale: "'bgcolor' adalah atribut HTML usang, bukan properti CSS standar." }
-    ],
-    hint: "Pikirkan properti CSS standar yang memiliki kata 'color' dan 'background'."
-  },
-  {
-    question: "Bagaimana cara memilih elemen HTML dengan ID \"app\" menggunakan JavaScript murni (Vanilla JS)?",
-    options: [
-      { text: "document.querySelector(\".app\")", isCorrect: false, rationale: "Penggunaan titik (.) pada querySelector digunakan untuk mencari class, bukan ID." },
-      { text: "document.getElement(\"app\")", isCorrect: false, rationale: "Metode ini tidak ada dalam spesifikasi JavaScript DOM standar." },
-      { text: "document.findId(\"app\")", isCorrect: false, rationale: "Tidak ada fungsi 'findId' di dalam JavaScript DOM." },
-      { text: "document.getElementById(\"app\")", isCorrect: true, rationale: "Benar! Ini adalah metode bawaan DOM yang paling umum untuk mengambil elemen berdasarkan ID-nya." }
-    ],
-    hint: "Ingat penulisan camelCase dan kata kunci 'ById'."
-  },
-  {
-    question: "Untuk mencegah serangan XSS saat menampilkan teks inputan user ke layar, properti DOM apa yang paling aman digunakan?",
-    options: [
-      { text: "innerHTML", isCorrect: false, rationale: "Penggunaan 'innerHTML' sangat berbahaya karena akan mengeksekusi tag HTML dan script jahat yang disisipkan oleh pengguna." },
-      { text: "outerHTML", isCorrect: false, rationale: "Sama seperti innerHTML, properti ini mem-parsing HTML sehingga rentan terhadap serangan XSS." },
-      { text: "textContent", isCorrect: true, rationale: "Tepat! Properti 'textContent' secara otomatis melakukan escape karakter sehingga teks aman dari injeksi script HTML." }
-    ],
-    hint: "Cari properti yang hanya memproses string teks mentah tanpa mem-parsing tag HTML."
-  },
-  {
-    question: "Manakah tag HTML5 yang digunakan secara semantik untuk membungkus navigasi utama?",
-    options: [
-      { text: "<navigation>", isCorrect: false, rationale: "Tidak ada tag bernama '<navigation>' di HTML5." },
-      { text: "<nav>", isCorrect: true, rationale: "Tepat! Tag '<nav>' dirancang khusus untuk mendefinisikan sekumpulan tautan navigasi." },
-      { text: "<menu>", isCorrect: false, rationale: "Tag '<menu>' digunakan untuk daftar perintah interaktif, bukan navigasi utama." },
-      { text: "<section>", isCorrect: false, rationale: "Tag '<section>' bersifat generik untuk mengelompokkan konten serumpun." }
-    ],
-    hint: "Singkatan dari kata 'navigation'."
-  },
-  {
-    question: "Properti CSS apa yang digunakan untuk membuat layout grid dua dimensi secara fleksibel?",
-    options: [
-      { text: "display: grid", isCorrect: true, rationale: "Betul! 'display: grid' mengaktifkan CSS Grid Layout yang sangat andal untuk dua dimensi." },
-      { text: "display: flex", isCorrect: false, rationale: "Flexbox lebih cocok untuk layout satu dimensi (baris saja atau kolom saja)." },
-      { text: "display: block", isCorrect: false, rationale: "Block layout adalah alur dokumen vertikal standar." },
-      { text: "display: inline-block", isCorrect: false, rationale: "Inline-block menjejalkan elemen ke samping tetapi tidak menyediakan sistem grid." }
-    ],
-    hint: "Menggunakan kata 'grid' secara langsung."
-  },
-  {
-    question: "Bagaimana cara mendefinisikan variabel CSS kustom secara global agar bisa diakses oleh seluruh halaman?",
-    options: [
-      { text: "selector :root", isCorrect: true, rationale: "Luar biasa! Selector ':root' menargetkan elemen terluar (HTML) sehingga variabel kustom dapat diwarisi oleh semua elemen." },
-      { text: "selector body", isCorrect: false, rationale: "Meskipun bisa, selector body tidak mencakup elemen di luar body atau jika ada manipulasi tingkat html." },
-      { text: "selector *", isCorrect: false, rationale: "Mendefinisikan variabel di selector universal '*' akan menduplikasi variabel di setiap elemen secara tidak efisien." },
-      { text: "selector #global", isCorrect: false, rationale: "Tidak ada ID khusus '#global' yang bawaan dari spesifikasi CSS." }
-    ],
-    hint: "Selector pseudo-class yang mewakili akar dokumen."
-  },
-  {
-    question: "Metode array JavaScript manakah yang digunakan untuk membuat array baru yang hanya berisi elemen yang lolos uji kondisi?",
-    options: [
-      { text: "map()", isCorrect: false, rationale: "Metode 'map()' mentransformasi setiap elemen array, bukan menyaringnya." },
-      { text: "filter()", isCorrect: true, rationale: "Tepat! 'filter()' menyaring elemen array berdasarkan fungsi penguji yang mengembalikan nilai truthy." },
-      { text: "reduce()", isCorrect: false, rationale: "Metode 'reduce()' mengakumulasikan nilai array menjadi satu nilai tunggal." },
-      { text: "forEach()", isCorrect: false, rationale: "Metode 'forEach()' hanya melakukan iterasi tanpa mengembalikan array baru." }
-    ],
-    hint: "Kata bahasa Inggris yang berarti menyaring."
-  },
-  {
-    question: "Manakah cara yang benar untuk mendefinisikan fungsi arrow di ES6 JavaScript?",
-    options: [
-      { text: "const myFunc = () => {}", isCorrect: true, rationale: "Benar! Ini adalah sintaks fungsi arrow standar di ES6." },
-      { text: "const myFunc = function() => {}", isCorrect: false, rationale: "Sintaks ini mencampurkan kata kunci 'function' dengan panah, yang merupakan syntax error." },
-      { text: "const myFunc = () -> {}", isCorrect: false, rationale: "JavaScript menggunakan operator panah gemuk '=>', bukan panah kurus '->'." },
-      { text: "function myFunc = () => {}", isCorrect: false, rationale: "Pendefinisian ini salah sintaks karena menggunakan kata kunci function di depan variabel penugasan." }
-    ],
-    hint: "Menggunakan simbol '=' diikuti dengan '>'."
-  },
-  {
-    question: "Di CSS Flexbox, properti mana yang digunakan untuk mengontrol perataan elemen anak di sepanjang sumbu utama (main axis)?",
-    options: [
-      { text: "align-items", isCorrect: false, rationale: "'align-items' mengontrol perataan di sepanjang sumbu silang (cross axis), bukan sumbu utama." },
-      { text: "justify-content", isCorrect: true, rationale: "Tepat sekali! 'justify-content' menyelaraskan item di sepanjang sumbu utama kontainer flex." },
-      { text: "align-content", isCorrect: false, rationale: "'align-content' mengatur baris flex saat ada ruang ekstra pada sumbu silang." },
-      { text: "flex-direction", isCorrect: false, rationale: "'flex-direction' menentukan arah sumbu utama (baris atau kolom), bukan perataannya." }
-    ],
-    hint: "Menggunakan kata 'justify'."
-  },
-  {
-    question: "Apa tujuan utama penggunaan atribut 'alt' pada tag gambar <img>?",
-    options: [
-      { text: "Menentukan ukuran gambar", isCorrect: false, rationale: "Ukuran ditentukan oleh atribut width/height atau CSS." },
-      { text: "Memberikan deskripsi tekstual alternatif untuk aksesibilitas dan SEO", isCorrect: true, rationale: "Benar! Atribut 'alt' sangat krusial bagi pembaca layar (screen reader) tuna netra dan mesin pencari." },
-      { text: "Membuat efek animasi hover pada gambar", isCorrect: false, rationale: "Animasi hover dikontrol oleh CSS atau JavaScript." },
-      { text: "Menentukan url cadangan jika gambar utama gagal dimuat", isCorrect: false, rationale: "'alt' hanya menampilkan teks biasa, bukan tautan url cadangan." }
-    ],
-    hint: "Singkatan dari kata 'alternative'."
-  }
-];
-
-let currentQuizIndex = 0;
-let quizCorrectCount = 0;
-let quizWrongCount = 0;
-let quizAnswersState = Array(quizSplitData.length).fill(null);
-
-function openQuizWorkspace() {
-    const studio = document.getElementById('studio');
-    const workspace = document.getElementById('studio-expanded-workspace');
-    
-    if (studio && workspace) {
-        studio.classList.remove('collapsed');
-        studio.classList.add('expanded');
-        workspace.removeAttribute('hidden');
-        initQuizWorkspace();
-    }
-}
-
-function closeQuizWorkspace() {
-    const studio = document.getElementById('studio');
-    const workspace = document.getElementById('studio-expanded-workspace');
-    
-    if (studio && workspace) {
-        studio.classList.remove('expanded');
-        studio.classList.add('collapsed');
-        workspace.setAttribute('hidden', 'true');
-    }
-}
-
-function initQuizWorkspace() {
-    currentQuizIndex = 0;
-    quizCorrectCount = 0;
-    quizWrongCount = 0;
-    quizAnswersState = Array(quizSplitData.length).fill(null);
-    
-    // Renders the segmented progress bar
-    const progressContainer = document.getElementById('segmented-progress');
-    if (progressContainer) {
-        progressContainer.innerHTML = '';
-        for (let i = 0; i < quizSplitData.length; i++) {
-            const segment = document.createElement('div');
-            segment.classList.add('progress-segment');
-            if (i === 0) segment.classList.add('active');
-            progressContainer.appendChild(segment);
-        }
-    }
-    
-    // Reset stats
-    document.getElementById('count-correct').textContent = '0';
-    document.getElementById('count-wrong').textContent = '0';
-    
-    // Setup event listeners for hint, close, share, back, next
-    setupQuizEvents();
-    
-    // Load first question
-    loadSplitQuestion();
-}
-
-function setupQuizEvents() {
-    // Share Button
-    const btnShare = document.getElementById('btn-quiz-share');
-    if (btnShare) {
-        btnShare.onclick = (e) => {
-            e.stopPropagation();
-            alert('Tautan kuis berhasil disalin ke papan klip! 🚀');
-        };
-    }
-    
-    // Close Button
-    const btnClose = document.getElementById('btn-quiz-close');
-    if (btnClose) {
-        btnClose.onclick = (e) => {
-            e.stopPropagation();
-            closeQuizWorkspace();
-        };
-    }
-    
-    // Hint Toggle
-    const btnHint = document.getElementById('btn-quiz-hint-toggle');
-    const hintBox = document.getElementById('quiz-split-hint-box');
-    if (btnHint && hintBox) {
-        btnHint.onclick = (e) => {
-            e.stopPropagation();
-            const isHidden = hintBox.hasAttribute('hidden');
-            if (isHidden) {
-                hintBox.removeAttribute('hidden');
-                btnHint.querySelector('span:first-child').textContent = 'Sembunyikan Petunjuk';
-                btnHint.querySelector('.material-icons-round').textContent = 'expand_less';
-            } else {
-                hintBox.setAttribute('hidden', 'true');
-                btnHint.querySelector('span:first-child').textContent = 'Lihat Petunjuk';
-                btnHint.querySelector('.material-icons-round').textContent = 'expand_more';
-            }
-        };
-    }
-    
-    // Back Button
-    const btnBack = document.getElementById('btn-quiz-back');
-    if (btnBack) {
-        btnBack.onclick = (e) => {
-            e.stopPropagation();
-            if (currentQuizIndex > 0) {
-                currentQuizIndex--;
-                loadSplitQuestion();
-            }
-        };
-    }
-    
-    // Next Button
-    const btnNext = document.getElementById('btn-quiz-next');
-    if (btnNext) {
-        btnNext.onclick = (e) => {
-            e.stopPropagation();
-            handleSplitNext();
-        };
-    }
-}
-
-function loadSplitQuestion() {
-    if (currentQuizIndex >= quizSplitData.length) return;
-    
-    const currentQuiz = quizSplitData[currentQuizIndex];
-    
-    // Update Counter
-    document.getElementById('quiz-split-counter').textContent = `${currentQuizIndex + 1} / ${quizSplitData.length}`;
-    document.getElementById('quiz-split-qnum').textContent = `${currentQuizIndex + 1}.`;
-    document.getElementById('quiz-split-qtext').textContent = currentQuiz.question;
-    
-    // Update Progress Segments active states
-    const segments = document.querySelectorAll('.progress-segment');
-    segments.forEach((seg, idx) => {
-        seg.className = 'progress-segment'; // reset classes
-        if (idx === currentQuizIndex) {
-            seg.classList.add('active');
-        }
-        
-        // Show previous answers
-        const answer = quizAnswersState[idx];
-        if (answer !== null) {
-            const isAnswerCorrect = quizSplitData[idx].options[answer].isCorrect;
-            seg.classList.add(isAnswerCorrect ? 'correct' : 'wrong');
-        }
-    });
-    
-    // Options
-    const optionsContainer = document.getElementById('quiz-split-options');
-    optionsContainer.innerHTML = '';
-    
-    // Reset Hint and Explanation Boxes
-    const hintBox = document.getElementById('quiz-split-hint-box');
-    const btnHint = document.getElementById('btn-quiz-hint-toggle');
-    if (hintBox) hintBox.setAttribute('hidden', 'true');
-    if (btnHint) {
-        btnHint.querySelector('span:first-child').textContent = 'Lihat Petunjuk';
-        btnHint.querySelector('.material-icons-round').textContent = 'expand_more';
-    }
-    document.getElementById('quiz-split-hint-text').textContent = currentQuiz.hint || "Pikirkan secara semantik dan teliti.";
-    
-    const expBox = document.getElementById('quiz-split-explanation');
-    expBox.setAttribute('hidden', 'true');
-    expBox.className = 'quiz-split-explanation';
-    
-    const prevAnswer = quizAnswersState[currentQuizIndex];
-    
-    currentQuiz.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.classList.add('split-option-btn');
-        
-        const letter = String.fromCharCode(65 + idx); // A, B, C, D
-        btn.innerHTML = `<span class="option-prefix">${letter}.</span> <span>${opt.text}</span>`;
-        
-        if (prevAnswer === null) {
-            btn.onclick = () => selectSplitAnswer(idx, btn);
-        } else {
-            btn.disabled = true;
-            if (idx === prevAnswer) {
-                btn.classList.add(opt.isCorrect ? 'correct' : 'incorrect');
-            } else if (opt.isCorrect) {
-                btn.classList.add('correct');
-            }
-        }
-        optionsContainer.appendChild(btn);
-    });
-    
-    // Back Button State
-    const btnBack = document.getElementById('btn-quiz-back');
-    btnBack.disabled = (currentQuizIndex === 0);
-    
-    // Next Button State
-    const btnNext = document.getElementById('btn-quiz-next');
-    if (prevAnswer !== null) {
-        btnNext.removeAttribute('disabled');
-        btnNext.textContent = (currentQuizIndex === quizSplitData.length - 1) ? 'Selesai' : 'Lanjut';
-        
-        // Show explanation for already answered questions
-        const isCorrect = currentQuiz.options[prevAnswer].isCorrect;
-        expBox.removeAttribute('hidden');
-        expBox.classList.add(isCorrect ? 'correct-explanation' : 'incorrect-explanation');
-        document.getElementById('quiz-split-exp-icon').textContent = isCorrect ? 'check' : 'close';
-        document.getElementById('explanation-header-title').textContent = isCorrect ? 'Jawaban Benar!' : 'Jawaban Kurang Tepat';
-        document.getElementById('explanation-header-title').style.color = isCorrect ? 'var(--color-success)' : 'var(--color-error)';
-        document.getElementById('quiz-split-explanation-text').textContent = currentQuiz.options[prevAnswer].rationale;
-    } else {
-        btnNext.setAttribute('disabled', 'true');
-        btnNext.textContent = 'Lanjut';
-    }
-}
-
-function selectSplitAnswer(optionIndex, optionBtn) {
-    const currentQuiz = quizSplitData[currentQuizIndex];
-    quizAnswersState[currentQuizIndex] = optionIndex;
-    
-    const allButtons = document.querySelectorAll('.split-option-btn');
-    allButtons.forEach(btn => btn.disabled = true);
-    
-    const isCorrect = currentQuiz.options[optionIndex].isCorrect;
-    
-    // Highlight selected option
-    optionBtn.classList.add(isCorrect ? 'correct' : 'incorrect');
-    
-    // Highlight correct option if wrong
-    if (!isCorrect) {
-        const correctIdx = currentQuiz.options.findIndex(opt => opt.isCorrect);
-        if (correctIdx !== -1 && allButtons[correctIdx]) {
-            allButtons[correctIdx].classList.add('correct');
-        }
-        quizWrongCount++;
-        document.getElementById('count-wrong').textContent = quizWrongCount;
-    } else {
-        quizCorrectCount++;
-        document.getElementById('count-correct').textContent = quizCorrectCount;
-    }
-    
-    // Update progress segment color
-    const segments = document.querySelectorAll('.progress-segment');
-    if (segments[currentQuizIndex]) {
-        segments[currentQuizIndex].classList.remove('active');
-        segments[currentQuizIndex].classList.add(isCorrect ? 'correct' : 'wrong');
-    }
-    
-    // Show explanation
-    const expBox = document.getElementById('quiz-split-explanation');
-    expBox.removeAttribute('hidden');
-    expBox.classList.add(isCorrect ? 'correct-explanation' : 'incorrect-explanation');
-    document.getElementById('quiz-split-exp-icon').textContent = isCorrect ? 'check' : 'close';
-    document.getElementById('explanation-header-title').textContent = isCorrect ? 'Jawaban Benar!' : 'Jawaban Kurang Tepat';
-    document.getElementById('explanation-header-title').style.color = isCorrect ? 'var(--color-success)' : 'var(--color-error)';
-    document.getElementById('quiz-split-explanation-text').textContent = currentQuiz.options[optionIndex].rationale;
-    
-    // Enable Next Button
-    const btnNext = document.getElementById('btn-quiz-next');
-    btnNext.removeAttribute('disabled');
-    btnNext.textContent = (currentQuizIndex === quizSplitData.length - 1) ? 'Selesai' : 'Lanjut';
-}
-
-function handleSplitNext() {
-    if (currentQuizIndex < quizSplitData.length - 1) {
-        currentQuizIndex++;
-        loadSplitQuestion();
-    } else {
-        showQuizResults();
-    }
-}
-
-function showQuizResults() {
-    // Hide progress bar and stats
-    const progressRow = document.querySelector('.quiz-split-progress-row');
-    if (progressRow) progressRow.style.display = 'none';
-    
-    const body = document.getElementById('quiz-split-body');
-    const footer = document.querySelector('.quiz-split-footer');
-    if (footer) footer.style.display = 'none';
-    
-    const percentage = Math.round((quizCorrectCount / quizSplitData.length) * 100);
-    
-    body.innerHTML = `
-      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; height: 100%; padding: 40px 16px;">
-        <div style="font-size: 80px; animation: bounce 1s ease infinite;">🎉</div>
-        <div>
-          <h2 style="font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Kuis Selesai!</h2>
-          <p style="color: var(--text-secondary); font-size: 14px; max-width: 320px; margin: 0 auto;">Luar biasa! Kamu telah menyelesaikan kuis Frontend Web Development.</p>
-        </div>
-        
-        <div style="display: flex; gap: 20px; width: 100%; max-width: 340px; margin-top: 10px;">
-          <div style="flex: 1; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-align: center;">
-            <div style="font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Akurasi</div>
-            <div style="font-size: 28px; font-weight: 800; color: var(--accent-primary); margin-top: 4px;">\${percentage}%</div>
-          </div>
-          <div style="flex: 1; background: var(--bg-surface-2); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-align: center;">
-            <div style="font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Skor</div>
-            <div style="font-size: 28px; font-weight: 800; color: var(--color-success); margin-top: 4px;">\${quizCorrectCount}/\${quizSplitData.length}</div>
-          </div>
-        </div>
-        
-        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 340px; margin-top: 20px;">
-          <button onclick="initQuizWorkspace(); const pRow = document.querySelector('.quiz-split-progress-row'); if (pRow) pRow.style.display = 'flex'; const fRow = document.querySelector('.quiz-split-footer'); if (fRow) fRow.style.display = 'flex';" 
-            style="width: 100%; background: var(--accent-primary); color: var(--accent-on); border: none; padding: 12px; border-radius: var(--radius-pill); font-weight: 700; font-family: var(--font-ui); cursor: pointer; box-shadow: 0 4px 12px var(--accent-glow);">
-            Ulangi Kuis
-          </button>
-          <button onclick="closeQuizWorkspace();" 
-            style="width: 100%; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-strong); padding: 12px; border-radius: var(--radius-pill); font-weight: 600; font-family: var(--font-ui); cursor: pointer; transition: 0.2s;"
-            onmouseover="this.style.background='var(--bg-hover)'; this.style.color='var(--text-primary)';"
-            onmouseout="this.style.background='transparent'; this.style.color='var(--text-secondary)';">
-            Kembali ke Belajar
-          </button>
-        </div>
-      </div>
-    `;
-    
-    // Add dynamic CSS animation if not already present
-    if (!document.getElementById('bounce-anim')) {
-        const style = document.createElement('style');
-        style.id = 'bounce-anim';
-        style.textContent = `
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-          }
-        `;
-        document.head.appendChild(style);
-    }
-}
-
-// Make globally accessible
-window.openQuizWorkspace = openQuizWorkspace;
-window.closeQuizWorkspace = closeQuizWorkspace;
-window.initQuizWorkspace = initQuizWorkspace;
