@@ -337,6 +337,7 @@ function doSend() {
       removeTyping();
       
       const isQuiz = text.toLowerCase().includes('kuis') || text.toLowerCase().includes('quiz');
+      const isFlashcards = text.toLowerCase().includes('kartu belajar') || text.toLowerCase().includes('flashcards') || text.toLowerCase().includes('flashcard');
       const params = new URLSearchParams(window.location.search);
       const sessionKey = params.get('session');
       
@@ -349,6 +350,15 @@ function doSend() {
       } else if (isQuiz && sessionKey === 'algoritma') {
           appendAiMsg("Tentu! Saya telah menyiapkan kuis interaktif **Kuis Algoritma & Pemrograman** seputar algoritma sorting dan searching di panel kanan Anda. Selamat mengerjakan! 💻✨");
           startAlgoritmaQuiz();
+      } else if (isFlashcards && sessionKey === 'kalkulus') {
+          appendAiMsg("Tentu! Saya telah menyiapkan 12 **Kartu Belajar (Flashcards) Kalkulus** interaktif yang mencakup materi Limit, Turunan, Integral, dan Aplikasinya di panel kanan Anda. Silakan pelajari dan uji pemahaman Anda! 📐✨");
+          startCalculusFlashcards();
+      } else if (isFlashcards && sessionKey === 'ppkn') {
+          appendAiMsg("Tentu! Saya telah menyiapkan **Kartu Belajar PPKn** interaktif seputar Pancasila dan Konstitusi di panel kanan Anda. Silakan pelajari dan uji pemahaman Anda! 🏛️✨");
+          startPpknFlashcards();
+      } else if (isFlashcards && sessionKey === 'algoritma') {
+          appendAiMsg("Tentu! Saya telah menyiapkan **Kartu Belajar Algoritma & Pemrograman** interaktif seputar Sorting, Searching, dan Struktur Data di panel kanan Anda. Silakan pelajari dan uji pemahaman Anda! 💻✨");
+          startAlgoritmaFlashcards();
       } else {
           const reply = aiReplies[messages.length % aiReplies.length];
           appendAiMsg(reply);
@@ -550,9 +560,10 @@ function ctxAction(action) {
 
 /* ── Studio ───────────────────────────────────────────────── */
 function generateStudioContent(type) {
+    const params = new URLSearchParams(window.location.search);
+    const sessionKey = params.get('session');
+    
     if (type === 'Kuis') {
-        const params = new URLSearchParams(window.location.search);
-        const sessionKey = params.get('session');
         if (sessionKey === 'kalkulus') {
             startCalculusQuiz();
             return;
@@ -561,6 +572,17 @@ function generateStudioContent(type) {
             return;
         } else if (sessionKey === 'algoritma') {
             startAlgoritmaQuiz();
+            return;
+        }
+    } else if (type === 'Kartu Belajar') {
+        if (sessionKey === 'kalkulus') {
+            startCalculusFlashcards();
+            return;
+        } else if (sessionKey === 'ppkn') {
+            startPpknFlashcards();
+            return;
+        } else if (sessionKey === 'algoritma') {
+            startAlgoritmaFlashcards();
             return;
         }
     }
@@ -1178,3 +1200,455 @@ function showQuizResults() {
         </style>
     `;
 }
+
+/* ── Interactive Flashcard (Kartu Belajar) Studio Engine ──── */
+let activeFlashcardsDeck = [];
+let fcIndex = 0;
+let fcFilter = 'Semua';
+let fcFlipped = false;
+
+function startCalculusFlashcards() {
+    fcFilter = 'Semua';
+    fcIndex = 0;
+    fcFlipped = false;
+    activeFlashcardsDeck = [
+        {
+            category: "Limit",
+            question: "Apa yang dimaksud dengan limit suatu fungsi f(x) saat x mendekati a?",
+            answer: "Limit adalah nilai yang didekati f(x) ketika x semakin dekat ke nilai a, tanpa harus tepat di a.",
+            formula: "lim(x→a) f(x) = L",
+            subtext: "Penting: f(a) belum tentu sama dengan L. Limit membahas perilaku fungsi di sekitar titik, bukan di titiknya.",
+            rated: null // 'paham' or 'ulang' or null
+        },
+        {
+            category: "Limit",
+            question: "Apa bunyi Teorema Apit (Squeeze Theorem) dalam penentuan limit?",
+            answer: "Jika f(x) ≤ g(x) ≤ h(x) untuk semua x dekat a, dan limit f(x) serta h(x) saat x→a adalah L, maka limit g(x) juga L.",
+            formula: "lim f(x) = lim h(x) = L ⇒ lim g(x) = L",
+            subtext: "Sangat berguna untuk mencari limit fungsi trigonometri kompleks seperti x² sin(1/x).",
+            rated: null
+        },
+        {
+            category: "Limit",
+            question: "Kapan suatu limit fungsi dikatakan ada (exist) di suatu titik x = a?",
+            answer: "Limit f(x) saat x mendekati a ada jika dan hanya jika limit kiri sama dengan limit kanan.",
+            formula: "lim(x→a⁻) f(x) = lim(x→a⁺) f(x) = L",
+            subtext: "Jika kedua limit sepihak bernilai berbeda, maka limit tersebut dikatakan tidak ada (Does Not Exist / DNE).",
+            rated: null
+        },
+        {
+            category: "Turunan",
+            question: "Apa definisi formal dari turunan f'(x) menggunakan limit?",
+            answer: "Turunan adalah limit dari perubahan rata-rata fungsi saat perubahan input (h) mendekati nol.",
+            formula: "f'(x) = lim(h→0) [f(x+h) - f(x)] / h",
+            subtext: "Definisi ini merepresentasikan kemiringan garis singgung kurva f(x) pada titik x.",
+            rated: null
+        },
+        {
+            category: "Turunan",
+            question: "Bagaimana aturan rantai (Chain Rule) digunakan untuk turunan fungsi komposisi f(g(x))?",
+            answer: "Turunan dari f(g(x)) adalah turunan fungsi luar dikali turunan fungsi dalam.",
+            formula: "d/dx [f(g(x))] = f'(g(x)) · g'(x)",
+            subtext: "Sering ditulis dalam notasi Leibniz sebagai dy/dx = (dy/du) · (du/dx).",
+            rated: null
+        },
+        {
+            category: "Turunan",
+            question: "Apa aturan turunan hasil kali (Product Rule) untuk dua fungsi u(x) dan v(x)?",
+            answer: "Turunan dari perkalian dua fungsi adalah turunan pertama dikali kedua ditambah pertama dikali turunan kedua.",
+            formula: "(u · v)' = u'v + uv'",
+            subtext: "Jangan tertukar dengan aturan hasil bagi (Quotient Rule) yang memiliki tanda minus dan pembagi v².",
+            rated: null
+        },
+        {
+            category: "Integral",
+            question: "Apa bunyi Teorema Dasar Kalkulus I (Fundamental Theorem of Calculus I)?",
+            answer: "Jika F(x) adalah integral dari f(t) dari a ke x, maka turunan dari F(x) adalah f(x) itu sendiri.",
+            formula: "d/dx [ ∫[a to x] f(t) dt ] = f(x)",
+            subtext: "Teorema ini membuktikan bahwa turunan dan integral adalah dua operasi yang saling berkebalikan.",
+            rated: null
+        },
+        {
+            category: "Integral",
+            question: "Bagaimana rumus dasar Integral Substitusi (perluasan aturan rantai)?",
+            answer: "Metode substitusi digunakan dengan memisalkan u = g(x) sehingga du = g'(x)dx untuk menyederhanakan integrand.",
+            formula: "∫ f(g(x))g'(x) dx = ∫ f(u) du",
+            subtext: "Cari bagian dari integran yang merupakan turunan dari bagian lainnya.",
+            rated: null
+        },
+        {
+            category: "Integral",
+            question: "Bagaimana rumus dasar dari Integral Parsial (Integration by Parts)?",
+            answer: "Integral parsial diturunkan dari aturan perkalian (Product Rule) pada turunan.",
+            formula: "∫ u dv = u·v - ∫ v du",
+            subtext: "Pilihlah bagian 'u' yang mudah diturunkan, dan 'dv' yang mudah diintegralkan (Aturan LIATE).",
+            rated: null
+        },
+        {
+            category: "Aplikasi",
+            question: "Bagaimana menentukan titik stasioner dan jenis ekstrem dari fungsi f(x)?",
+            answer: "Titik stasioner dicapai saat f'(x) = 0. Titik maksimum terjadi jika f''(x) < 0, dan minimum jika f''(x) > 0.",
+            formula: "Stasioner: f'(c) = 0 ; Maks: f''(c) < 0 ; Min: f''(c) > 0",
+            subtext: "Jika f''(c) = 0, gunakan uji turunan pertama di sekitar titik c untuk menentukan jenis stasionernya.",
+            rated: null
+        },
+        {
+            category: "Aplikasi",
+            question: "Bagaimana cara menghitung luas daerah di bawah kurva y = f(x) dari x = a ke x = b?",
+            answer: "Luas daerah dihitung menggunakan Integral Tentu dari fungsi f(x) pada selang batas [a, b].",
+            formula: "Luas = ∫[a to b] f(x) dx",
+            subtext: "Pastikan kurva berada di atas sumbu X. Jika kurva di bawah sumbu X, integralkan nilai mutlak fungsinya.",
+            rated: null
+        },
+        {
+            category: "Aplikasi",
+            question: "Apa syarat suatu fungsi f(x) dikatakan kontinu di titik x = a?",
+            answer: "Fungsi dikatakan kontinu jika nilai limit saat x mendekati a sama dengan nilai fungsi di titik a tersebut.",
+            formula: "lim(x→a) f(x) = f(a)",
+            subtext: "Syarat ini mencakup tiga hal: f(a) terdefinisi, limit f(x) ada, dan kedua nilai tersebut sama.",
+            rated: null
+        }
+    ];
+    initStudioFlashcards();
+}
+
+function startPpknFlashcards() {
+    fcFilter = 'Semua';
+    fcIndex = 0;
+    fcFlipped = false;
+    activeFlashcardsDeck = [
+        {
+            category: "Pancasila",
+            question: "Apa makna lambang sila ke-1 Pancasila, yaitu Bintang Emas?",
+            answer: "Bintang emas melambangkan cahaya rohani bagi setiap manusia, dipancarkan oleh Tuhan Yang Maha Esa.",
+            formula: "Ketuhanan Yang Maha Esa",
+            subtext: "Lambang ini terletak di bagian tengah perisai Garuda Pancasila.",
+            rated: null
+        },
+        {
+            category: "Konstitusi",
+            question: "Pasal berapa di UUD 1945 yang menjamin kemerdekaan tiap penduduk untuk memeluk agamanya masing-masing?",
+            answer: "Pasal 29 ayat 2 UUD 1945 menjamin kemerdekaan beragama bagi seluruh masyarakat.",
+            formula: "Pasal 29 Ayat 2 UUD 1945",
+            subtext: "Negara menjamin kemerdekaan tiap-tiap penduduk untuk memeluk agamanya masing-masing.",
+            rated: null
+        },
+        {
+            category: "Kewarganegaraan",
+            question: "Apa asas kewarganegaraan yang berdasarkan pertalian darah atau keturunan?",
+            answer: "Asas Ius Sanguinis (Asas Keturunan) menetapkan kewarganegaraan seseorang berdasarkan kewarganegaraan orang tuanya.",
+            formula: "Asas Keturunan / Ius Sanguinis",
+            subtext: "Kebalikan dari Ius Soli yang menetapkan berdasarkan tempat kelahiran.",
+            rated: null
+        }
+    ];
+    initStudioFlashcards();
+}
+
+function startAlgoritmaFlashcards() {
+    fcFilter = 'Semua';
+    fcIndex = 0;
+    fcFlipped = false;
+    activeFlashcardsDeck = [
+        {
+            category: "Sorting",
+            question: "Apa karakteristik utama dari algoritma Insertion Sort?",
+            answer: "Mengurutkan data dengan cara mengambil satu per satu elemen lalu menyisipkannya pada posisi yang tepat dalam array terurut.",
+            formula: "Time Complexity: O(n²)",
+            subtext: "Sangat efisien untuk dataset kecil atau data yang hampir terurut.",
+            rated: null
+        },
+        {
+            category: "Searching",
+            question: "Bagaimana pembagian ruang pencarian pada Binary Search?",
+            answer: "Binary Search membagi ruang pencarian menjadi setengah di setiap iterasi dengan membandingkan nilai tengah.",
+            formula: "Time Complexity: O(log n)",
+            subtext: "Syarat wajib agar Binary Search bekerja adalah data harus dalam kondisi terurut.",
+            rated: null
+        },
+        {
+            category: "Struktur Data",
+            question: "Apa perbedaan utama antara Stack dan Queue dalam pengelolaan data?",
+            answer: "Stack menerapkan prinsip LIFO (Last In First Out), sedangkan Queue menerapkan prinsip FIFO (First In First Out).",
+            formula: "Stack: LIFO | Queue: FIFO",
+            subtext: "Stack mirip seperti tumpukan piring, Queue mirip seperti antrean loket.",
+            rated: null
+        }
+    ];
+    initStudioFlashcards();
+}
+
+function getFilteredFlashcards() {
+    if (fcFilter === 'Semua') return activeFlashcardsDeck;
+    return activeFlashcardsDeck.filter(card => card.category.toLowerCase() === fcFilter.toLowerCase());
+}
+
+function initStudioFlashcards() {
+    const studio = document.getElementById('studio');
+    if (!studio) return;
+
+    studio.classList.add('expanded');
+
+    studio.innerHTML = `
+        <div class="studio-expanded-workspace" style="display: flex; flex-direction: column; height: 100%;">
+          <!-- Header -->
+          <div class="quiz-split-header" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 24px; border-bottom: 1px solid var(--border); background: var(--bg-surface);">
+            <div class="quiz-split-header__left" style="display: flex; align-items: center; gap: 10px;">
+              <span class="material-icons-round quiz-split-icon" style="color: var(--accent-primary);">style</span>
+              <span class="quiz-split-title" style="font-family: var(--font-ui); font-size: 1.1rem; font-weight: 700; color: var(--text-primary);">KARTU BELAJAR · ${activeQuiz ? activeQuiz.toUpperCase() : 'KALKULUS'}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="fc-progress-dots-row" id="fc-progress-dots" style="display: flex; gap: 6px;">
+                <!-- progress dots dynamically generated -->
+              </div>
+              <span class="quiz-counter-text" id="fc-counter-text" style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--text-secondary);">1 / 12</span>
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="quiz-split-body" style="flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column;">
+            
+            <!-- Category Pills Filter -->
+            <div class="flashcard-category-row" id="fc-categories-container">
+              <!-- Category pills dynamically generated -->
+            </div>
+
+            <!-- Flipped Card Wrapper -->
+            <div class="flashcard-wrapper" onclick="flipFlashcard()">
+              <div class="flashcard-inner" id="fc-card-inner">
+                
+                <!-- FRONT (Pertanyaan) -->
+                <div class="flashcard-front">
+                  <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div class="fc-badge fc-badge-question">
+                      <span class="material-icons-round" style="font-size: 14px;">help_outline</span>
+                      <span>Pertanyaan</span>
+                    </div>
+                    <div class="fc-category-label" id="fc-front-category">LIMIT</div>
+                    <div class="fc-main-text" id="fc-front-question">Loading question...</div>
+                  </div>
+                  <div class="fc-hint-footer">
+                    <span class="material-icons-round">cached</span>
+                    <span>Klik kartu untuk lihat jawaban</span>
+                  </div>
+                </div>
+
+                <!-- BACK (Jawaban) -->
+                <div class="flashcard-back">
+                  <div style="display: flex; flex-direction: column; gap: 14px; flex: 1;">
+                    <div class="fc-badge fc-badge-answer">
+                      <span class="material-icons-round" style="font-size: 14px;">lightbulb</span>
+                      <span>Jawaban</span>
+                    </div>
+                    <div class="fc-main-text" id="fc-back-answer" style="font-size: 0.95rem; font-weight: 500;">Loading answer...</div>
+                    <div class="fc-formula-box" id="fc-back-formula">lim(x→a) f(x) = L</div>
+                  </div>
+                  <div class="fc-subtext-note" id="fc-back-note">
+                    <span class="material-icons-round">info</span>
+                    <span id="fc-back-note-text">Penting: f(a) belum tentu sama dengan L...</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Navigation Bar + Rating Actions -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+              
+              <!-- Left Arrow, Balik, Right Arrow -->
+              <div style="display: flex; gap: 8px;">
+                <button class="fc-btn-paham" id="fc-prev-btn" onclick="prevFlashcard()" style="padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); min-width: 44px; justify-content: center;">
+                  <span class="material-icons-round">arrow_back</span>
+                </button>
+                <button class="fc-btn-paham" onclick="flipFlashcard()" style="font-weight: 700; border-radius: var(--radius-sm); min-width: 90px; justify-content: center;">
+                  <span class="material-icons-round">history</span>
+                  <span>Balik</span>
+                </button>
+                <button class="fc-btn-paham" id="fc-next-btn" onclick="nextFlashcard()" style="padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border); min-width: 44px; justify-content: center;">
+                  <span class="material-icons-round">arrow_forward</span>
+                </button>
+              </div>
+
+              <!-- Rating Buttons (Paham / Perlu ulang) -->
+              <div class="fc-rating-actions" id="fc-rating-container" style="visibility: hidden;">
+                <button class="fc-btn-paham" onclick="rateFlashcard('paham')">
+                  <span class="material-icons-round" style="color: var(--color-success);">check</span>
+                  <span>Sudah paham</span>
+                </button>
+                <button class="fc-btn-ulang" onclick="rateFlashcard('ulang')">
+                  <span class="material-icons-round" style="color: #ef5350;">refresh</span>
+                  <span>Perlu diulang</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Footer Stats -->
+          <div class="fc-stats-row">
+            <div class="fc-stat-item fc-stat-paham">
+              <span class="fc-stat-num" id="fc-stat-paham-val">0</span>
+              <span class="fc-stat-label">Paham</span>
+            </div>
+            <div style="width: 1px; height: 16px; background: var(--divider);"></div>
+            <div class="fc-stat-item fc-stat-ulang">
+              <span class="fc-stat-num" id="fc-stat-ulang-val">0</span>
+              <span class="fc-stat-label">Perlu ulang</span>
+            </div>
+            <div style="width: 1px; height: 16px; background: var(--divider);"></div>
+            <div class="fc-stat-item fc-stat-belum">
+              <span class="fc-stat-num" id="fc-stat-belum-val">12</span>
+              <span class="fc-stat-label">Belum dinilai</span>
+            </div>
+            <div style="margin-left: auto;">
+              <button onclick="closeStudioQuiz()" style="font-family: var(--font-ui); font-size: 13px; font-weight: 700; color: var(--text-secondary); cursor: pointer; background: none; border: none; padding: 6px 12px; border-radius: 4px; transition: all 0.2s;">Tutup Studio</button>
+            </div>
+          </div>
+        </div>
+    `;
+
+    renderFlashcard();
+}
+
+function renderFlashcard() {
+    const filtered = getFilteredFlashcards();
+    if (!filtered || filtered.length === 0) {
+        document.getElementById('fc-front-question').textContent = "Tidak ada kartu belajar di kategori ini.";
+        document.getElementById('fc-front-category').textContent = "";
+        document.getElementById('fc-counter-text').textContent = "0 / 0";
+        document.getElementById('fc-progress-dots').innerHTML = "";
+        return;
+    }
+
+    // Adjust active index
+    if (fcIndex >= filtered.length) fcIndex = filtered.length - 1;
+    if (fcIndex < 0) fcIndex = 0;
+
+    const currentCard = filtered[fcIndex];
+
+    // Reset flipped state on card
+    fcFlipped = false;
+    const cardInner = document.getElementById('fc-card-inner');
+    if (cardInner) cardInner.classList.remove('flipped');
+
+    // Hide rating actions by default (only visible on back)
+    document.getElementById('fc-rating-container').style.visibility = 'hidden';
+
+    // Set Text Content
+    document.getElementById('fc-front-question').textContent = currentCard.question;
+    document.getElementById('fc-front-category').textContent = currentCard.category.toUpperCase();
+    document.getElementById('fc-back-answer').textContent = currentCard.answer;
+    document.getElementById('fc-back-formula').textContent = currentCard.formula;
+    document.getElementById('fc-back-note-text').textContent = currentCard.subtext;
+    document.getElementById('fc-counter-text').textContent = `${fcIndex + 1} / ${filtered.length}`;
+
+    // Render filter categories pills
+    const categoriesSet = new Set(activeFlashcardsDeck.map(c => c.category));
+    const categoriesList = ['Semua', ...Array.from(categoriesSet)];
+    
+    const catContainer = document.getElementById('fc-categories-container');
+    catContainer.innerHTML = categoriesList.map(cat => {
+        const isActive = fcFilter.toLowerCase() === cat.toLowerCase() ? 'active' : '';
+        return `<button class="flashcard-pill ${isActive}" onclick="filterFlashcards('${cat}')">${cat}</button>`;
+    }).join('');
+
+    // Render progress dots
+    const dotsContainer = document.getElementById('fc-progress-dots');
+    dotsContainer.innerHTML = filtered.map((c, idx) => {
+        let dotStyle = 'background-color: var(--text-disabled);';
+        if (idx === fcIndex) {
+            dotStyle = 'background-color: var(--accent-primary);';
+        } else if (c.rated === 'paham') {
+            dotStyle = 'background-color: var(--color-success);';
+        } else if (c.rated === 'ulang') {
+            dotStyle = 'background-color: #ef5350;';
+        }
+        return `<div style="width: 6px; height: 6px; border-radius: 50%; ${dotStyle} transition: all 0.2s;"></div>`;
+    }).join('');
+
+    // Disable navigation buttons if out of range
+    document.getElementById('fc-prev-btn').disabled = fcIndex === 0;
+    document.getElementById('fc-next-btn').disabled = fcIndex === filtered.length - 1;
+
+    // Recalculate stats
+    recalculateFcStats();
+}
+
+function flipFlashcard() {
+    const cardInner = document.getElementById('fc-card-inner');
+    if (!cardInner) return;
+
+    fcFlipped = !fcFlipped;
+    if (fcFlipped) {
+        cardInner.classList.add('flipped');
+        document.getElementById('fc-rating-container').style.visibility = 'visible';
+    } else {
+        cardInner.classList.remove('flipped');
+        document.getElementById('fc-rating-container').style.visibility = 'hidden';
+    }
+}
+
+function filterFlashcards(cat) {
+    fcFilter = cat;
+    fcIndex = 0;
+    fcFlipped = false;
+    renderFlashcard();
+}
+
+window.prevFlashcard = function() {
+    if (fcIndex > 0) {
+        fcIndex--;
+        renderFlashcard();
+    }
+}
+
+window.nextFlashcard = function() {
+    const filtered = getFilteredFlashcards();
+    if (fcIndex < filtered.length - 1) {
+        fcIndex++;
+        renderFlashcard();
+    }
+}
+
+window.rateFlashcard = function(status) {
+    const filtered = getFilteredFlashcards();
+    if (!filtered || filtered.length === 0) return;
+
+    const currentCard = filtered[fcIndex];
+    currentCard.rated = status;
+
+    recalculateFcStats();
+
+    // Automatically navigate to next card after a brief, smooth delay
+    setTimeout(() => {
+        if (fcIndex < filtered.length - 1) {
+            fcIndex++;
+            renderFlashcard();
+        } else {
+            // Flipped first to show rated status dot update
+            renderFlashcard();
+        }
+    }, 250);
+}
+
+function recalculateFcStats() {
+    let paham = 0;
+    let ulang = 0;
+    let belum = 0;
+
+    activeFlashcardsDeck.forEach(card => {
+        if (card.rated === 'paham') paham++;
+        else if (card.rated === 'ulang') ulang++;
+        else belum++;
+    });
+
+    const pahamVal = document.getElementById('fc-stat-paham-val');
+    const ulangVal = document.getElementById('fc-stat-ulang-val');
+    const belumVal = document.getElementById('fc-stat-belum-val');
+
+    if (pahamVal) pahamVal.textContent = paham;
+    if (ulangVal) ulangVal.textContent = ulang;
+    if (belumVal) belumVal.textContent = belum;
+}
+
