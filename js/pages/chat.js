@@ -380,7 +380,10 @@ function appendAiMsg(html) {
     group.className = 'msg-group';
     group.innerHTML = `
     <div class="msg-ai">
-      <div class="ai-avatar">✨</div>
+      <div class="ai-avatar">
+        <img src="../../assets/images/profile_logo_dark.png" alt="AI Avatar" class="ai-avatar-img theme-dark-avatar">
+        <img src="../../assets/images/profile_logo_light.png" alt="AI Avatar" class="ai-avatar-img theme-light-avatar">
+      </div>
       <div class="bubble">
         ${formatMsgHtml(html)}
       </div>
@@ -420,7 +423,10 @@ function showTyping() {
     typingEl.className = 'typing-indicator';
     typingEl.id = 'typing-indicator';
     typingEl.innerHTML = `
-    <div class="ai-avatar">✨</div>
+    <div class="ai-avatar">
+      <img src="../../assets/images/profile_logo_dark.png" alt="AI Avatar" class="ai-avatar-img theme-dark-avatar">
+      <img src="../../assets/images/profile_logo_light.png" alt="AI Avatar" class="ai-avatar-img theme-light-avatar">
+    </div>
     <div class="typing-dots">
       <span></span><span></span><span></span>
     </div>
