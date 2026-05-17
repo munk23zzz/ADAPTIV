@@ -473,10 +473,10 @@ function renderSources() {
 
     if (sources.length === 0) {
         list.innerHTML = `
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; text-align: center; color: var(--text-muted); opacity: 0.85;">
+            <div class="sources-empty-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; text-align: center; color: var(--text-muted); opacity: 0.85; transition: padding var(--transition);">
                 <span class="material-icons-round" style="font-size: 40px; margin-bottom: 12px; color: var(--text-disabled);">description</span>
-                <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Belum ada sumber</div>
-                <div style="font-size: 11px; margin-top: 4px; line-height: 1.4; color: var(--text-muted);">Tambahkan dokumen atau seret file Anda untuk memulai belajar</div>
+                <div class="empty-title" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Belum ada sumber</div>
+                <div class="empty-desc" style="font-size: 11px; margin-top: 4px; line-height: 1.4; color: var(--text-muted);">Tambahkan dokumen atau seret file Anda untuk memulai belajar</div>
             </div>
         `;
         return;
