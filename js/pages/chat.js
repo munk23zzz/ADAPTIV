@@ -1,9 +1,5 @@
 /* ── Data ─────────────────────────────────────────────────── */
-let sources = [
-  { id: 1, name: 'Limit_dan_Turunan.pdf', type: 'PDF', icon: '📄', checked: true },
-  { id: 2, name: 'Pancasila_dan_UUD1945.pdf', type: 'PDF', icon: '📄', checked: true },
-  { id: 3, name: 'Sorting_Algorithm.pdf', type: 'PDF', icon: '📄', checked: true },
-];
+let sources = [];
 
 
 let messages = [];
@@ -448,6 +444,18 @@ function scrollBottom() {
 function renderSources() {
     const list = document.getElementById('sources-list');
     if (!list) return;
+
+    if (sources.length === 0) {
+        list.innerHTML = `
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 16px; text-align: center; color: var(--text-muted); opacity: 0.85;">
+                <span class="material-icons-round" style="font-size: 40px; margin-bottom: 12px; color: var(--text-disabled);">description</span>
+                <div style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Belum ada sumber</div>
+                <div style="font-size: 11px; margin-top: 4px; line-height: 1.4; color: var(--text-muted);">Tambahkan dokumen atau seret file Anda untuk memulai belajar</div>
+            </div>
+        `;
+        return;
+    }
+
     list.innerHTML = sources.map(s => `
   <div class="source-item ${s.checked ? 'checked' : ''}" data-id="${s.id}" onclick="toggleSource(${s.id})">
     <div class="source-check">
