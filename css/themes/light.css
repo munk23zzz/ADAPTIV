@@ -6,7 +6,9 @@
     /* ── BACKGROUNDS ── */
     --bg-base:      #F0F2F5;
     --bg-surface:   #FFFFFF;
+    --bg-surface-rgb: 255, 255, 255;
     --bg-surface-2: #F6F8FA;
+    --bg-surface-2-rgb: 246, 248, 250;
     --bg-panel:     #FFFFFF;
     --bg-hover:     #E8ECF0;
     --bg-active:    #D0F5ED;
@@ -41,8 +43,10 @@
     --color-success-rgb:    5, 150, 105;
     --color-success-subtle: rgba(5, 150, 105, 0.08);
     --color-warning:        #D97706;
+    --color-warning-rgb:    217, 119, 6;
     --color-warning-subtle: rgba(217, 119, 6, 0.08);
     --color-error:          #DC2626;
+    --color-error-rgb:      220, 38, 38;
     --color-error-subtle:   rgba(220, 38, 38, 0.08);
     --color-info:           #2563EB;
     --color-info-subtle:    rgba(37, 99, 235, 0.08);
