@@ -1348,6 +1348,25 @@ img {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px;
 }
 
+.welcome-hand {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.5s infinite ease-in-out;
+  filter: grayscale(1) brightness(1.4) contrast(1.1);
+  opacity: 0.92;
+  margin-left: 4px;
+}
+
+@keyframes wave-hand {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1200px) {
   .dashboard-wrap { 
