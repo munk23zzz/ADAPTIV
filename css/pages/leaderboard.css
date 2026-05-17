@@ -4,12 +4,32 @@
 
 :root {
   --podium-grid: rgba(255, 255, 255, 0.03);
+  --podium-bg: linear-gradient(180deg, rgba(var(--accent-tertiary-rgb), 0.15) 0%, rgba(var(--accent-primary-rgb), 0.04) 100%);
   --column-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 15px 30px rgba(0,0,0,0.3);
+  
+  --pillar-gold-bg: linear-gradient(to top, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.25) 100%);
+  --pillar-gold-border: rgba(255, 215, 0, 0.45);
+  --pillar-silver-bg: linear-gradient(to top, rgba(192, 192, 192, 0.08) 0%, rgba(192, 192, 192, 0.22) 100%);
+  --pillar-silver-border: rgba(192, 192, 192, 0.38);
+  --pillar-bronze-bg: linear-gradient(to top, rgba(205, 127, 50, 0.08) 0%, rgba(205, 127, 50, 0.2) 100%);
+  --pillar-bronze-border: rgba(205, 127, 50, 0.35);
+  
+  --pillar-number-opacity: 0.22;
 }
 
 [data-theme="light"] {
-  --podium-grid: rgba(0, 0, 0, 0.025);
-  --column-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.06);
+  --podium-grid: rgba(0, 0, 0, 0.03);
+  --podium-bg: linear-gradient(180deg, rgba(var(--accent-tertiary-rgb), 0.09) 0%, rgba(var(--accent-primary-rgb), 0.06) 100%);
+  --column-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 10px 22px rgba(0,0,0,0.06);
+  
+  --pillar-gold-bg: linear-gradient(to top, rgba(255, 215, 0, 0.32) 0%, rgba(255, 215, 0, 0.6) 100%);
+  --pillar-gold-border: rgba(212, 175, 55, 0.85);
+  --pillar-silver-bg: linear-gradient(to top, rgba(185, 185, 185, 0.28) 0%, rgba(185, 185, 185, 0.55) 100%);
+  --pillar-silver-border: rgba(145, 145, 145, 0.7);
+  --pillar-bronze-bg: linear-gradient(to top, rgba(215, 137, 60, 0.28) 0%, rgba(215, 137, 60, 0.52) 100%);
+  --pillar-bronze-border: rgba(185, 105, 45, 0.75);
+  
+  --pillar-number-opacity: 0.48;
 }
 
 body {
@@ -49,7 +69,7 @@ body {
   align-items: flex-end;
   gap: 24px;
   padding: 60px 32px 40px;
-  background: linear-gradient(180deg, rgba(var(--accent-tertiary-rgb), 0.08) 0%, rgba(var(--accent-primary-rgb), 0.02) 100%);
+  background: var(--podium-bg);
   border-bottom: 1px solid var(--border);
   position: relative;
   overflow: hidden;
@@ -186,7 +206,7 @@ body {
   font-family: var(--font-ui);
   font-size: 2.5rem;
   font-weight: 900;
-  opacity: 0.15;
+  opacity: var(--pillar-number-opacity);
   color: var(--text-primary);
   user-select: none;
 }
@@ -201,9 +221,9 @@ body {
 }
 .rank-1 .podium-column {
   height: 140px;
-  background: linear-gradient(to top, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.2) 100%);
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.2), 0 15px 35px rgba(255, 215, 0, 0.1);
+  background: var(--pillar-gold-bg);
+  border: 1px solid var(--pillar-gold-border);
+  box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.25), 0 15px 35px rgba(255, 215, 0, 0.12);
 }
 .rank-1 .podium-number {
   color: #FFD700;
@@ -220,9 +240,9 @@ body {
 }
 .rank-2 .podium-column {
   height: 95px;
-  background: linear-gradient(to top, rgba(192, 192, 192, 0.05) 0%, rgba(192, 192, 192, 0.15) 100%);
-  border: 1px solid rgba(192, 192, 192, 0.3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 10px 25px rgba(0, 0, 0, 0.3);
+  background: var(--pillar-silver-bg);
+  border: 1px solid var(--pillar-silver-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 10px 25px rgba(0, 0, 0, 0.04);
 }
 .rank-2 .podium-number {
   color: #C0C0C0;
@@ -238,9 +258,9 @@ body {
 }
 .rank-3 .podium-column {
   height: 70px;
-  background: linear-gradient(to top, rgba(205, 127, 50, 0.04) 0%, rgba(205, 127, 50, 0.12) 100%);
-  border: 1px solid rgba(205, 127, 50, 0.25);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 20px rgba(0, 0, 0, 0.3);
+  background: var(--pillar-bronze-bg);
+  border: 1px solid var(--pillar-bronze-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 8px 20px rgba(0, 0, 0, 0.03);
 }
 .rank-3 .podium-number {
   color: #CD7F32;
