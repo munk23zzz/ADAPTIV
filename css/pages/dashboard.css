@@ -1323,92 +1323,39 @@ img {
 /* ── WELCOME OVERLAY ── */
 .welcome-overlay {
   position: fixed; inset: 0; z-index: 10000;
-  background: rgba(10, 15, 25, 0.4); 
+  background: rgba(255, 255, 255, 0.45); 
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
   display: none; align-items: center; justify-content: center;
   opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s;
-  pointer-events: none;
-  overflow: hidden;
+  pointer-events: none; /* Make it click-through so it doesn't block scrolling */
 }
 
-[data-theme="dark"] .welcome-overlay { background: rgba(8, 12, 20, 0.6); }
+[data-theme="dark"] .welcome-overlay { background: rgba(12, 17, 23, 0.6); }
 .welcome-overlay.show { opacity: 1; visibility: visible; }
-
-.welcome-orb {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(var(--accent-primary-rgb, 0, 168, 146), 0.28) 0%, transparent 70%);
-  filter: blur(65px);
-  pointer-events: none;
-  z-index: 1;
-  animation: float-orb 8s infinite ease-in-out;
-}
-
-@keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(25px, -25px) scale(1.12); }
-}
-
 .welcome-content { 
   text-align: center; 
-  max-width: 520px; 
-  width: 90%;
-  padding: 48px 40px; 
-  background: rgba(var(--bg-surface-rgb, 28, 38, 51), 0.72);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1.5px solid rgba(var(--accent-primary-rgb, 0, 168, 146), 0.25);
-  border-radius: 28px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35), 
-              inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transform: scale(0.92) translateY(30px) translateZ(0); 
+  max-width: 600px; 
+  padding: 40px; 
+  transform: scale(0.95) translateY(20px) translateZ(0); 
   -webkit-font-smoothing: antialiased;
-  z-index: 2;
-  position: relative;
-  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s; 
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); 
 }
-
 .welcome-overlay.show .welcome-content { transform: scale(1) translateY(0); }
-
-.welcome-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-  padding: 12px;
-  background: rgba(var(--accent-primary-rgb, 0, 168, 146), 0.1);
-  border: 1.5px solid rgba(var(--accent-primary-rgb, 0, 168, 146), 0.25);
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
-  box-shadow: 0 10px 25px rgba(var(--accent-primary-rgb, 0, 168, 146), 0.15);
-  animation: pulse-badge 2s infinite ease-in-out;
-}
-
-.welcome-badge img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(var(--accent-primary-rgb, 0, 168, 146), 0.5));
-}
-
-@keyframes pulse-badge {
-  0%, 100% { transform: scale(1); box-shadow: 0 10px 25px rgba(var(--accent-primary-rgb, 0, 168, 146), 0.15); }
-  50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(var(--accent-primary-rgb, 0, 168, 146), 0.3); }
-}
-
 .welcome-text {
-  font-family: var(--font-display); 
-  font-size: 2.3rem; 
-  font-weight: 800;
-  margin-bottom: 16px; 
-  background: linear-gradient(135deg, var(--accent-primary) 0%, #a855f7 50%, var(--accent-secondary) 100%);
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; 
-  letter-spacing: -0.5px;
-  line-height: 1.25;
+  font-family: var(--font-display); font-size: 2.8rem; font-weight: 800;
+  margin-bottom: 16px; background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px;
+}
+
+.welcome-subtext {
+  font-family: var(--font-body);
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.62;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .welcome-hand {
@@ -1428,15 +1375,6 @@ img {
   40% { transform: rotate(-4deg); }
   50% { transform: rotate(10deg); }
   60% { transform: rotate(0deg); }
-}
-
-.welcome-subtext {
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin: 0;
-  opacity: 0.9;
 }
 
 /* ── RESPONSIVE ── */
