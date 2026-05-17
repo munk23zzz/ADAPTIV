@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Interaktif — ADAPTIV</title>
+  <link rel="stylesheet" href="../../css/base/variables.css" />
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/sidebar.css">
+  <link rel="stylesheet" href="../../css/components/upload-modal.css">
+  <link rel="stylesheet" href="../../css/pages/quiz.css" />
+  <script src="../../js/core/theme.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- ════════════ NAVBAR ════════════ -->
+    <header class="app-header" id="app-header" role="banner">
+      <nav class="app-topnav" role="navigation" aria-label="Navigasi utama aplikasi">
+
+        <div class="topnav__left">
+          <!-- Global Menu (Hamburger) -->
+          <button class="btn btn--icon topnav__sidebar-toggle" id="sidebar-toggle-btn" type="button"
+            aria-label="Toggle sidebar navigation" aria-expanded="true" aria-controls="app-sidebar">
+            <span class="material-icons-round">menu</span>
+          </button>
+
+          <!-- Logo -->
+          <a class="logo-wrap" href="../app/dashboard.html">
+            <img src="../../assets/icons/darkIcon.png" alt="ADAPTIV Logo" class="logo-img logo-dark">
+            <img src="../../assets/icons/lightIcon.png" alt="ADAPTIV Logo" class="logo-img logo-light">
+            <span class="logo-text">ADAPTIV</span>
+          </a>
+
+          <div class="topbar-divider"></div>
+
+          <!-- Notebook Title -->
+          <span class="notebook-title" id="notebook-title" title="Klik untuk ubah nama">
+            Kuis Belajar Interaktif
+          </span>
+        </div>
+
+        <div class="topnav__right">
+          <!-- Theme Toggle -->
+          <button class="btn btn--icon topnav__icon-btn" id="btn-theme" type="button"
+            aria-label="Toggle dark/light mode" title="Ganti tema">
+            <span class="material-icons-round" id="theme-icon">light_mode</span>
+          </button>
+
+          <div class="topbar-divider"></div>
+
+          <!-- User Profile Section -->
+          <div class="user-profile-top">
+            <span class="badge-pro">PRO</span>
+            <div class="user-logo">
+              <img src="../../assets/images/profile_logo_dark.png" alt="User Profile" class="logo-dark">
+              <img src="../../assets/images/profile_logo_light.png" alt="User Profile" class="logo-light">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ═══════════════ GLOBAL DRAWER ═══════════════ -->
+    <div class="global-drawer-overlay" id="global-drawer-overlay"></div>
+    <div class="global-drawer" id="global-drawer">
+
+      <!-- Header -->
+      <div class="drawer-header">
+        <span class="logo-text logo-text--small">ADAPTIV</span>
+        <button class="btn btn--icon" id="btn-close-drawer"><span class="material-icons-round">close</span></button>
+      </div>
+
+      <!-- Zone 1: Menu Utama -->
+      <nav class="drawer-main-nav">
+        <a href="../app/dashboard.html"><span class="material-icons-round">dashboard</span> Beranda</a>
+        <a href="../app/documents.html"><span class="material-icons-round">folder</span> Dokumen Saya</a>
+        <a href="../app/leaderboard.html"><span class="material-icons-round">emoji_events</span> Papan Peringkat</a>
+        <a href="../app/chat.html"><span class="material-icons-round">chat</span> Tutor AI</a>
+      </nav>
+
+      <!-- Zone 2: Terkini (Recents) -->
+      <div class="drawer-recents">
+        <div class="drawer-search-wrap">
+          <span class="material-icons-round drawer-search-icon">search</span>
+          <input type="text" class="drawer-search" id="drawer-search-input" placeholder="Cari history..."
+            aria-label="Cari riwayat belajar">
+        </div>
+        <div class="recents-label">Terkini</div>
+        <a class="recent-item" href="../app/chat.html?session=algoritma">📁 Algoritma &amp; Sorting</a>
+        <a class="recent-item" href="../app/chat.html?session=os">📁 Sistem Operasi</a>
+        <a class="recent-item" href="../app/chat.html?session=kimia">📁 Kimia Organik</a>
+        <a class="recent-item" href="../app/chat.html?session=kalkulus">📁 Kalkulus</a>
+        <a class="recent-item" href="../app/chat.html?session=database">📁 Basis Data</a>
+        <a class="recent-item" href="../app/chat.html?session=jaringan">📁 Jaringan Komputer</a>
+        <a class="recent-item" href="../app/chat.html?session=web">📁 Pemrograman Web</a>
+      </div>
+
+      <!-- Zone 3: Account Bar -->
+      <div class="drawer-account">
+        <!-- Sub-popup Level 2 -->
+        <div class="account-sub-popup hidden" id="account-sub-popup">
+          <div class="sub-popup-email">
+            <span class="material-icons-round">account_circle</span>
+            nabil@student.binus.ac.id
+          </div>
+          <div class="sub-popup-account-row">
+            <div class="account-avatar">NK</div>
+            <span class="sub-popup-account-name">Nabil Kurniawan</span>
+            <span class="material-icons-round sub-popup-check">check</span>
+          </div>
+          <div class="sub-popup-add">
+            <span class="material-icons-round">add</span>
+            Tambah Akun
+          </div>
+        </div>
+
+        <!-- Main Popup Level 1 -->
+        <div class="account-popup hidden" id="account-popup">
+          <div class="popup-user-row" id="popup-user-row">
+            <div class="account-avatar">NK</div>
+            <div>
+              <div class="popup-user-name">Nabil Kurniawan</div>
+              <div class="popup-user-plan">Pro</div>
+            </div>
+            <span class="material-icons-round popup-user-chevron">chevron_right</span>
+          </div>
+          <div class="popup-menu">
+            <button class="popup-item"><span class="material-icons-round">tune</span>Personalisasi</button>
+            <button class="popup-item"><span class="material-icons-round">person_outline</span>Profil</button>
+            <button class="popup-item"><span class="material-icons-round">settings</span>Pengaturan</button>
+            <div class="popup-divider"></div>
+            <button class="popup-item"><span class="material-icons-round">help_outline</span>Bantuan<span
+                class="material-icons-round popup-item-chevron">chevron_right</span></button>
+            <button class="popup-item popup-item--danger"><span
+                class="material-icons-round">logout</span>Keluar</button>
+          </div>
+        </div>
+
+        <!-- Account Bar -->
+        <button class="account-bar" id="account-bar-btn">
+          <div class="account-avatar">NK</div>
+          <div class="account-info">
+            <div class="account-name">Nabil Kurniawan</div>
+            <div class="account-plan">Pro</div>
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════ MAIN LAYOUT ═══════════════ -->
+    <div id="layout">
+
+      <!-- ═══ LEFT SIDEBAR — Sources ═══ -->
+      <aside id="sidebar">
+        <div class="panel-header">
+          <span class="panel-title">Sumber</span>
+          <button class="icon-btn" id="btn-toggle-sidebar">
+            <span class="material-icons-round">vertical_split</span>
+          </button>
+        </div>
+
+        <button class="add-source-btn" id="btn-add-source" data-modal-target="upload-modal">
+          <span class="material-icons-round">add</span>
+          <span class="add-text">Tambah sumber</span>
+        </button>
+
+        <div class="sources-list" id="sources-list">
+          <!-- Source items (static placeholder for Quiz context) -->
+          <div class="source-item checked">
+            <div class="source-check">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="source-icon">📚</div>
+            <div class="source-meta">
+              <div class="source-name">Diktat Frontend.pdf</div>
+              <div class="source-type">PDF Dokumen</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ═══ QUIZ MAIN CONTENT ═══ -->
+      <main id="main" class="quiz-main-container">
+        <div class="quiz-wrapper">
+          <div class="quiz-card">
+            
+            <header class="quiz-header">
+              <div class="quiz-progress-text">
+                <span>Kuis Frontend Dasar</span>
+                <span id="question-counter">Soal 1/3</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 33.33%;"></div>
+              </div>
+            </header>
+
+            <main class="quiz-body">
+              <h2 class="question-text" id="question-text">Memuat pertanyaan...</h2>
+              
+              <div class="options-container" id="options-container">
+                <!-- Option buttons dynamically generated by JS -->
+              </div>
+
+              <div class="feedback-box" id="feedback-box" hidden>
+                <div class="feedback-header">
+                  <span class="feedback-icon" id="feedback-icon">✨</span>
+                  <strong class="feedback-title" id="feedback-title">Penjelasan</strong>
+                </div>
+                <p class="feedback-text" id="feedback-rationale">Teks penjelasan akan muncul di sini.</p>
+              </div>
+            </main>
+
+            <footer class="quiz-footer">
+              <button class="btn-next" id="btn-next" hidden>Lanjut ke Soal Berikutnya</button>
+            </footer>
+
+          </div>
+        </div>
+      </main>
+
+      <!-- ═══ RIGHT PANEL — Studio ═══ -->
+      <aside id="studio">
+        <div class="studio-collapsed-toolbar">
+          <button class="studio-collapsed-btn bg-audio" title="Ringkasan Audio"
+            onclick="generateStudioContent('Ringkasan Audio')">
+            <span class="material-icons-round mat-icon">graphic_eq</span>
+            <span class="collapsed-label">Audio</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-mindmap" title="Studio Podcast"
+            onclick="generateStudioContent('Studio Podcast')">
+            <span class="material-icons-round mat-icon">tune</span>
+            <span class="collapsed-label">Podcast</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-slide" title="Slide Presentasi"
+            onclick="generateStudioContent('Slide Presentasi')">
+            <span class="material-icons-round mat-icon">branding_watermark</span>
+            <span class="collapsed-label">Slide Presentasi</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-video" title="Ringkasan Video"
+            onclick="generateStudioContent('Ringkasan Video')">
+            <span class="material-icons-round mat-icon">smart_display</span>
+            <span class="collapsed-label">Ringkasan Video</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-mindmap" title="Peta Pikiran"
+            onclick="generateStudioContent('Peta Pikiran')">
+            <span class="material-icons-round mat-icon">account_tree</span>
+            <span class="collapsed-label">Peta Pikiran</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-flashcards" title="Kartu Belajar"
+            onclick="generateStudioContent('Kartu Belajar')">
+            <span class="material-icons-round mat-icon">style</span>
+            <span class="collapsed-label">Kartu Belajar</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-quiz active" title="Kuis" onclick="generateStudioContent('Kuis')">
+            <span class="material-icons-round mat-icon">quiz</span>
+            <span class="collapsed-label">Kuis</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-infographic" title="Infografis"
+            onclick="generateStudioContent('Infografis')">
+            <span class="material-icons-round mat-icon">insert_chart_outlined</span>
+            <span class="collapsed-label">Infografis</span>
+          </button>
+
+          <button class="studio-collapsed-btn bg-datatable" title="Tabel Data"
+            onclick="generateStudioContent('Tabel Data')">
+            <span class="material-icons-round mat-icon">table_view</span>
+            <span class="collapsed-label">Tabel Data</span>
+          </button>
+        </div>
+      </aside>
+
+    </div><!-- /#layout -->
+  </div><!-- /#app -->
+
+  <!-- ═══════════════ MODALS ═══════════════ -->
+  <div class="modal-overlay" id="upload-modal-overlay" role="dialog" aria-modal="true" hidden data-modal="upload-modal">
+    <div class="modal modal--upload" id="upload-modal">
+      <button class="modal__close-btn--top" data-modal-close="upload-modal" aria-label="Close">
+        <span class="material-icons-round">close</span>
+      </button>
+
+      <header class="modal__header--premium">
+        <h2 class="modal__title--premium">Buat belajar anda lebih akurat dari <span class="text-accent--notes">sumber Anda</span></h2>
+      </header>
+
+      <div class="modal__body">
+        <div class="dropzone--premium" id="upload-dropzone">
+          <div class="dropzone__title--premium">atau seret file Anda</div>
+          <div class="dropzone__hint--premium">pdf, images, docs, audio, and more</div>
+          <div class="action-pills">
+            <button class="pill-btn"><span class="material-icons-round icon">upload</span> Unggah file</button>
+            <button class="pill-btn"><span class="material-icons-round icon">link</span> Situs Web</button>
+            <button class="pill-btn"><span class="material-icons-round icon">add_to_drive</span> Drive</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script src="../../js/core/navigation.js"></script>
+  <script src="../../js/pages/quiz.js"></script>
+  <script>
+    // Handle right studio content clicks in quiz page context
+    function generateStudioContent(type) {
+      if (type === 'Kuis') return;
+      window.location.href = '../app/chat.html?generate=' + encodeURIComponent(type);
+    }
+  </script>
+</body>
+
+</html>

@@ -527,6 +527,10 @@ function ctxAction(action) {
 
 /* ── Studio ───────────────────────────────────────────────── */
 function generateStudioContent(type) {
+    if (type === 'Kuis') {
+        window.location.href = '../quiz/quiz.html';
+        return;
+    }
     sendMessage(`Buat ${type} dari sumber yang saya miliki`);
 }
 
