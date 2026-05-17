@@ -820,6 +820,12 @@ header.scrolled {
     background: rgba(var(--accent-primary-rgb), 0.03);
 }
 
+/* Warning / Negative indicators color in Comparison Table */
+.comparison-table td.table-warning-text {
+    color: var(--color-warning);
+    font-weight: 500;
+}
+
 /* Light Mode Overrides for Comparison Table */
 [data-theme="light"] .comparison-table {
     background: var(--bg-surface);

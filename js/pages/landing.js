@@ -77,9 +77,9 @@ if (termBody) {
     let stepIdx = 0;
 
     const colorMap = {
-        process: "#e2e8f0",
-        success: "#00e8c8",
-        done:    "#a78bfa",
+        process: "var(--term-text-process)",
+        success: "var(--term-text-success)",
+        done:    "var(--term-text-done)",
     };
 
     function typeStep(step, callback) {
@@ -120,20 +120,20 @@ if (termBody) {
                 if (step.status === "success") {
                     const badge = document.createElement('span');
                     badge.textContent = " ✓";
-                    badge.style.color = "#00e8c8";
+                    badge.style.color = "var(--term-text-success)";
                     badge.style.fontWeight = "700";
                     textSpan.appendChild(badge);
                 } else if (step.status === "done") {
                     const badge = document.createElement('span');
                     badge.textContent = " ✓ DONE";
-                    badge.style.cssText = "color:#a78bfa; font-weight:700; margin-left:8px;";
+                    badge.style.cssText = "color: var(--term-text-done); font-weight:700; margin-left:8px;";
                     textSpan.appendChild(badge);
 
                     setTimeout(() => {
                         const barWrap = document.createElement('div');
                         barWrap.style.cssText = `
                             margin-top: 16px; 
-                            background: rgba(255,255,255,0.08); 
+                            background: var(--term-bg-bar); 
                             border-radius: 4px; height: 6px; overflow: hidden;
                         `;
                         const bar = document.createElement('div');
