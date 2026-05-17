@@ -335,6 +335,8 @@ img {
 /* ── DASHBOARD LAYOUT ── */
 .app-shell {
   min-height: 100vh;
+  height: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
 }
