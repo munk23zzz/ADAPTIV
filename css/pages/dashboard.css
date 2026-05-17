@@ -1323,60 +1323,29 @@ img {
 /* ── WELCOME OVERLAY ── */
 .welcome-overlay {
   position: fixed; inset: 0; z-index: 10000;
-  background: rgba(255, 255, 255, 0.45); 
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(0, 0, 0, 0.2); 
+  backdrop-filter: blur(15px) saturate(160%);
+  -webkit-backdrop-filter: blur(15px) saturate(160%);
   display: none; align-items: center; justify-content: center;
-  opacity: 0; visibility: hidden; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+  opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s;
   pointer-events: none; /* Make it click-through so it doesn't block scrolling */
 }
 
-[data-theme="dark"] .welcome-overlay { background: rgba(12, 17, 23, 0.55); }
+[data-theme="dark"] .welcome-overlay { background: rgba(12, 17, 23, 0.3); }
 .welcome-overlay.show { opacity: 1; visibility: visible; }
 .welcome-content { 
   text-align: center; 
-  max-width: 650px; 
-  padding: 48px; 
-  transform: scale(0.95) translateY(24px) translateZ(0); 
+  max-width: 600px; 
+  padding: 40px; 
+  transform: scale(0.95) translateY(20px) translateZ(0); 
   -webkit-font-smoothing: antialiased;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); 
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); 
 }
 .welcome-overlay.show .welcome-content { transform: scale(1) translateY(0); }
 .welcome-text {
-  font-family: var(--font-display); font-size: 3.2rem; font-weight: 800;
-  margin-bottom: 20px; background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-tertiary) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1.5px;
-  line-height: 1.25;
-}
-.welcome-subtext {
-  font-family: var(--font-body);
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto;
-  opacity: 0.9;
-  letter-spacing: -0.2px;
-}
-
-.welcome-hand {
-  display: inline-block;
-  transform-origin: 70% 70%;
-  animation: wave-hand 2.5s infinite ease-in-out;
-  filter: grayscale(1) brightness(1.4) contrast(1.1);
-  opacity: 0.92;
-  margin-left: 4px;
-}
-
-@keyframes wave-hand {
-  0%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
+  font-family: var(--font-display); font-size: 2.8rem; font-weight: 800;
+  margin-bottom: 16px; background: linear-gradient(135deg, var(--accent) 0%, var(--violet) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px;
 }
 
 /* ── RESPONSIVE ── */
