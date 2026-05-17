@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Helper untuk generate mock data lebih banyak
   function generateMockData(count, userRank = 3, timeRange = [500, 2000]) {
     const names = [
-      "Sarah Wijaya", "Budi Santoso", "Nabil Kurniawan", "Alex Chen", "Dina Fitri",
-      "Kevin Julio", "Rina Kusuma", "Ahmad Fauzi", "Jessica Lin", "Reza Rahadian",
-      "Putri Andini", "Doni Pratama", "Siska Saraswati", "Galih Purnama", "Toni Stark",
-      "Bruce Wayne", "Clark Kent", "Diana Prince", "Peter Parker", "Barry Allen"
+      "Sarah", "Budi", "Loid", "Alex", "Dina",
+      "Kevin", "Rina", "Ahmad", "Jessica", "Reza",
+      "Putri", "Doni", "Siska", "Galih", "Toni",
+      "Bruce", "Clark", "Diana", "Peter", "Barry"
     ];
     
     return Array.from({ length: count }, (_, i) => ({
