@@ -820,6 +820,37 @@ header.scrolled {
     background: rgba(var(--accent-primary-rgb), 0.03);
 }
 
+/* Light Mode Overrides for Comparison Table */
+[data-theme="light"] .comparison-table {
+    background: var(--bg-surface);
+    box-shadow: 0 10px 30px rgba(30, 45, 61, 0.05);
+}
+
+[data-theme="light"] .comparison-table th {
+    background: var(--bg-surface-2);
+}
+
+[data-theme="light"] .comparison-table tr:hover {
+    background: rgba(30, 45, 61, 0.015);
+}
+
+[data-theme="light"] .comparison-table td:nth-child(2) {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .comparison-table th:nth-child(3),
+[data-theme="light"] .comparison-table td:nth-child(3) {
+    text-shadow: none;
+}
+
+[data-theme="light"] .comparison-table td:nth-child(3) {
+    background: rgba(var(--accent-primary-rgb), 0.03);
+}
+
+[data-theme="light"] .comparison-table tr:hover td:nth-child(3) {
+    background: rgba(var(--accent-primary-rgb), 0.06);
+}
+
 .trust-right {
     display: flex;
     align-items: center;
