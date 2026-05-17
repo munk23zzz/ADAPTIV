@@ -1696,20 +1696,22 @@ html, body {
   width: 100%;
   padding: 12px;
   border-radius: 14px;
-  background: var(--text-primary);
-  color: #fff;
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
   font-weight: 700;
-  border: none;
+  border: 1px solid var(--border);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all .2s;
+  transition: all .22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-upload-premium:hover {
   background: var(--accent);
+  color: var(--accent-on);
+  border-color: var(--accent);
   transform: scale(1.02);
   box-shadow: 0 10px 20px var(--accent-glow);
 }
