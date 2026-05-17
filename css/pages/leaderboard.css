@@ -40,6 +40,14 @@ body {
   min-height: 100vh;
 }
 
+.app-shell {
+  min-height: 100vh;
+  height: auto;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
 .main-content {
   padding-top: calc(var(--header-height) + 32px);
   padding-bottom: 80px;
