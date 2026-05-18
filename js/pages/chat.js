@@ -586,7 +586,7 @@ function generateStudioContent(type) {
             return;
         }
     }
-    sendMessage(`Buat ${type} dari sumber yang saya miliki`);
+    alert('Fitur belum dibuat!');
 }
 
 function handleToolAction(type, menuId) {
